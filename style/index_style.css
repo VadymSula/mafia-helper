@@ -1,22 +1,106 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
-body{
-    margin: 0;
-    width: 100%;
+html{
+    margin: 0% 0% 0% 0%;
+    background: url(../images/mafia.png);
+   
 }
 a{
-    
+    font-family: 'Montserrat';
     text-decoration: none;
-    text-decoration-color: none; 
+}
+ul{
+    margin: 0%;
+    
+}
+body{
+    margin: 0;
+    width: 100%;   
+}
+a.nav{
+    text-decoration: none;
+    color:black; 
+}
+a.nav:active{
+    color: rgb(152,15,0);
+    text-underline-position: above;
 }
 li {
     font-size: 14px;
     font-family: 'Montserrat';
-    width: 5%; 
+    width: 7%; 
     margin: 0; 
     display: inline-block;
 }
+h1{
+    font-family: 'Montserrat';
+    font-size: 200px;
+}
 .header__nav{
-    z-index: 1;
-    background-image: url(../imgs/);
+    /* background-image: url(../images/mafia.png); */
+    background-color:  rgb(215, 217, 224, 0.8);
+    max-width: 100%;
+    min-height: 673px;
+    z-index: 2;
+
+}
+.head__button__play{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;   
+    height: 457.172px;
+}    
+a.button{
+        color: #fff; /* цвет текста */
+        text-decoration: none; /* убирать подчёркивание у ссылок */
+        user-select: none; /* убирать выделение текста */
+        background: rgb(65, 105, 225); /* фон кнопки */
+        padding: 1.0em 2.5em; /* отступ от текста */
+        outline: none; /* убирать контур в Mozilla */
+        border-radius: 0%;
+}
+a.button:hover { 
+    background: rgb(232,95,76); } /* при наведении курсора мышки */
+a.button:active { 
+    background: rgb(152,15,0); } /* при нажатии */
+.head__button__log{
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+
+}     
+a.head__button__login{ 
+  display: inline-block;
+  width: 5em;
+  height: 2em;
+  line-height: 2em;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  color: rgb(0,0,0);
+  outline: none;
+  border: 1px solid rgba(0,0,0,.4);
+  border-top-color: rgba(0,0,0,.3);
+  border-radius: 2px;
+  background: linear-gradient(rgb(255,255,255), rgb(240,240,240));  
+  transition: .2s ease-in-out;
+}
+a.head__button__login:hover {
+    background: rgb(240,240,240);
+    }
+main{
+    background-color: whitesmoke;
+}
+div.main__button-icons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+h5{
+    display: flex;
+    justify-content: center;
+    color: gray;
 }
