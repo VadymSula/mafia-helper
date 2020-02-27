@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"
+          integrity="sha384-REHJTs1r2ErKBuJB0fCK99gCYsVjwxHrSU0N7I1zl9vZbggVJXRMsv/sLlOAGb4M" crossorigin="anonymous">
+    <title>Game</title>
+    <link rel="stylesheet" href="style/game.css">
+</head>
+<body>
+<a class="btn-back" href="index.html">
+    <i class="fas fa-chevron-circle-left"></i>
+</a>
+<section>
+    <h1>Набір гравців</h1>
+    <div class="players">
+        <div class="players-item">
+            <p>1) Mr.Od1n</p>
+        </div>
+        <div class="players-item">
+            <p>2) Mr.Od1n</p>
+        </div>
+        <div class="players-item">
+            <p>3) Mr.Od1n</p>
+        </div>
+        <div class="players-item">
+            <p>4) Mr.Od1n</p>
+        </div>
+        <div class="players-item">
+            <p>5) Mr.Od1n</p>
+        </div>
+        <div class="players-item">
+            <p>6) Mr.Od1n</p>
+        </div>
+        <div class="players-item">
+            <p>7) Mr.Od1n</p>
+        </div>
+        <div class="players-item">
+            <p>8) Mr.Od1n</p>
+        </div>
+        <div class="players-item">
+            <p>9) Mr.Od1n</p>
+        </div>
+        <div class="players-item">
+            <p>10)
+                <button onclick="state.players.isAll=true" class="players__add-player">+</button>
+            </p>
+        </div>
+    </div>
+    <a class="game__start" onclick="startGame()">Почати</a>
+</section>
+</body>
+<script>
+    let state = {
+        players: {
+            1: null,
+            2: null,
+            3: null,
+            4: null,
+            5: null,
+            6: null,
+            7: null,
+            8: null,
+            9: null,
+            10: null,
+            isAll: false
+        }
+    };
+
+    function startGame() {
+        if (state.players.isAll)
+            window.location.pathname = "mafia-helper/game2.html";
+        else
+            alert("Players is not ready");
+    }
+</script>
+</html>

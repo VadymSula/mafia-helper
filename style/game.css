@@ -1,0 +1,134 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+    transition: .2s;
+}
+p#time{
+    margin: 0;
+}
+.btn-back{
+    align-self: flex-start;
+    font-size: 50px;
+}
+.btn-back:hover{
+    color: red;
+    transition: .2s;
+
+}
+section{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+section h1{
+    border-bottom: 2px #1f1f1f solid;
+    padding: 10px;
+    font-size: 40px;
+    margin: 0;
+    text-align: center;
+}
+.players{
+    width: 100%;
+    margin: 100px 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.players-item{
+    background-color: white;
+    text-align: center;
+    border: 2px #7d7d7d dashed;
+    border-radius: 20px;
+    padding: 10px;
+    width: 20%;
+    margin: 15px;
+    min-width: 200px;
+    font-size: 25px;
+}
+.game{
+    margin: 50px 0;
+}
+.game .players-item p{
+    margin: 0;
+}
+.game .players-item{
+    margin: 30px;
+}
+.players__add-player{
+    padding: 10px;
+    border: none;
+    background-color: #6558F5;
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+    width: 50px;
+    border-radius: 10px;
+    height: 50px;
+}
+.game__start{
+    padding: 10px 30px;
+    text-decoration: none;
+    color: white;
+    font-size: 30px;
+    border-radius: 20px;
+    background-color: #6558F5;
+    text-transform: uppercase;
+}
+.col{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.timers{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+button{
+    margin: 10px;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+}
+button.orange{
+    background-color: #E8833A;
+}
+button.red{
+    background-color: #D3455B;
+}
+button.purple{
+    background-color: #6558F5;
+}
+button.green{
+    background-color: #207868;
+}
+button:hover{
+    cursor: pointer;
+    transition: .2s;
+    filter: saturate(.4);
+}
+.timers i{
+    font-size: 100px;
+}
+.footerBlock{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.checks{
+
+}
+.btns-End{
+    display: flex;
+    flex-direction: column;
+}

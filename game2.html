@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css"
+          integrity="sha384-REHJTs1r2ErKBuJB0fCK99gCYsVjwxHrSU0N7I1zl9vZbggVJXRMsv/sLlOAGb4M" crossorigin="anonymous">
+    <title>Game2</title>
+    <link rel="stylesheet" href="style/game.css">
+</head>
+<body>
+<p id="time">0:0</p>
+<section>
+    <h1>Гра</h1>
+    <div class="players game">
+        <div class="first_col col">
+            <div class="players-item">
+                <p>1) Mr.Od1n</p>
+            </div>
+            <div class="players-item">
+                <p>1) Mr.Od1n</p>
+            </div>
+        </div>
+        <div class="second_col col">
+            <div>
+                <div class="players-item">
+                    <p>1) Mr.Od1n</p>
+                </div>
+                <div class="players-item">
+                    <p>1) Mr.Od1n</p>
+                </div>
+                <div class="players-item">
+                    <p>1) Mr.Od1n</p>
+                </div>
+            </div>
+            <div class="timers">
+                <div>
+                    <button class="btn-timer orange" onclick="setTimer(2)">30 сек</button>
+                    <button class="btn-timer red" onclick="timeIsOver()">time-out</button>
+                </div>
+                <button class="btn-timer purple" onclick="setTimer(5)">1 хвилина</button>
+                <i class="fas fa-stopwatch"></i>
+            </div>
+            <div>
+                <div class="players-item">
+                    <p>1) Mr.Od1n</p>
+                </div>
+                <div class="players-item">
+                    <p>1) Mr.Od1n</p>
+                </div>
+                <div class="players-item">
+                    <p>1) Mr.Od1n</p>
+                </div>
+            </div>
+        </div>
+        <div class="third_col col">
+            <div class="players-item">
+                <p>1) Mr.Od1n</p>
+            </div>
+            <div class="players-item">
+                <p>1) Mr.Od1n</p>
+            </div>
+        </div>
+    </div>
+    <div class="footerBlock">
+        <div class="checks">
+
+        </div>
+        <div class="btns-End">
+            <button class="green">Закінчити круг</button>
+            <button class="red" onclick="window.location.pathname='/mafia-helper/game.html'">Закінчити гру</button>
+        </div>
+    </div>
+</section>
+</body>
+<script>
+    var myVar;
+    let state = {
+        fullTime: {
+            seconds: 0,
+            minutes: 0,
+            hours: 0
+        }
+    };
+    setInterval(function () {
+        if (state.fullTime.seconds + 1 === 60) {
+            if (state.fullTime.minutes + 1 === 60) {
+                state.fullTime.minutes = 0;
+                state.fullTime.hours++;
+            } else {
+                state.fullTime.minutes++;
+            }
+            state.fullTime.seconds = 0;
+        } else
+            state.fullTime.seconds++;
+        document.getElementById('time').innerHTML = state.fullTime.hours + ':' + state.fullTime.minutes + ':' + state.fullTime.seconds;
+    }, 1000);
+
+    function setTimer(time) {
+        myVar = setTimeout(timeIsOver, time * 1000);
+    }
+    function timeIsOver() {
+        if(myVar) {
+            clearTimeout(myVar);
+            myVar = 0;
+            document.body.style.background = "#f00";
+            setTimeout(function () {
+                document.body.style.background = "white"
+            }, 2500);
+        }
+    }
+
+</script>
+</html>
