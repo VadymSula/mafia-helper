@@ -39,10 +39,9 @@ h1{
     font-size: 200px;
 }
 .header__nav{
-    /* background-image: url(../images/mafia.png); */
     background-color:  rgb(215, 217, 224, 0.8);
     max-width: 100%;
-    min-height: 673px;
+    min-height: 727px;
     z-index: 2;
 
 }
@@ -92,6 +91,7 @@ a.button:active {
     background: rgb(152,15,0); } /* при нажатии */
 main{
     background-color: whitesmoke;
+    
 }
 div.main__button-icons{
     display: flex;
@@ -103,4 +103,8 @@ h5{
     display: flex;
     justify-content: center;
     color: gray;
+}
+.fas {
+    color: gray;
+    font-size: 150px;
 }
