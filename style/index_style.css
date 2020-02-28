@@ -2,7 +2,8 @@
 
 html{
     margin: 0% 0% 0% 0%;
-    background: url(../images/mafia.png);
+    background: url(../images/mafia.png) no-repeat center fixed;
+    background-size: 100%;
    
 }
 a{
@@ -19,16 +20,17 @@ body{
 }
 a.nav{
     text-decoration: none;
-    color:black; 
+    color:black;
+    font-size: 20px;
 }
 a.nav:active{
     color: rgb(152,15,0);
     text-underline-position: above;
 }
 li {
-    font-size: 14px;
+    padding: 10px;
     font-family: 'Montserrat';
-    width: 7%; 
+    width: 8%; 
     margin: 0; 
     display: inline-block;
 }
@@ -43,6 +45,30 @@ h1{
     min-height: 673px;
     z-index: 2;
 
+}
+.login__button{
+    position: relative;
+    left: 57%;    
+}
+a.head__button__login{ 
+    display: inline-block;
+    width: 5em;
+    height: 2em;
+    line-height: 2em;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    color: rgb(0,0,0);
+    outline: none;
+    border: 1px solid rgba(0,0,0,.4);
+    border-top-color: rgba(0,0,0,.3);
+    border-radius: 2px;
+    background: linear-gradient(rgb(255,255,255), rgb(240,240,240));  
+    transition: .2s ease-in-out;
+  }
+a.head__button__login:hover {
+    background: rgb(240,240,240);
 }
 .head__button__play{
     display: flex;
@@ -64,32 +90,6 @@ a.button:hover {
     background: rgb(232,95,76); } /* при наведении курсора мышки */
 a.button:active { 
     background: rgb(152,15,0); } /* при нажатии */
-.head__button__log{
-    display: flex;
-    justify-content: flex-end;
-    align-items: baseline;
-
-}     
-a.head__button__login{ 
-  display: inline-block;
-  width: 5em;
-  height: 2em;
-  line-height: 2em;
-  vertical-align: middle;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  color: rgb(0,0,0);
-  outline: none;
-  border: 1px solid rgba(0,0,0,.4);
-  border-top-color: rgba(0,0,0,.3);
-  border-radius: 2px;
-  background: linear-gradient(rgb(255,255,255), rgb(240,240,240));  
-  transition: .2s ease-in-out;
-}
-a.head__button__login:hover {
-    background: rgb(240,240,240);
-    }
 main{
     background-color: whitesmoke;
 }
