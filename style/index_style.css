@@ -2,18 +2,20 @@
 *{
     margin: 0%;
 }
+/* css in heder begin */
 header{
     margin: 0% 0% 0% 0%;
     background: url(../images/mafia.png) no-repeat center fixed;
     background-size: 100%;
     width: 100%;
+    height: 100%;
 }
 a{
     font-family: 'Montserrat';
     text-decoration: none;
 }
 /* ul{
-    margin: 0%;
+    list-style: none;
 } */
 li{
     font-size:  1.25em;
@@ -85,4 +87,26 @@ background: rgb(152,15,0);
     align-items: center;
     flex-direction: column;
     padding-top: 10%;   
+}
+
+/* css in header end */
+/* main css begin */
+main{
+    background-color: whitesmoke;
+    
+}
+div.main__button-icons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+h5{
+    display: flex;
+    justify-content: center;
+    color: gray;
+}
+.fas {
+    color: gray;
+    font-size: 9.375em;
 }
