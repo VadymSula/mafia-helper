@@ -1,53 +1,29 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
-
-html{
+*{
+    margin: 0%;
+}
+header{
     margin: 0% 0% 0% 0%;
     background: url(../images/mafia.png) no-repeat center fixed;
     background-size: 100%;
-   
+    width: 100%;
 }
 a{
     font-family: 'Montserrat';
     text-decoration: none;
 }
-ul{
+/* ul{
     margin: 0%;
-    
-}
-body{
-    margin: 0;
-    width: 100%;   
+} */
+li{
+    font-size:  1.25em;
+    padding: 0.5%;
+    font-family: 'Montserrat';
+    display: inline-block;
 }
 a.nav{
     text-decoration: none;
     color:black;
-    font-size: 20px;
-}
-a.nav:active{
-    color: rgb(152,15,0);
-    text-underline-position: above;
-}
-li {
-    padding: 10px;
-    font-family: 'Montserrat';
-    width: 8%; 
-    margin: 0; 
-    display: inline-block;
-}
-h1{
-    font-family: 'Montserrat';
-    font-size: 200px;
-}
-.header__nav{
-    background-color:  rgb(215, 217, 224, 0.8);
-    max-width: 100%;
-    min-height: 727px;
-    z-index: 2;
-
-}
-.login__button{
-    position: relative;
-    left: 57%;    
 }
 a.head__button__login{ 
     display: inline-block;
@@ -69,42 +45,44 @@ a.head__button__login{
 a.head__button__login:hover {
     background: rgb(240,240,240);
 }
+.login__button{
+    float: right;
+    margin: 0.5%;
+}
+a.nav:active{
+    color: rgb(206, 31, 11);
+    text-underline-position: above;
+}
+/* Center part  */
+p.h1{
+    font-family: 'Montserrat';
+    font-size: 12.5em;
+}
+a.button{
+    color: #fff;    /* цвет текста */
+    text-decoration: none;  /* убирать подчёркивание у ссылок */
+    user-select: none;  /* убирать выделение текста */
+    background: rgb(65, 105, 225);  /* фон кнопки */
+    padding: 1.0em 2.5em;   /* отступ от текста */
+    outline: none;      /* убирать контур в Mozilla */
+    border-radius: 0%;
+}
+a.button:hover { 
+background: rgb(232,95,76); 
+} /* при наведении курсора мышки */
+a.button:active { 
+background: rgb(152,15,0); 
+} /* при нажатии */
+.header__nav{
+    background-color:  rgb(215, 217, 224, 0.8);
+    max-width: 100%;
+    min-height: 727px;
+    width: 100%;
+}
 .head__button__play{
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;   
-    height: 457.172px;
-}    
-a.button{
-        color: #fff; /* цвет текста */
-        text-decoration: none; /* убирать подчёркивание у ссылок */
-        user-select: none; /* убирать выделение текста */
-        background: rgb(65, 105, 225); /* фон кнопки */
-        padding: 1.0em 2.5em; /* отступ от текста */
-        outline: none; /* убирать контур в Mozilla */
-        border-radius: 0%;
-}
-a.button:hover { 
-    background: rgb(232,95,76); } /* при наведении курсора мышки */
-a.button:active { 
-    background: rgb(152,15,0); } /* при нажатии */
-main{
-    background-color: whitesmoke;
-    
-}
-div.main__button-icons{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: flex-end;
-}
-h5{
-    display: flex;
-    justify-content: center;
-    color: gray;
-}
-.fas {
-    color: gray;
-    font-size: 150px;
+    flex-direction: column;
+    padding-top: 10%;   
 }
