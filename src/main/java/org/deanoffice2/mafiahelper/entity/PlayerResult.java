@@ -1,12 +1,15 @@
 package org.deanoffice2.mafiahelper.entity;
 
-public class PlayerResult {
+public class PlayerResult implements DomainObject {
     private int idPlayer;
     private int idGame;
     private String roleInGame;
     private int foulsQuantity;
     private String goldenMove;
     private boolean firstKillSheriff;
+
+    public PlayerResult() {
+    }
 
     public PlayerResult(int idPlayer, int idGame, String roleInGame, int foulsQuantity, String goldenMove, boolean firstKillSheriff) {
         this.idPlayer = idPlayer;
