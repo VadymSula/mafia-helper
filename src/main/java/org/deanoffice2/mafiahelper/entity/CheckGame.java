@@ -1,10 +1,13 @@
 package org.deanoffice2.mafiahelper.entity;
 
-public class CheckGame {
+public class CheckGame implements DomainObject {
    private int idGame;
    private int numberOfTheCircle;
    private Integer mafiaCheck;
    private Integer sheriffCheck;
+
+    public CheckGame() {
+    }
 
     public CheckGame(int idGame, int numberOfTheCircle, Integer mafiaCheck, Integer sheriffCheck) {
         this.idGame = idGame;

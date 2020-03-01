@@ -3,13 +3,16 @@ package org.deanoffice2.mafiahelper.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameResult {
+public class GameResult implements DomainObject {
     private int idGame;
     private String clubName;
     private String win;
     private List<PlayerResult> playersResult = new ArrayList<>();
     private List<CheckGame> checksResult = new ArrayList<>();
     private String gameDuration;
+
+    public GameResult() {
+    }
 
     public GameResult(int idGame, String clubName, String win, List<PlayerResult> playersResult, List<CheckGame> checksResult, String gameDuration) {
         this.idGame = idGame;
