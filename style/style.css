@@ -1,0 +1,17 @@
+body {
+/background-color: #2c2c2c;
+}
+.centered{
+    border: 3px blue none;
+}
+.rules{
+    font-size:55px;
+}
+.text{
+    margin-left:10%;
+    font-size:30px;
+}
+.text_header{
+    font-size: 70px;
+    text-align: center;
+}
