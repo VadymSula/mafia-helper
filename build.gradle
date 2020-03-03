@@ -19,7 +19,7 @@ dependencies {
     compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.1'
-    compile group: 'hikari-cp', name: 'hikari-cp', version: '2.8.0'
+    compile group: 'com.zaxxer', name: 'HikariCP', version: '3.4.2'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
