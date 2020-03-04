@@ -1,0 +1,52 @@
+html {
+    margin: 0 0 0 0;
+}
+h1 {
+    text-align:center;
+}
+.blocks__guides__info {
+    margin: 5% 10% 5% 10%;
+    padding: 0 0 0 0;
+    border-bottom: 2px dotted #7d7d7d;
+
+}
+.blocks__guides__text {
+    margin: 4% 1% 4% 1%;
+    padding: 1% 1% 1% 1%;
+    border: 2px solid #6558F5;
+}
+.blocks__guides__text p{
+    font-size:20px;
+}
+
+.blocks__guides__author__date__time {
+    margin: 4% 1% 4% 1%;
+    padding: 0 0 0 0;
+    display: flex;
+    flex-flow: row wrap;
+}
+.icons_people {
+    display: inline-block;
+}
+.author_name {
+    display: inline-block;
+    margin-top: auto;
+    margin-bottom: 0;
+    margin-left: 10px;
+}
+.author_name h3 {
+    margin-top: auto;
+    margin-bottom: 0;
+}
+.author__time-date_post {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: 0;
+    margin-top: auto;
+    margin-bottom: 0;
+    padding: 0 0 0 0;
+}
+.author__time-date_post h3 {
+    margin-top: auto;
+    margin-bottom: 0;
+}
