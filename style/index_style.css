@@ -10,14 +10,24 @@ header{
     width: 100%;
     height: 100%;
 }
-@media (max-width:630px){header {background-size: 100% 100%;transition: .5s ease-in-out;}}
 a{
     font-family: 'Montserrat';
     text-decoration: none;
 }
-/* ul{
-    list-style: none;
-} */
+nav{
+    position: sticky;
+    top: 0px;
+
+}
+ul{
+    background-color: rgb(245, 245, 243, 0.8);
+    
+    min-height: 55px;
+    /* display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%; */
+}
 li{
     font-size:  1.25em;
     padding: 0.5%;
@@ -50,7 +60,7 @@ a.head__button__login:hover {
 }
 .login__button{
     float: right;
-    margin: 0.5%;
+    
 }
 a.nav:active{
     color: rgb(206, 31, 11);
@@ -77,7 +87,7 @@ background: rgb(232,95,76);
 a.button:active { 
 background: rgb(152,15,0); 
 } /* при нажатии */
-.header__nav{
+.header{
     background-color:  rgb(215, 217, 224, 0.8);
     max-width: 100%;
     min-height: 727px;
@@ -90,8 +100,6 @@ background: rgb(152,15,0);
     flex-direction: column;
     padding-top: 10%;   
 }
-@media screen and (max-width:725px) {p.h1{font-size: 5em;transition: .5s ease-in-out;}.header__nav{min-height: 600px;transition: .5s ease-in-out;}}
-@media screen and (max-width:600px) {.head__button__play{padding-top: 50%;padding-left: 25%;transition: .5s ease-in-out;}}
 /* css in header end */
 /* main css begin */
 main{
@@ -105,19 +113,32 @@ div.main__button-icons{
     justify-content: space-around;
     align-items: flex-end;
 }
+h5{
+    font-size: 1.875em;
+    display: flex;
+    justify-content: center;
+    color: gray;
+    padding-top: 3%;
+}
+.fas {
+    color: gray;
+    font-size: 9.375em;
+}
+/* @media begin */
+@media (max-width:630px){header {background-size: 100% 100%;transition: .5s ease-in-out;}}
+@media screen and (max-width:725px) {p.h1{font-size: 5em;transition: .5s ease-in-out;}}
+@media screen and (max-width:600px) {.head__button__play{display: flex;
+    padding-top: 50%;
+    justify-content: center;
+    align-items: center;;transition: .5s ease-in-out;}
+h5{padding-bottom: 6%;}}
 @media (max-width:600px){div.main__button-icons{
+    padding: 4% 0% 1.5% 0%;
     display: flex;
     flex-direction: column;
     align-items:center;
     justify-content: space-around;
     transition: .5s ease-in-out;    
 }}
-h5{
-    display: flex;
-    justify-content: center;
-    color: gray;
-}
-.fas {
-    color: gray;
-    font-size: 9.375em;
-}
+@media(max-width:414px){.head__button__play{padding-left: 25%;}ul{min-height: 60px;padding-left: 0px;}}
+/* @media end */
