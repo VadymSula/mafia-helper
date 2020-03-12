@@ -1,7 +1,9 @@
 package org.deanoffice2.mafiahelper.entity;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+//@JsonPropertyOrder({ "numberOfTheCircle", "mafiaCheck", "sheriffCheck" })
 public class CheckGame implements DomainObject {
-   private int idGame;
    private int numberOfTheCircle;
    private Integer mafiaCheck;
    private Integer sheriffCheck;
@@ -9,19 +11,10 @@ public class CheckGame implements DomainObject {
     public CheckGame() {
     }
 
-    public CheckGame(int idGame, int numberOfTheCircle, Integer mafiaCheck, Integer sheriffCheck) {
-        this.idGame = idGame;
+    public CheckGame(int numberOfTheCircle, Integer mafiaCheck, Integer sheriffCheck) {
         this.numberOfTheCircle = numberOfTheCircle;
         this.mafiaCheck = mafiaCheck;
         this.sheriffCheck = sheriffCheck;
-    }
-
-    public int getIdGame() {
-        return idGame;
-    }
-
-    public void setIdGame(int idGame) {
-        this.idGame = idGame;
     }
 
     public int getNumberOfTheCircle() {

@@ -1,22 +1,26 @@
 package org.deanoffice2.mafiahelper.entity;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameResult implements DomainObject {
     private int idGame;
-    private String clubName;
+    private int idClub;
     private String win;
     private List<PlayerResult> playersResult = new ArrayList<>();
+    @JsonProperty("checksResult")
     private List<CheckGame> checksResult = new ArrayList<>();
     private String gameDuration;
 
     public GameResult() {
     }
 
-    public GameResult(int idGame, String clubName, String win, List<PlayerResult> playersResult, List<CheckGame> checksResult, String gameDuration) {
+    public GameResult(int idGame, int idClub, String win, List<PlayerResult> playersResult, List<CheckGame> checksResult, String gameDuration) {
         this.idGame = idGame;
-        this.clubName = clubName;
+        this.idClub = idClub;
         this.win = win;
         this.playersResult = playersResult;
         this.checksResult = checksResult;
@@ -31,12 +35,12 @@ public class GameResult implements DomainObject {
         this.idGame = idGame;
     }
 
-    public String getClubName() {
-        return clubName;
+    public int getIdClub() {
+        return idClub;
     }
 
-    public void setClubName(String clubName) {
-        this.clubName = clubName;
+    public void setIdClub(int idClub) {
+        this.idClub = idClub;
     }
 
     public String getWin() {
@@ -55,6 +59,7 @@ public class GameResult implements DomainObject {
         this.playersResult = playersResult;
     }
 
+    @JsonProperty("checksResult")
     public List<CheckGame> getChecksResult() {
         return checksResult;
     }

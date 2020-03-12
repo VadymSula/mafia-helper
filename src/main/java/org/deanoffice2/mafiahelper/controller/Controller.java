@@ -1,5 +1,6 @@
 package org.deanoffice2.mafiahelper.controller;
 
+import org.deanoffice2.mafiahelper.entity.GameResult;
 import org.deanoffice2.mafiahelper.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,5 +17,11 @@ public class Controller {
     @GetMapping("/games/player-game-result{idGame}")
     public ResponseEntity getPlayersGame(@PathVariable int idGame) {
         return ResponseEntity.ok(gameService.findGameById(idGame));
+    }
+
+    @PutMapping("/game-end")
+    public ResponseEntity saveGameResult(@RequestBody GameResult gameResult) {
+        gameService.saveGameResults(gameResult);
+        return ResponseEntity.ok("Success");
     }
 }
