@@ -17,4 +17,15 @@ public class GameServiceImpl implements GameService {
     public GameResult findGameById(Integer idGame) {
         return gameResultRepository.findGameById(idGame);
     }
+
+    @Override
+    public void saveGameResults(GameResult gameResult) {
+        gameResultRepository.addGameResult(gameResult);
+
+        gameResult.getPlayersResult()
+                .forEach(gameResultRepository::addPlayerResult);
+
+        gameResult.getChecksResult()
+                .forEach((gameResultRepository::addChecksResult));
+    }
 }
