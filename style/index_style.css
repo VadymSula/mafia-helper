@@ -145,4 +145,8 @@ h5{padding-bottom: 6%;}}
     transition: .5s ease-in-out;    
 }}
 @media(max-width:414px){.head__button__play{padding-left: 25%;}ul{min-height: 60px;padding-left: 0px;}}
+@media(max-width:550px){
+    nav{
+        display: none;
+    }}
 /* @media end */
