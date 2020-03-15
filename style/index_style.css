@@ -4,11 +4,13 @@
 }
 /* css in heder begin */
 header{
-    /* margin: 0% 0% 0% 0%; */
     background: url(../images/mafia.png) no-repeat center fixed;
-    background-size: 100%;
+    background-size: cover;
     width: 100%;
     height: 100%;
+}
+.zaglyshka{
+    width: 100px;
 }
 a{
     font-family: 'Montserrat';
@@ -21,12 +23,9 @@ nav{
 }
 ul{
     background-color: rgb(245, 245, 243, 0.8);
-    
-    min-height: 55px;
-    /* display: flex;
+    display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    width: 100%; */
+    justify-content: space-around;
 }
 li{
     font-size:  1.25em;
@@ -59,7 +58,7 @@ a.head__button__login:hover {
     background: rgb(240,240,240);
 }
 .login__button{
-    float: right;
+    align-self: flex-end;
     
 }
 a.nav:active{
@@ -89,9 +88,11 @@ background: rgb(152,15,0);
 } /* при нажатии */
 .header{
     background-color:  rgb(215, 217, 224, 0.8);
+    
+    height: 100%;
     max-width: 100%;
     min-height: 727px;
-    width: 100%;
+
 }
 .head__button__play{
     display: flex;
@@ -123,6 +124,9 @@ h5{
 .fas {
     color: gray;
     font-size: 9.375em;
+}
+.main__button-icon{
+    margin: 30px 30px;
 }
 /* @media begin */
 @media (max-width:630px){header {background-size: 100% 100%;transition: .5s ease-in-out;}}
