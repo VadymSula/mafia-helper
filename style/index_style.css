@@ -112,6 +112,7 @@ div.main__button-icons{
     flex-direction: row;
     justify-content: space-around;
     align-items: flex-end;
+    flex-wrap: wrap;
 }
 h5{
     font-size: 1.875em;
