@@ -2,7 +2,6 @@ package org.deanoffice2.mafiahelper.entity;
 
 public class PlayerResult implements DomainObject {
     private int idPerson;
-    private int idGame;
     private String roleInGame;
     private int foulsQuantity;
     private String goldenMove;
@@ -11,9 +10,8 @@ public class PlayerResult implements DomainObject {
     public PlayerResult() {
     }
 
-    public PlayerResult(int idPerson, int idGame, String roleInGame, int foulsQuantity, String goldenMove, boolean firstKillSheriff) {
+    public PlayerResult(int idPerson, String roleInGame, int foulsQuantity, String goldenMove, boolean firstKillSheriff) {
         this.idPerson = idPerson;
-        this.idGame = idGame;
         this.roleInGame = roleInGame;
         this.foulsQuantity = foulsQuantity;
         this.goldenMove = goldenMove;
@@ -26,14 +24,6 @@ public class PlayerResult implements DomainObject {
 
     public void setIdPerson(int idPerson) {
         this.idPerson = idPerson;
-    }
-
-    public int getIdGame() {
-        return idGame;
-    }
-
-    public void setIdGame(int idGame) {
-        this.idGame = idGame;
     }
 
     public String getRoleInGame() {

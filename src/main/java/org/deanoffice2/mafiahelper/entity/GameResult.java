@@ -1,8 +1,5 @@
 package org.deanoffice2.mafiahelper.entity;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +8,6 @@ public class GameResult implements DomainObject {
     private int idClub;
     private String win;
     private List<PlayerResult> playersResult = new ArrayList<>();
-    @JsonProperty("checksResult")
     private List<CheckGame> checksResult = new ArrayList<>();
     private String gameDuration;
 
@@ -59,7 +55,6 @@ public class GameResult implements DomainObject {
         this.playersResult = playersResult;
     }
 
-    @JsonProperty("checksResult")
     public List<CheckGame> getChecksResult() {
         return checksResult;
     }
