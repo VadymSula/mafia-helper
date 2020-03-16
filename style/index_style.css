@@ -127,6 +127,12 @@ h5{
 }
 .main__button-icon{
     margin: 30px 30px;
+}
+.fa-play {
+    padding-left: 40px;
+}
+.fa-book-open{
+    padding-left: 12px;
 
 }
 /* @media begin */
