@@ -71,13 +71,12 @@ p.h1{
     font-size: 12.5em;
 }
 a.button{
-    /* margin-top: 5%; */
-    color: #fff;    /* цвет текста */
-    text-decoration: none;  /* убирать подчёркивание у ссылок */
-    user-select: none;  /* убирать выделение текста */
-    background: rgb(65, 105, 225);  /* фон кнопки */
-    padding: 1.0em 2.5em;   /* отступ от текста */
-    outline: none;      /* убирать контур в Mozilla */
+    color: #fff;    
+    text-decoration: none;  
+    user-select: none;  
+    background: rgb(65, 105, 225);  
+    padding: 1.0em 2.5em;  
+    outline: none;      
     border-radius: 0%;
 }
 a.button:hover { 
@@ -129,22 +128,30 @@ h5{
     margin: 30px 30px;
 }
 /* @media begin */
-@media (max-width:741px){header {background-size: cover;transition: .5s ease-in-out;}}
-@media screen and (max-width:725px) {p.h1{font-size: 5em;transition: .5s ease-in-out;}}
-@media screen and (max-width:600px) {.head__button__play{display: flex;
-    padding-top: 50%;
-    justify-content: center;
-    align-items: center;;transition: .5s ease-in-out;}
+@media (max-width:741px){
+    header {
+        background-size: cover;
+        transition: .5s ease-in-out;}}
+@media screen and (max-width:725px) {
+    p.h1{
+        font-size: 5em;
+        transition: .5s ease-in-out;}}
+@media screen and (max-width:600px) {
+    .head__button__play{
+        display: flex;
+        padding-top: 50%;
+        justify-content: center;
+        align-items: center;;transition: .5s ease-in-out;}
 h5{padding-bottom: 6%;}}
-@media (max-width:750px){div.main__button-icons{
-    
-    display: flex;
-    flex-direction: column;
-    align-items:center;
-    justify-content: space-around;
-    transition: .5s ease-in-out;    
+@media (max-width:750px){
+    div.main__button-icons{   
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+        justify-content: space-around;
+        transition: .5s ease-in-out;    
 }}
-@media(max-width:414px){.head__button__play{padding-left: 25%;}ul{min-height: 60px;padding-left: 0px;}}
+@media(max-width:414px){ul{min-height: 60px;padding-left: 0px;}}
 @media(max-width:550px){
     nav{
         display: none;
