@@ -14,11 +14,6 @@ public class Controller {
     @Qualifier("gameService")
     private GameService gameService;
 
-    @GetMapping("/games/player-game-result{idGame}")
-    public ResponseEntity getPlayersGame(@PathVariable int idGame) {
-        return ResponseEntity.ok(gameService.findGameById(idGame));
-    }
-
     @PutMapping("/game-end")
     public ResponseEntity saveGameResult(@RequestBody GameResult gameResult) {
         gameService.saveGameResults(gameResult);
