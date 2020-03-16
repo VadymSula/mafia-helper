@@ -28,7 +28,7 @@ ul{
     justify-content: space-around;
 }
 li{
-    font-size:  20px;
+    font-size:  22px;
     padding: 7px 0px 7px 0px;
     font-family: 'Montserrat';
     display: inline-block;
@@ -127,6 +127,7 @@ h5{
 }
 .main__button-icon{
     margin: 30px 30px;
+
 }
 /* @media begin */
 @media (max-width:741px){
@@ -150,7 +151,8 @@ h5{padding-bottom: 6%;}}
         flex-direction: column;
         align-items:center;
         justify-content: space-around;
-        transition: .5s ease-in-out;    
+        transition: .5s ease-in-out;   
+ 
 }}
 @media(max-width:414px){ul{min-height: 60px;padding-left: 0px;}}
 @media(max-width:550px){
