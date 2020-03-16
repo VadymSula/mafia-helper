@@ -28,8 +28,8 @@ ul{
     justify-content: space-around;
 }
 li{
-    font-size:  1.25em;
-    padding: 0.5%;
+    font-size:  20px;
+    padding: 7px 0px 7px 0px;
     font-family: 'Montserrat';
     display: inline-block;
 }
@@ -37,8 +37,8 @@ a.nav{
     text-decoration: none;
     color:black;
 }
-a.head__button__login{ 
-  
+a.head__button__login{
+    font-size: 15px; 
     display: inline-block;
     width: 5em;
     height: 2em;
@@ -88,7 +88,6 @@ background: rgb(152,15,0);
 } /* при нажатии */
 .header{
     background-color:  rgb(215, 217, 224, 0.8);
-    
     height: 100%;
     max-width: 100%;
     min-height: 727px;
@@ -124,7 +123,7 @@ h5{
 }
 .fas {
     color: gray;
-    font-size: 9.375em;
+    font-size: 8em;
 }
 .main__button-icon{
     margin: 30px 30px;
