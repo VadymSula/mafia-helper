@@ -38,6 +38,7 @@ section h1{
     justify-content: space-around;
 }
 .players-item{
+    cursor: pointer;
     background-color: white;
     text-align: center;
     border: 2px #7d7d7d dashed;
@@ -141,5 +142,16 @@ button:hover{
 }
 .btns-End{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    max-height: 70px;
+}
+.players-item.disabled, .player.disabled{
+    color: #bfbfbf;
+    cursor: auto;
+}
+.player{
+    user-select: none;
+}
+.player.danger{
+    color: #b71c1c;
 }

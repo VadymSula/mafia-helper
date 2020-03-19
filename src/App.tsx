@@ -5,7 +5,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    // Redirect
+    Redirect
 } from "react-router-dom";
 
 function App() {
@@ -15,6 +15,9 @@ function App() {
                 <Switch>
                     <Route path="/game">
                         <GameComponent/>
+                    </Route>
+                    <Route path="/">
+                        <Redirect to="/game"/>
                     </Route>
                 </Switch>
             </Router>
