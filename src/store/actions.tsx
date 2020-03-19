@@ -5,6 +5,8 @@ export const CHANGE_ACTIVE_ROLE = 'CHANGE_ACTIVE_ROLE';
 export const CHANGE_PLAYER_INFO = 'CHANGE_PLAYER_INFO';
 export const CHANGE_VOTING = 'CHANGE_VOTING';
 export const CHANGE_CIRCLE = 'CHANGE_CIRCLE';
+export const CHANGE_KILL_STATUS = 'CHANGE_KILL_STATUS';
+export const CHANGE_KICK_STATUS = 'CHANGE_KICK_STATUS';
 export const ADD_CHECK = 'ADD_CHECK';
 
 export const startGame = value => ({
@@ -29,6 +31,14 @@ export const changePlayerInfo = value => ({
 });
 export const changeVoting = value => ({
     type: CHANGE_VOTING,
+    payload: value
+});
+export const changeKillStatus = value => ({
+    type: CHANGE_KILL_STATUS,
+    payload: value
+});
+export const changeKickStatus = value => ({
+    type: CHANGE_KICK_STATUS,
     payload: value
 });
 export const changeCircle = value => ({

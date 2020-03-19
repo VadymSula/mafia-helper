@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import PlayerDiv from "./playerDiv";
-import {addCheck, changeCircle, changeVoting} from "../../../store/actions";
+import {addCheck, changeCircle, changeKickStatus, changeKillStatus, changeVoting} from "../../../store/actions";
 
 interface Player {
     name: string,
@@ -29,7 +29,10 @@ interface Props {
     checks: any,
     changeCircle: any,
     store: any,
-    addCheck:any
+    addCheck: any,
+    changeKickStatus: any,
+    changeKillStatus: any,
+    isKilled: boolean
 }
 
 interface State {
@@ -39,7 +42,8 @@ interface State {
     timeOutDurGame: string,
     timer: number,
     pause: boolean,
-    currentCircle: number
+    currentCircle: number,
+    gameIsEnd: boolean
 }
 
 class InGame extends Component<Props, State> {
@@ -53,40 +57,47 @@ class InGame extends Component<Props, State> {
             timeOutDurGame: '0:00:00',
             timer: 0,
             pause: false,
-            currentCircle: 1
+            currentCircle: 1,
+            gameIsEnd: false
         }
     }
+
+    changeKillStatus = () => {
+        this.props.changeKillStatus(true)
+    };
 
     endCircle = () => {
         this.props.changeVoting([]);
         this.props.changeCircle(this.props.circle + 1);
         let _tmp = this.props.checks;
-        _tmp[this.props.circle] =  {
+        _tmp[this.props.circle] = {
             sheriff: null,
             don: null,
             circle: this.props.circle + 1
         };
         this.props.addCheck(_tmp);
+        this.props.changeKickStatus(false);
+        this.props.changeKillStatus(false);
     };
 
     resumeTimer = () => {
-            this.startTimer(this.state.timer);
-            this.setState({pause: false})
-        };
+        this.startTimer(this.state.timer);
+        this.setState({pause: false})
+    };
 
-        clearTimer = () => {
-            this.setState({timer: 0});
-            clearInterval(this.state.intervalIdM);
-            this.setState({pause: false});
-        };
+    clearTimer = () => {
+        this.setState({timer: 0});
+        clearInterval(this.state.intervalIdM);
+        this.setState({pause: false});
+    };
 
-        pauseTimer = () => {
-            clearInterval(this.state.intervalIdM);
-            this.setState({pause: true})
-        };
+    pauseTimer = () => {
+        clearInterval(this.state.intervalIdM);
+        this.setState({pause: true})
+    };
 
-        startTimer = (sec) => {
-            this.setState({timer: sec});
+    startTimer = (sec) => {
+        this.setState({timer: sec});
         this.setState({
             intervalIdM: setInterval(() => {
                 if (this.state.timer - 1 === 0) {
@@ -123,22 +134,35 @@ class InGame extends Component<Props, State> {
     }
 
     componentDidUpdate() {
-        // console.log(this.props.store)
-
-        // if (this.state.currentCircle !== this.props.circle) {
-        //     this.setState({
-        //         checks: this.props.checks
-        //     })
-        // }
+        if (!this.state.gameIsEnd) {
+            let countPlayers = {
+                red: 0,
+                black: 0
+            };
+            for (let i = 1; i <= 10; i++) {
+                if (this.props.player['player' + i].active === true)
+                    if (this.props.player['player' + i].role === 'civil' || this.props.player['player' + i].role === 'sheriff')
+                        countPlayers.red++;
+                    else
+                        countPlayers.black++;
+            }
+            if (countPlayers.red === countPlayers.black) {
+                this.endTimerDurationGame();
+                alert('mafia win');
+                this.setState({gameIsEnd:true})
+            } else if (countPlayers.black === 0) {
+                this.endTimerDurationGame();
+                alert('city win');
+                this.setState({gameIsEnd:true})
+            }
+        }
     }
 
-    endTimerDurationGame = (event) => {
+    endTimerDurationGame = () => {
         clearInterval(this.state.intervalId);
-        event.preventDefault();
     };
 
     render() {
-        console.log(this.props.checks)
         return (
             <section>
                 <h1>{this.state.timeOutDurGame}</h1>
@@ -188,21 +212,22 @@ class InGame extends Component<Props, State> {
                             <p>Перевірки Шеріфа:</p>
                             <p>Перевірки Дона:</p>
                         </div>
-                            {
-                                this.props.checks.map(circle => {
-                                    return (
-                                        <div key={circle.circle}>
-                                            <p>{circle.circle} ніч</p>
-                                            <p>{circle.sheriff}</p>
-                                            <p>{circle.don}</p>
-                                        </div>
-                                    )
-                                })
-                            }
+                        {
+                            this.props.checks.map(circle => {
+                                return (
+                                    <div key={circle.circle}>
+                                        <p>{circle.circle} ніч</p>
+                                        <p>{circle.sheriff}</p>
+                                        <p>{circle.don}</p>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                     <div className="btns-End">
                         <button onClick={this.endCircle} className="green">Закінчити круг</button>
-                        {/*<button onClick={this.endTimerDurationGame} className="red">Закінчити гру</button>*/}
+                        {!this.props.isKilled ?
+                            <button onClick={this.changeKillStatus} className="red">Промах</button> : null}
                     </div>
                 </div>
             </section>
@@ -215,13 +240,16 @@ const mapStateToProps = function (state) {
         checks: state.checks,
         player: state,
         store: state,
-        circle: state.currentCircle
+        circle: state.currentCircle,
+        isKilled: state.isKilled
     }
 };
 
 const mapDispatchToProps = {
     changeVoting,
     changeCircle,
-    addCheck
+    addCheck,
+    changeKickStatus,
+    changeKillStatus,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(InGame)

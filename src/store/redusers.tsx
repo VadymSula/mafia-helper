@@ -1,7 +1,7 @@
 import {
     ADD_CHECK,
     CHANGE_ACTIVE_ROLE, CHANGE_CIRCLE,
-    CHANGE_COUNT_ROLES,
+    CHANGE_COUNT_ROLES, CHANGE_KICK_STATUS, CHANGE_KILL_STATUS,
     CHANGE_PLAYER_INFO,
     CHANGE_VOTING,
     PLAYER_IS_READY,
@@ -16,6 +16,8 @@ const defaultState = {
     donLeft: 1,
     sheriffLeft: 1,
     civilLeft: 6,
+    isKilled: true,
+    isKicked: false,
     checks: [
         {
             sheriff: null,
@@ -73,16 +75,16 @@ const defaultState = {
     //     role: '',
     //     fouls: 0
     // },
-    player1: {name: "Zalypelnik", role: "civil", ready: true, number: 1, fouls: 0},
-    player2: {name: "Mr.Od1n", role: "civil", ready: true, number: 2, fouls: 0},
-    player3: {name: "WhoAmI", role: "civil", ready: true, number: 3, fouls: 0},
-    player4: {name: "SUBARIST", role: "civil", ready: true, number: 4, fouls: 0},
-    player5: {name: "Drews", role: "civil", ready: true, number: 5, fouls: 0},
-    player6: {name: "Vitalik", role: "civil", ready: true, number: 6, fouls: 0},
-    player7: {name: "Bananator", role: "sheriff", ready: true, number: 7, fouls: 0},
-    player8: {name: "Микола", role: "don", ready: true, number: 8, fouls: 0},
-    player9: {name: "Михайло", role: "mafia", ready: true, number: 9, fouls: 0},
-    player10: {name: "Дьома", role: "mafia", ready: true, number: 10, fouls: 0},
+    player1: {name: "Zalypelnik", role: "civil", ready: true, number: 1, fouls: 0, active: true},
+    player2: {name: "Mr.Od1n", role: "civil", ready: true, number: 2, fouls: 0, active: true},
+    player3: {name: "WhoAmI", role: "civil", ready: true, number: 3, fouls: 0, active: true},
+    player4: {name: "SUBARIST", role: "civil", ready: true, number: 4, fouls: 0, active: true},
+    player5: {name: "Drews", role: "civil", ready: true, number: 5, fouls: 0, active: true},
+    player6: {name: "Vitalik", role: "civil", ready: true, number: 6, fouls: 0, active: true},
+    player7: {name: "Bananator", role: "sheriff", ready: true, number: 7, fouls: 0, active: true},
+    player8: {name: "Микола", role: "don", ready: true, number: 8, fouls: 0, active: true},
+    player9: {name: "Михайло", role: "mafia", ready: true, number: 9, fouls: 0, active: true},
+    player10: {name: "Дьома", role: "mafia", ready: true, number: 10, fouls: 0, active: true},
 };
 
 export const rootReducer = (state = defaultState, action) => {
@@ -121,6 +123,16 @@ export const rootReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 currentCircle: action.payload
+            };
+        case CHANGE_KILL_STATUS:
+            return {
+                ...state,
+                isKilled: action.payload
+            };
+        case CHANGE_KICK_STATUS:
+            return {
+                ...state,
+                isKicked: action.payload
             };
         case ADD_CHECK:
             return {

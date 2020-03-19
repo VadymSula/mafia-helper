@@ -1,0 +1,62 @@
+.modal-wrapper {
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    z-index: 1;
+    border: 2px #b74d82 solid;
+    border-radius: 10px;
+}
+
+.back-drop {
+    background-color: rgba(48, 49, 48, 0.09);
+    height: 100%;
+    position: fixed;
+    transition: all 1.3s;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+.modal button{
+    border-radius: 10px;
+    font-size: 18px;
+    color: white;
+}
+.modal button.foul{
+    background-color: #D3455B;
+}
+.modal button.voting{
+    background-color: #E8833A;
+}
+.modal button.del{
+    background-color: #4B5C6B;
+}
+.modal button.checkDon{
+    background-color: #a64042;
+}
+.modal button.checkSheriff{
+    background-color: #2092c2;
+}
+.isVoting{
+    color: #E8833A;
+}
+span.time{
+    font-size: 60px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.modal input{
+    padding: 10px;
+    width: 15px;
+}
+.player i.iRole{
+    font-size:40px;
+    display: inline-block;
+}
+.players-item p span {
+    margin-left: 10px;
+    font-weight: bold;
+
+}
