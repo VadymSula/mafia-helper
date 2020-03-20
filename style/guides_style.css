@@ -1,52 +1,60 @@
 html {
     margin: 0 0 0 0;
+    background-color: #ffffff;
 }
 h1 {
     text-align:center;
+    font-family: Сomic Sans MS, cursive;
+    color: #293845;
 }
-.blocks__guides__info {
-    margin: 5% 10% 5% 10%;
-    padding: 0 0 0 0;
-    border-bottom: 2px dotted #7d7d7d;
-
+@media (min-width: 500px) {
+    .blocks__guides__info {
+        margin: 2% 5% 2% 5%;
+        padding: 0 0 0 0;
+        border-bottom: 4px dashed #9eadba;
+    }
 }
 .blocks__guides__text {
-    margin: 4% 1% 4% 1%;
-    padding: 1% 1% 1% 1%;
-    border: 2px solid #6558F5;
+    margin: 2% 1% 2% 1%;
+    padding: 0 0 0 0;
 }
-.blocks__guides__text p{
+.blocks__guides__text h2{
     font-size:20px;
+    color: #374551;
+    font-family:  cursive;
+    font-weight: 700;
 }
-
 .blocks__guides__author__date__time {
-    margin: 4% 1% 4% 1%;
+    margin: 1% 2px 20px 2px;
     padding: 0 0 0 0;
     display: flex;
-    flex-flow: row wrap;
+    align-items: stretch;
+    flex-flow:  wrap;
 }
 .icons_people {
-    display: inline-block;
+    align-items: stretch; /*центрирование*/
 }
 .author_name {
     display: inline-block;
-    margin-top: auto;
-    margin-bottom: 0;
-    margin-left: 10px;
+    margin-left: 20px;
+    flex:1;
 }
 .author_name h3 {
-    margin-top: auto;
-    margin-bottom: 0;
+    align-items: stretch; /*центрирование*/
+    font-family:  cursive;
+    font-weight: 500;
+    color: #43505c;
+    font-size:20px;
 }
 .author__time-date_post {
-    display: inline-block;
+    align-items: stretch; /*центрирование*/
     margin-left: auto;
-    margin-right: 0;
-    margin-top: auto;
-    margin-bottom: 0;
-    padding: 0 0 0 0;
+    flex-wrap:wrap;
+    color: #43505c;
 }
 .author__time-date_post h3 {
-    margin-top: auto;
-    margin-bottom: 0;
+    font-size:20px;
+    font-family:  cursive;
+    font-weight: 500;
+
 }
