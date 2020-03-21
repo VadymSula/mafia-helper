@@ -2,28 +2,48 @@
 *{
     margin: 0px;
 }
+body{
+    /* margin: 0px 220px; */
+    background-color:white;
+    width: 100%;
+}
+.body{
+    background-color:  oldlace;
+}
+/* header begin */
 h1{
     font-family: 'Montserrat';
 }
 .header{
-    margin: 0px 220px;
+    /* margin: 0px 220px; */
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    border-bottom: 2px gray solid;
+    border-bottom: 4px gray solid;
 }
-.logo__result_left{
+/* .logo__result_left{
     padding-right: 355px;
 }
 .logo__result_right{
     padding-left: 355px;
-}
+} */
 .result-name{
     display: flex;
     flex-direction: column;
     justify-content: center;
     font-size: 25px;
 }
-.result2{
-        padding-top: 25px;
+/* .result_one{} */
+.result_two{
+    padding-top: 25px;
+    padding-left: 175px;
+}
+/* header end */
+.content{
+    display: flex;
+
+}
+.box{
+    display: flex;
+    justify-content: space-around;
 }
