@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+*{
+    margin: 0px;
+}
+h1{
+    font-family: 'Montserrat';
+}
+.header{
+    margin: 0px 220px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-bottom: 2px gray solid;
+}
+.logo__result_left{
+    padding-right: 355px;
+}
+.logo__result_right{
+    padding-left: 355px;
+}
+.result-name{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 25px;
+}
+.result2{
+        padding-top: 25px;
+}
