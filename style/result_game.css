@@ -1,9 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 *{
-    margin: 0px;
+    margin: 0%;
 }
 body{
-    /* margin: 0px 220px; */
     background-color:white;
     width: 100%;
 }
@@ -11,11 +10,10 @@ body{
     background-color:  oldlace;
 }
 /* header begin */
-h1,h2,p{
+h1, h2, h3, p, time{
     font-family: 'Montserrat';
 }
 .header{
-    /* margin: 0px 220px; */
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -34,16 +32,28 @@ h1,h2,p{
 /* header end */
 .content{
     display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 
 }
-.box{
-    display: flex;
-    justify-content: space-around;
+.column_one{
+  margin-top: 15px;
+  font-size: 50px;
+}
+.column_second{
+    margin-top: 15px;
+}
+.timer{
+    
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid gray;
 }
 /*------------------------------------------------------- table begin ----------------------------------*/
 div.checkTable {
+    
     font-family: Arial, Helvetica, sans-serif;
-    width: 25%;
+    width: 100%;
     height: 200px;
     text-align: center;
     border-collapse: collapse;
@@ -56,22 +66,13 @@ div.checkTable {
     font-size: 16px;
   }
   .divTable.checkTable .divTableHeading {
-    background: #8E847D;
-    background: -moz-linear-gradient(top, #aaa39d 0%, #99908a 66%, #8E847D 100%);
-    background: -webkit-linear-gradient(top, #aaa39d 0%, #99908a 66%, #8E847D 100%);
-    background: linear-gradient(to bottom, #aaa39d 0%, #99908a 66%, #8E847D 100%);
-    border-bottom: 0px solid #444444;
+      border-bottom: 0px solid #444444;
   }
   .divTable.checkTable .divTableHeading .divTableHead {
     font-size: 20px;
     font-weight: bold;
     text-align: center;
-    border-left: 0px solid #D0E4F5;
   }
-  .divTable.checkTable .divTableHeading .divTableHead:first-child {
-    border-left: none;
-  }
-  
   /* DivTable.com */
   .divTable{ display: table; }
   .divTableRow { display: table-row; }
@@ -81,3 +82,29 @@ div.checkTable {
   .divTableFoot { display: table-footer-group;}
   .divTableBody { display: table-row-group;}
   /* -------------------------------- end table----------------------------------------------- */
+.features-game{
+    padding-top: 15px;
+    border-bottom: solid  1px gray;
+}
+.best__act{
+    padding-top: 15px;
+    font-size: 20px;
+}
+.gold__act{
+    background-color: rgb(251, 225, 146);
+}
+.first__blood{
+    background-color: rgb(214, 177, 177);
+}
+.black__checks{
+    background-color: rgb(196, 189, 175);
+}
+.head{
+    padding: 5px 0px 5px 10px;
+}
+.head1{
+    padding: 5px 80px 5px 40px;
+}
+.head2{
+    padding: 5px 0px 5px 37px;
+}
