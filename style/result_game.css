@@ -3,12 +3,12 @@
     margin: 0%;
 }
 body{
-    background-color:white;
+    /* background-color:white; */
     width: 100%;
 }
-.body{
+/* .body{
     background-color:  oldlace;
-}
+} */
 /* header begin */
 h1, h2, h3, p, time{
     font-family: 'Montserrat';
@@ -19,11 +19,12 @@ h1, h2, h3, p, time{
     justify-content: space-around;
     border-bottom: 4px gray solid;
 }
+
 .result-name{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    font-size: 25px;
+    font-size: 40px;
 }
 .result_two{
     padding-top: 25px;
@@ -32,19 +33,22 @@ h1, h2, h3, p, time{
 /* header end */
 .content{
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; */
     justify-content: space-around;
+    font-size: 40px;
 
 }
 .column_one{
+    font-size: 60px;
   margin-top: 15px;
-  font-size: 50px;
+}
+.player{
+    padding: 10px 10px  1px 0px;
 }
 .column_second{
     margin-top: 15px;
 }
 .timer{
-    
     margin-bottom: 15px;
     padding-bottom: 5px;
     border-bottom: 1px solid gray;
@@ -62,14 +66,13 @@ div.checkTable {
     border: 1px solid #BABABA;
     padding: 7px 4px;
   }
-  .divTable.checkTable .divTableBody .divTableCell {
+  /* .divTable.checkTable .divTableBody .divTableCell {
     font-size: 16px;
-  }
+  } */
   .divTable.checkTable .divTableHeading {
       border-bottom: 0px solid #444444;
   }
   .divTable.checkTable .divTableHeading .divTableHead {
-    font-size: 20px;
     font-weight: bold;
     text-align: center;
   }
@@ -88,7 +91,7 @@ div.checkTable {
 }
 .best__act{
     padding-top: 15px;
-    font-size: 20px;
+
 }
 .gold__act{
     background-color: rgb(251, 225, 146);
@@ -108,3 +111,11 @@ div.checkTable {
 .head2{
     padding: 5px 0px 5px 37px;
 }
+/* Begin @media */
+@media (max-width:800px){.content{flex-direction: column;}.column_one{margin-left: 50%; padding-bottom: 50px;}}
+@media screen and (max-width:725px) {.content{font-size: 30px;}.result-name{font-size: 25px;}}
+@media screen and (max-width:610px) {.logo{display: none;}.column_one{font-size: 20px;}}
+@media (max-width:750px){}
+@media(max-width:414px){}
+@media(max-width:550px){}
+/* end @media */
