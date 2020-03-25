@@ -8,6 +8,7 @@ body{
 /* header begin */
 h1, h2, h3, p, time,li{
     font-family: 'Montserrat';
+    color: rgb(41, 56, 69);
 }
 .header{
     display: flex;
@@ -114,10 +115,10 @@ div.checkTable {
     padding: 5px 0px 5px 37px;
 }
 /* Begin @media */
-@media (max-width:800px){.content{flex-direction: column;}.column_one{margin-left: 50%; padding-bottom: 50px;}}
-@media screen and (max-width:725px) {.content{font-size: 30px;}.result-name{font-size: 25px;}}
-@media screen and (max-width:610px) {.logo{display: none;}.column_one{font-size: 20px;}}
+@media (max-width:800px){.content{flex-direction: column;}.column_one{margin-left: 35%; padding-bottom: 50px;}}
+@media screen and (max-width:725px) {.content{margin: 5px 25px;}.result-name{font-size: 25px;}}
+@media screen and (max-width:610px) {.logo{display: none;}.column_one{font-size: 30px;}}
 @media (max-width:750px){}
-@media(max-width:414px){}
+@media(max-width:414px){.column_one {font-size: 30px;margin-left: 20%;}.result-name{font-size: 20px;}.result_two{padding-left: 125px;}}
 @media(max-width:550px){}
 /* end @media */
