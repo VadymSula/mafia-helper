@@ -26,15 +26,37 @@ public class PlayerResultRepositoryImpl implements GameRepository<PlayerResult> 
     }
 
     @Override
+    public PlayerResult findById(Integer idGame, Integer idPlayer) {
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("idGame", idGame);
+        parameters.addValue("idPlayer", idPlayer);
+        return jdbcTemplate.queryForObject(
+                "SELECT role, fouls_quantity, golden_move, first_kill_sheriff, is_killed " +
+                        "FROM player_result " +
+                        "WHERE id_game = :idGame AND id_player = :idPlayer",
+                parameters,
+                (rs, rowName) -> {
+                    PlayerResult playerResult = new PlayerResult();
+                        playerResult.setGoldenMove(rs.getString("golden_move"));
+                        playerResult.setFoulsQuantity(rs.getInt("fouls_quantity"));
+                        playerResult.setFirstKillSheriff(rs.getBoolean("first_kill_sheriff"));
+                        playerResult.setRoleInGame(rs.getString("role"));
+                        playerResult.setKilled(rs.getBoolean("is_killed"));
+                        return playerResult;
+                });
+    }
+
+    @Override
     public void addInfoFromGame(PlayerResult infoFromGame) {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        String sql = "INSERT INTO player_result (id_person, role, fouls_quantity, golden_move, first_kill_sheriff, id_game)" +
-                "VALUES (:idPerson, :role, :foulsQuantity, :goldenMove, :firstKillSheriff, (SELECT id_game FROM game ORDER BY id_game DESC LIMIT 1))";
+        String sql = "INSERT INTO player_result (id_person, role, fouls_quantity, golden_move, first_kill_sheriff, id_game, is_killed)" +
+                "VALUES (:idPerson, :role, :foulsQuantity, :goldenMove, :firstKillSheriff, (SELECT id_game FROM game ORDER BY id_game DESC LIMIT 1), :isKilled)";
         parameters.addValue("idPerson", infoFromGame.getIdPerson());
         parameters.addValue("role", infoFromGame.getRoleInGame());
         parameters.addValue("foulsQuantity", infoFromGame.getFoulsQuantity());
         parameters.addValue("goldenMove", infoFromGame.getGoldenMove());
         parameters.addValue("firstKillSheriff", infoFromGame.isFirstKillSheriff());
+        parameters.addValue("isKilled", infoFromGame.isKilled());
 
         jdbcTemplate.update(sql, parameters);
     }
