@@ -1,10 +1,15 @@
 package org.deanoffice2.mafiahelper.repository;
 
+import org.deanoffice2.mafiahelper.entity.CheckGame;
 import org.deanoffice2.mafiahelper.entity.GameResult;
+import org.deanoffice2.mafiahelper.entity.PlayerResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @org.springframework.stereotype.Repository("gameResultRepository")
 public class GameResultRepositoryImpl implements GameRepository<GameResult> {
@@ -18,10 +23,23 @@ public class GameResultRepositoryImpl implements GameRepository<GameResult> {
     @Override
     public GameResult findById(Integer idGame) {
         return jdbcTemplate.queryForObject(
-                "SELECT * FROM game WHERE id_game = :idGame",
+                "SELECT win, game_duration " +
+                        "FROM game " +
+                        "WHERE id_game = :idGame",
                 new MapSqlParameterSource("idGame", idGame),
-                new BeanPropertyRowMapper<>(GameResult.class)
-        );
+                (rs, rowName) -> {
+                    GameResult gameResult = new GameResult();
+                        gameResult.setGameDuration(rs.getString("game_duration"));
+                        gameResult.setWin(rs.getString("win"));
+                        gameResult.setPlayersResult(getPlayerResultsFromDb(idGame));
+                        gameResult.setChecksResult(getGameChecksFromDb(idGame));
+                        return gameResult;
+                });
+    }
+
+    @Override
+    public GameResult findById(Integer idGame, Integer idPlayer) {
+        return null;
     }
 
     @Override
@@ -35,4 +53,49 @@ public class GameResultRepositoryImpl implements GameRepository<GameResult> {
 
         jdbcTemplate.update(sql, parameters);
     }
+
+    private List<PlayerResult> getPlayerResultsFromDb(Integer idGame) {
+        List<PlayerResult> playerResults = new ArrayList<>();
+
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(
+                "SELECT first_kill_sheriff, role, fouls_quantity, golden_move " +
+                        "FROM player_result " +
+                        "WHERE id_game = :idGame",
+                new MapSqlParameterSource("idGame", idGame)
+        );
+
+        for (Map<String, Object> row : rows) {
+            PlayerResult playerResult = new PlayerResult();
+
+            playerResult.setRoleInGame((String) row.get("role"));
+            playerResult.setFirstKillSheriff((Boolean) row.get("first_kill_sheriff"));
+            playerResult.setFoulsQuantity((Integer) row.get("fouls_quantity"));
+            playerResult.setGoldenMove((String) row.get("golden_move"));
+            playerResults.add(playerResult);
+        }
+
+        return playerResults;
+    }
+
+    private List<CheckGame> getGameChecksFromDb(Integer idGame) {
+        List<CheckGame> gameChecks = new ArrayList<>();
+
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(
+                "SELECT don_check, sheriff_check, circle_number " +
+                        "FROM checks " +
+                        "WHERE id_game = :idGame",
+                new MapSqlParameterSource("idGame", idGame)
+        );
+
+        for (Map<String, Object> row : rows) {
+            CheckGame checkGame = new CheckGame();
+
+            checkGame.setDonCheck((Integer) row.get("mafia_check"));
+            checkGame.setSheriffCheck((Integer) row.get("sheriff_check"));
+            checkGame.setNumberOfTheCircle((Integer) row.get("circle_number"));
+            gameChecks.add(checkGame);
+        }
+        return gameChecks;
+    }
+
 }
