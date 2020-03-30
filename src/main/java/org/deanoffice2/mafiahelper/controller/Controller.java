@@ -14,9 +14,22 @@ public class Controller {
     @Qualifier("gameService")
     private GameService gameService;
 
-    @PutMapping("/game-end")
+    @PutMapping("/game-end/id-game={idGame}")
     public ResponseEntity saveGameResult(@RequestBody GameResult gameResult) {
         gameService.saveGameResults(gameResult);
-        return ResponseEntity.ok("Success");
+        return ResponseEntity
+                .ok("Success");
+    }
+
+    @GetMapping("/game-end/id-game={idGame}")
+    public ResponseEntity getGameResult(@PathVariable("idGame") int idGame) {
+        return ResponseEntity
+                .ok(gameService.getGameResults(idGame));
+    }
+
+    @GetMapping("/games/id-game={idGame}/players/id-player={idPlayer}")
+    public ResponseEntity getPlayerResultsById(@PathVariable Integer idGame, @PathVariable Integer idPlayer) {
+        return ResponseEntity
+                .ok(gameService.getPlayerResultByIdAndGameId(idPlayer, idGame));
     }
 }
