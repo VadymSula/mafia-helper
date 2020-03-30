@@ -1,10 +1,14 @@
 package org.deanoffice2.mafiahelper.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameResult implements DomainObject {
+    @JsonIgnore
     private int idGame;
+    @JsonIgnore
     private int idClub;
     private String win;
     private List<PlayerResult> playersResult = new ArrayList<>();
