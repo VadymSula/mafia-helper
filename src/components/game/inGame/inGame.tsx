@@ -1,29 +1,26 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import PlayerDiv from "./playerDiv";
-import {addCheck, changeCircle, changeKickStatus, changeKillStatus, changeVoting} from "../../../store/actions";
+import {
+    addCheck,
+    changeCircle,
+    changeKickStatus,
+    changeKillStatus,
+    changeVoting,
+    endGame
+} from "../../../store/actions";
+import {API} from "../../../servise/apiServise";
 
-interface Player {
-    name: string,
-    role: string,
-    ready: boolean,
-    number: number,
-    fouls: number
-}
+// interface Player {
+//     name: string,
+//     role: string,
+//     ready: boolean,
+//     number: number,
+//     fouls: number
+// }
 
 interface Props {
-    player: {
-        player1: Player,
-        player2: Player,
-        player3: Player,
-        player4: Player,
-        player5: Player,
-        player6: Player,
-        player7: Player,
-        player8: Player,
-        player9: Player,
-        player10: Player,
-    },
+    player: any,
     changeVoting: any,
     circle: number,
     checks: any,
@@ -32,7 +29,9 @@ interface Props {
     addCheck: any,
     changeKickStatus: any,
     changeKillStatus: any,
-    isKilled: boolean
+    isKilled: boolean,
+    endGame: any,
+    kills: any
 }
 
 interface State {
@@ -57,13 +56,13 @@ class InGame extends Component<Props, State> {
             timeOutDurGame: '0:00:00',
             timer: 0,
             pause: false,
-            currentCircle: 1,
+            currentCircle: 0,
             gameIsEnd: false
         }
     }
 
     changeKillStatus = () => {
-        this.props.changeKillStatus(true)
+        this.props.changeKillStatus({status: true, arr: this.props.kills})
     };
 
     endCircle = () => {
@@ -71,13 +70,13 @@ class InGame extends Component<Props, State> {
         this.props.changeCircle(this.props.circle + 1);
         let _tmp = this.props.checks;
         _tmp[this.props.circle] = {
-            sheriff: null,
-            don: null,
-            circle: this.props.circle + 1
+            sheriffCheck: null,
+            donCheck: null,
+            numberOfTheCircle: this.props.circle + 1
         };
         this.props.addCheck(_tmp);
         this.props.changeKickStatus(false);
-        this.props.changeKillStatus(false);
+        this.props.changeKillStatus({status: false, arr: this.props.kills});
     };
 
     resumeTimer = () => {
@@ -135,6 +134,42 @@ class InGame extends Component<Props, State> {
         })
     };
 
+
+    endGame = (winner: string, countPlayers: any) => {
+        let players:any = [], sheriffIsKilled = false, typeWin='mafia is Dead', firstKill = this.props.kills[0].playerNumber;
+        if(winner==='mafia')
+            typeWin = countPlayers.black+'#'+countPlayers.black;
+        if(this.props.player['player'+firstKill].role == 'sheriff')
+            sheriffIsKilled = true;
+
+        for (let i=1; i<=10;i++){
+            let player = this.props.player['player'+i];
+            let _SIK = false;
+            if(sheriffIsKilled && player.role === 'mafia' || sheriffIsKilled && player.role === 'don' )
+                _SIK = true;
+            players.push({
+                foulsQuantity: player.fouls,
+                firstKillSheriff: _SIK,
+                // goldenMove: null,
+                killed: !player.active,
+                roleInGame: player.role,
+            })
+        }
+        this.endTimerDurationGame();
+        this.setState({gameIsEnd: true});
+        this.props.endGame(true);
+        API.sendGameInformation({
+            checksResult: this.props.checks,
+            gameDuration: this.state.currentCount,
+            win: winner,
+            typeWin: typeWin,
+            playersResult: players,
+            kills: this.props.kills
+        }).then(response => {
+            console.log(response)
+        });
+    };
+
     componentDidMount() {
         this.startTimerDurationGame();
     }
@@ -153,13 +188,9 @@ class InGame extends Component<Props, State> {
                         countPlayers.black++;
             }
             if (countPlayers.red === countPlayers.black) {
-                this.endTimerDurationGame();
-                alert('mafia win');
-                this.setState({gameIsEnd: true})
+                this.endGame('mafia', countPlayers);
             } else if (countPlayers.black === 0) {
-                this.endTimerDurationGame();
-                alert('city win');
-                this.setState({gameIsEnd: true})
+                this.endGame('city', countPlayers);
             }
         }
     }
@@ -224,10 +255,10 @@ class InGame extends Component<Props, State> {
                         {
                             this.props.checks.map(circle => {
                                 return (
-                                    <div key={circle.circle}>
-                                        <p>{circle.circle} ніч</p>
-                                        <p>{circle.sheriff}</p>
-                                        <p>{circle.don}</p>
+                                    <div key={circle.numberOfTheCircle}>
+                                        <p>{circle.numberOfTheCircle} день</p>
+                                        <p>{circle.sheriffCheck}</p>
+                                        <p>{circle.donCheck}</p>
                                     </div>
                                 )
                             })
@@ -247,10 +278,22 @@ class InGame extends Component<Props, State> {
 const mapStateToProps = function (state) {
     return {
         checks: state.checks,
-        player: state,
+        player: {
+            player1: state.player1,
+            player2: state.player2,
+            player3: state.player3,
+            player4: state.player4,
+            player5: state.player5,
+            player6: state.player6,
+            player7: state.player7,
+            player8: state.player8,
+            player9: state.player9,
+            player10: state.player10,
+        },
         store: state,
         circle: state.currentCircle,
-        isKilled: state.isKilled
+        isKilled: state.isKilled,
+        kills: state.kills
     }
 };
 
@@ -260,5 +303,6 @@ const mapDispatchToProps = {
     addCheck,
     changeKickStatus,
     changeKillStatus,
+    endGame
 };
 export default connect(mapStateToProps, mapDispatchToProps)(InGame)

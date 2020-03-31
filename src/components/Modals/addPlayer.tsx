@@ -77,7 +77,8 @@ class AddPlayerModal extends Component<Props, State> {
             role: this.state.role,
             ready: true,
             number: this.props.number,
-            fouls: 0
+            fouls: 0,
+            active: true
         });
         this.props.changeCountRoles({
             role: this.state.role + 'Left',

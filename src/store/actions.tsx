@@ -1,4 +1,5 @@
 export const START_GAME = 'START_GAME';
+export const END_GAME = 'END_GAME';
 export const PLAYER_IS_READY = 'PLAYER_IS_READY';
 export const CHANGE_COUNT_ROLES = 'CHANGE_COUNT_ROLES';
 export const CHANGE_ACTIVE_ROLE = 'CHANGE_ACTIVE_ROLE';
@@ -11,6 +12,9 @@ export const ADD_CHECK = 'ADD_CHECK';
 
 export const startGame = value => ({
     type: START_GAME,
+    payload: value
+});export const endGame = value => ({
+    type: END_GAME,
     payload: value
 });
 export const playersIsReady = value => ({

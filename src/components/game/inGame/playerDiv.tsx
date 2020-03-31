@@ -17,7 +17,8 @@ interface Props {
     isKilled: boolean,
     isKicked: boolean,
     changeKillStatus: any,
-    changeKickStatus: any
+    changeKickStatus: any,
+    kills: any
 }
 
 interface State {
@@ -77,6 +78,7 @@ class PlayerDiv extends Component<Props, State> {
     banPlayer = () => {
         let _tmp = this.props.player;
         _tmp.active = false;
+        _tmp.typeNotActive = 'voting';
         this.props.changePlayerInfo(_tmp);
         this.props.changeKickStatus(true);
         this.props.changeVoting([]);
@@ -86,20 +88,23 @@ class PlayerDiv extends Component<Props, State> {
     killPlayer = () => {
         let _tmp = this.props.player;
         _tmp.active = false;
+        _tmp.typeNotActive = 'killed';
         this.props.changePlayerInfo(_tmp);
-        this.props.changeKillStatus(true);
+        let _tmp_obj = {playerNumber: this.props.player.number, circleNumber: this.props.circle};
+        const info: any = this.props.kills;
+        info.push(_tmp_obj);
+        this.props.changeKillStatus({status: true, arr: info});
         this.closeModal();
     };
 
     addFoul = () => {
         let pl = this.props.player;
-        if (pl.fouls + 1 < 4) {
-            pl.fouls++;
-            this.props.changePlayerInfo(pl);
-            this.setState({
-                isShowing: false
-            })
-        } else if (pl.fouls + 1 === 4)
+        pl.fouls++;
+        this.props.changePlayerInfo(pl);
+        this.setState({
+            isShowing: false
+        });
+        if (pl.fouls === 4)
             this.banPlayer()
     };
 
@@ -111,7 +116,7 @@ class PlayerDiv extends Component<Props, State> {
             alert("isChecked");
         else {
             let _tmp = this.props.checks, arr = _tmp[circle - 1];
-            arr[role] = this.state.check;
+            arr[role + 'Check'] = this.state.check;
             _tmp[circle - 1] = arr;
             this.props.addCheck(_tmp);
             this.setState({checked: true});
@@ -172,18 +177,21 @@ class PlayerDiv extends Component<Props, State> {
                                 <div>
                                     <button onClick={this.addFoul} className="foul">ФОЛ</button>
                                     {!this.state.isVoting && !this.props.isKicked ?
-                                        <button onClick={this.addVoting} className="voting" title="Виставити на голосування">
+                                        <button onClick={this.addVoting} className="voting"
+                                                title="Виставити на голосування">
                                             <i className="fas fa-thumbs-up"/>
                                         </button> : null}
                                     {
                                         this.state.isVoting && !this.props.isKicked ?
-                                    <button onClick={this.banPlayer} className="del" title="Вигнати через суд">
-                                        <i className="fas fa-user-slash"/>
-                                    </button>:null}
-                                    {!this.props.isKilled ? <button className="red" onClick={this.killPlayer}><i className="far fa-dizzy"/></button> : null}
+                                            <button onClick={this.banPlayer} className="del" title="Вигнати через суд">
+                                                <i className="fas fa-user-slash"/>
+                                            </button> : null}
+                                    {!this.props.isKilled ?
+                                        <button className="red" onClick={this.killPlayer}><i className="far fa-dizzy"/>
+                                        </button> : null}
                                 </div>
                                 {
-                                    this.props.player.role === 'don' && !this.state.checked ?
+                                    this.props.player.role === 'don' && !this.state.checked && this.props.circle !== 0 ?
                                         <form onSubmit={this.checkedPlayer}>
                                             <input max={10} placeholder="№" type="number"
                                                    onChange={this.updCheck}/>
@@ -191,7 +199,7 @@ class PlayerDiv extends Component<Props, State> {
                                         </form> : null
                                 }
                                 {
-                                    this.props.player.role === 'sheriff' && !this.state.checked ?
+                                    this.props.player.role === 'sheriff' && !this.state.checked && this.props.circle !== 0 ?
                                         <form onSubmit={this.checkedPlayer}>
                                             <input max={10} placeholder="№" type="number"
                                                    onChange={this.updCheck}/>
@@ -219,7 +227,8 @@ const mapStateToProps = function (state) {
         circle: state.currentCircle,
         checks: state.checks,
         isKilled: state.isKilled,
-        isKicked: state.isKicked
+        isKicked: state.isKicked,
+        kills: state.kills
     }
 };
 const mapDispatchToProps = {
