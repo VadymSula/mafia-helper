@@ -3,7 +3,10 @@ package org.deanoffice2.mafiahelper.repository;
 import org.deanoffice2.mafiahelper.entity.CheckGame;
 import org.deanoffice2.mafiahelper.entity.GameResult;
 import org.deanoffice2.mafiahelper.entity.PlayerResult;
+import org.deanoffice2.mafiahelper.exceptions.DataNotFoundException;
+import org.deanoffice2.mafiahelper.exceptions.IllegalInputDataException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
@@ -22,19 +25,23 @@ public class GameResultRepositoryImpl implements GameRepository<GameResult> {
 
     @Override
     public GameResult findById(Integer idGame) {
-        return jdbcTemplate.queryForObject(
-                "SELECT win, game_duration " +
-                        "FROM game " +
-                        "WHERE id_game = :idGame",
-                new MapSqlParameterSource("idGame", idGame),
-                (rs, rowName) -> {
-                    GameResult gameResult = new GameResult();
+        try {
+            return jdbcTemplate.queryForObject(
+                    "SELECT win, game_duration " +
+                            "FROM game " +
+                            "WHERE id_game = :idGame",
+                    new MapSqlParameterSource("idGame", idGame),
+                    (rs, rowName) -> {
+                        GameResult gameResult = new GameResult();
                         gameResult.setGameDuration(rs.getString("game_duration"));
                         gameResult.setWin(rs.getString("win"));
                         gameResult.setPlayersResult(getPlayerResultsFromDb(idGame));
                         gameResult.setChecksResult(getGameChecksFromDb(idGame));
                         return gameResult;
-                });
+                    });
+        } catch (DataAccessException e) {
+            throw new DataNotFoundException("idGame", idGame);
+        }
     }
 
     @Override
@@ -43,15 +50,15 @@ public class GameResultRepositoryImpl implements GameRepository<GameResult> {
     }
 
     @Override
-    public void addInfoFromGame(GameResult infoFromGame) {
-        MapSqlParameterSource parameters = new MapSqlParameterSource();
-        String sql = "INSERT INTO game (win, game_duration, id_club) " +
-                "VALUES (:win, :gameDuration, :idClub)";
-        parameters.addValue("win", infoFromGame.getWin());
-        parameters.addValue("gameDuration", infoFromGame.getGameDuration());
-        parameters.addValue("idClub", infoFromGame.getIdClub());
-
-        jdbcTemplate.update(sql, parameters);
+    public void addInfoFromGame(GameResult infoFromGame) throws IllegalInputDataException {
+//        MapSqlParameterSource parameters = new MapSqlParameterSource();
+//        String sql = "INSERT INTO game (win, game_duration, id_club) " +
+//                "VALUES (:win, :gameDuration, :idClub)";
+//            parameters.addValue("win", infoFromGame.getWin());
+//            parameters.addValue("gameDuration", infoFromGame.getGameDuration());
+//            parameters.addValue("idClub", infoFromGame.getIdClub());
+//
+//        jdbcTemplate.update(sql, parameters);
     }
 
     private List<PlayerResult> getPlayerResultsFromDb(Integer idGame) {

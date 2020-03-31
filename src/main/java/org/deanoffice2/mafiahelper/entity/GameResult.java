@@ -7,9 +7,9 @@ import java.util.List;
 
 public class GameResult implements DomainObject {
     @JsonIgnore
-    private int idGame;
+    private Integer idGame;
     @JsonIgnore
-    private int idClub;
+    private Integer idClub;
     private String win;
     private List<PlayerResult> playersResult = new ArrayList<>();
     private List<CheckGame> checksResult = new ArrayList<>();
@@ -27,19 +27,19 @@ public class GameResult implements DomainObject {
         this.gameDuration = gameDuration;
     }
 
-    public int getIdGame() {
+    public Integer getIdGame() {
         return idGame;
     }
 
-    public void setIdGame(int idGame) {
+    public void setIdGame(Integer idGame) {
         this.idGame = idGame;
     }
 
-    public int getIdClub() {
+    public Integer getIdClub() {
         return idClub;
     }
 
-    public void setIdClub(int idClub) {
+    public void setIdClub(Integer idClub) {
         this.idClub = idClub;
     }
 

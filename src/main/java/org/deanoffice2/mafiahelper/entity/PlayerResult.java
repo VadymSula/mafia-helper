@@ -1,11 +1,8 @@
 package org.deanoffice2.mafiahelper.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.List;
 
 public class PlayerResult implements DomainObject {
-    @JsonIgnore
     private int idPerson;
     private String roleInGame;
     private int foulsQuantity;
