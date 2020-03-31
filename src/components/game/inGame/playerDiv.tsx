@@ -79,6 +79,7 @@ class PlayerDiv extends Component<Props, State> {
         _tmp.active = false;
         this.props.changePlayerInfo(_tmp);
         this.props.changeKickStatus(true);
+        this.props.changeVoting([]);
         this.closeModal();
     };
 
@@ -175,7 +176,7 @@ class PlayerDiv extends Component<Props, State> {
                                             <i className="fas fa-thumbs-up"/>
                                         </button> : null}
                                     {
-                                        this.state.isVoting ?
+                                        this.state.isVoting && !this.props.isKicked ?
                                     <button onClick={this.banPlayer} className="del" title="Вигнати через суд">
                                         <i className="fas fa-user-slash"/>
                                     </button>:null}
