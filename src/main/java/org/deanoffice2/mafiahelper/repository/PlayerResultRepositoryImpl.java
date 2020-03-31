@@ -1,7 +1,9 @@
 package org.deanoffice2.mafiahelper.repository;
 
 import org.deanoffice2.mafiahelper.entity.PlayerResult;
+import org.deanoffice2.mafiahelper.exceptions.DataNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -30,20 +32,24 @@ public class PlayerResultRepositoryImpl implements GameRepository<PlayerResult> 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("idGame", idGame);
         parameters.addValue("idPlayer", idPlayer);
-        return jdbcTemplate.queryForObject(
-                "SELECT role, fouls_quantity, golden_move, first_kill_sheriff, is_killed " +
-                        "FROM player_result " +
-                        "WHERE id_game = :idGame AND id_player = :idPlayer",
-                parameters,
-                (rs, rowName) -> {
-                    PlayerResult playerResult = new PlayerResult();
-                        playerResult.setGoldenMove(rs.getString("golden_move"));
-                        playerResult.setFoulsQuantity(rs.getInt("fouls_quantity"));
-                        playerResult.setFirstKillSheriff(rs.getBoolean("first_kill_sheriff"));
-                        playerResult.setRoleInGame(rs.getString("role"));
-                        playerResult.setKilled(rs.getBoolean("is_killed"));
-                        return playerResult;
-                });
+        try {
+            return jdbcTemplate.queryForObject(
+                    "SELECT role, fouls_quantity, golden_move, first_kill_sheriff, is_killed " +
+                            "FROM player_result " +
+                            "WHERE id_game = :idGame AND id_player = :idPlayer",
+                    parameters,
+                    (rs, rowName) -> {
+                        PlayerResult playerResult1 = new PlayerResult();
+                        playerResult1.setGoldenMove(rs.getString("golden_move"));
+                        playerResult1.setFoulsQuantity(rs.getInt("fouls_quantity"));
+                        playerResult1.setFirstKillSheriff(rs.getBoolean("first_kill_sheriff"));
+                        playerResult1.setRoleInGame(rs.getString("role"));
+                        playerResult1.setKilled(rs.getBoolean("is_killed"));
+                        return playerResult1;
+                    });
+        } catch (DataAccessException e) {
+            throw new DataNotFoundException();
+        }
     }
 
     @Override

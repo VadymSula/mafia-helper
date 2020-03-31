@@ -3,6 +3,7 @@ package org.deanoffice2.mafiahelper.service;
 import org.deanoffice2.mafiahelper.entity.CheckGame;
 import org.deanoffice2.mafiahelper.entity.GameResult;
 import org.deanoffice2.mafiahelper.entity.PlayerResult;
+import org.deanoffice2.mafiahelper.exceptions.IllegalInputDataException;
 import org.deanoffice2.mafiahelper.repository.GameListRepository;
 import org.deanoffice2.mafiahelper.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service("gameService")
 public class GameServiceImpl implements GameService {
@@ -35,6 +37,11 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public void saveGameResults(GameResult gameResult) {
+        Optional.ofNullable(gameResult.getGameDuration()).orElseThrow(
+                () -> new IllegalInputDataException(gameResult.getGameDuration(), "gameDuration"));
+        Optional.ofNullable(gameResult.getWin()).orElseThrow(
+                () -> new IllegalInputDataException(gameResult.getWin(), "win"));
+
         gameRepository.addInfoFromGame(gameResult);
 
         gameResult.getPlayersResult()
