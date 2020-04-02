@@ -9,8 +9,7 @@ class GameComponent extends Component<{gameIsStarted:boolean}>{
     render() {
         let {gameIsStarted} = this.props;
         return (
-            // gameIsStarted ?  <InGame/> :  <SetPlayers/>
-            <InGame/>
+            gameIsStarted ?  <InGame/> :  <SetPlayers/>
         );
     }
 }

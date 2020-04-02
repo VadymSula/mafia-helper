@@ -1,4 +1,4 @@
-.modal-wrapper {
+.modal-wrapper__setPlayers {
     position: fixed;
     background: white;
     border: 1px solid #d0cccc;
@@ -10,7 +10,7 @@
     top:200px;
 }
 
-.modal-header {
+.modal-wrapper__setPlayers .modal-header {
     background: #263238;
     height: 40px;
     line-height: 40px;
@@ -18,25 +18,25 @@
     text-align: right;
 }
 
-.modal-header h3 {
+.modal-wrapper__setPlayers .modal-header h3 {
     color: white;
     float: left;
     margin: 0;
     padding: 0;
 }
 
-.modal-body {
+.modal-wrapper__setPlayers .modal-body {
     padding: 10px 15px;
     text-align: center;
 }
 
-.modal-footer {
+.modal-wrapper__setPlayers .modal-footer {
     background: #263238;
     height: 35px;
     padding: 15px;
 }
 
-.close-modal-btn {
+.modal-wrapper__setPlayers .close-modal-btn {
     color: white;
     cursor: pointer;
     float: right;
@@ -44,11 +44,11 @@
     margin: 0;
     transition: .3s;
 }
-.close-modal-btn:hover {
+.modal-wrapper__setPlayers .close-modal-btn:hover {
     transform: rotate(90deg);
 }
 
-.btn-cancel, .btn-continue {
+.modal-wrapper__setPlayers .btn-cancel, .btn-continue {
     background: coral;
     border: none;
     color: white;
@@ -58,17 +58,17 @@
     padding: 10px;
 }
 
-.btn-cancel {
+.modal-wrapper__setPlayers .btn-cancel {
     background-color: #b71c1c;
     float: left;
 }
 
-.btn-continue {
+.modal-wrapper__setPlayers .btn-continue {
     background-color: #1b5e20;
     float: right;
 }
 
-.back-drop {
+.modal-wrapper__setPlayers .back-drop {
     background-color: rgba(48, 49, 48, 0.42);
     height: 100%;
     position: fixed;
@@ -78,30 +78,30 @@
     top: 0;
 }
 
-.open-modal-btn {
+.modal-wrapper__setPlayers .open-modal-btn {
     margin: 15px;
     padding: 10px;
     font-weight: bold;
 }
-form{
+.modal-wrapper__setPlayers form{
     align-items: center;
     justify-content: center;
     display: flex;
     flex-direction: column;
 }
-form  label{
+.modal-wrapper__setPlayers form  label{
     margin: 10px;
     width: 50%;
     display: flex;
     justify-content: space-between;
 }
-form input, select{
+.modal-wrapper__setPlayers form input, select{
     width: 70%;
 }
-form button{
+.modal-wrapper__setPlayers form button{
     align-self: flex-end;
 }
-form .btns{
+.modal-wrapper__setPlayers form .btns{
     width: 100%;
     display: flex;
     flex-direction: row-reverse;

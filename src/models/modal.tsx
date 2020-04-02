@@ -4,7 +4,7 @@ import './modal.css';
 const modal = (props) => {
     return (
         <div>
-            <div className="modal-wrapper"
+            <div className="modal-wrapper__setPlayers"
                  style={{
                      transform: props.show ? 'translateY(0vh)' : 'translateY(-100vh)',
                      opacity: props.show ? '1' : '0',
