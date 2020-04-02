@@ -1,16 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 *{
-    margin: 0%;
+    margin: 0;
 }
 /* css in heder begin */
 header{
-    background: url(../images/mafia.png) no-repeat center fixed;
+    /*background: url(./assets/images/mafia.png) no-repeat center fixed;*/
     background-size: cover;
     width: 100%;
     height: 100%;
-}
-.zaglyshka{
-    width: 100px;
 }
 a{
     font-family: 'Montserrat';
@@ -19,10 +16,9 @@ a{
 nav{
     position: sticky;
     top: 0px;
-
 }
 ul{
-    background-color: rgb(245, 245, 243, 0.8);
+    background-color: rgba(245, 245, 243, 0.8);
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -33,12 +29,18 @@ li{
     font-family: 'Montserrat';
     display: inline-block;
 }
+.header__nav ul{
+    display:flex ;
+    flex-direction: row;
+    justify-content: space-between;
+}
 a.nav{
     text-decoration: none;
     color:black;
+    margin-left: 20px;
 }
 a.head__button__login{
-    font-size: 15px; 
+    font-size: 15px;
     display: inline-block;
     width: 5em;
     height: 2em;
@@ -52,15 +54,14 @@ a.head__button__login{
     border: 1px solid rgba(0,0,0,.4);
     border-top-color: rgba(0,0,0,.3);
     border-radius: 10pt;
-    background: linear-gradient(rgb(255,255,255), rgb(240,240,240));  
+    background: linear-gradient(rgb(255,255,255), rgb(240,240,240));
     transition: .2s ease-in-out;
-  }
+}
 a.head__button__login:hover {
     background: rgb(240,240,240);
 }
 .login__button{
-    align-self: flex-end;
-    
+ margin-right: 15px;
 }
 a.nav:active{
     color: rgb(206, 31, 11);
@@ -72,22 +73,22 @@ p.h1{
     font-size: 10em;
 }
 a.button{
-    color: #fff;    
-    text-decoration: none;  
-    user-select: none;  
-    background: rgb(65, 105, 225);  
-    padding: 1.0em 2.5em;  
-    outline: none;      
+    color: #fff;
+    text-decoration: none;
+    user-select: none;
+    background: rgb(65, 105, 225);
+    padding: 1.0em 2.5em;
+    outline: none;
     border-radius: 0%;
 }
-a.button:hover { 
-background: rgb(232,95,76); 
+a.button:hover {
+    background: rgb(232,95,76);
 } /* при наведении курсора мышки */
-a.button:active { 
-background: rgb(152,15,0); 
+a.button:active {
+    background: rgb(152,15,0);
 } /* при нажатии */
 .header{
-    background-color:  rgb(215, 217, 224, 0.8);
+    background-color:  rgba(215, 217, 224, 0.8);
     height: 100%;
     max-width: 100%;
     min-height: 727px;
@@ -98,13 +99,13 @@ background: rgb(152,15,0);
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding-top: 10%;   
+    padding-top: 10%;
 }
 /* css in header end */
 /* main css begin */
 main{
     background-color: whitesmoke;
-    
+
 }
 div.main__button-icons{
     padding: 1% 0% 1.5% 0%;
@@ -150,16 +151,16 @@ h5{
         padding-top: 50%;
         justify-content: center;
         align-items: center;;transition: .5s ease-in-out;}
-h5{padding-bottom: 6%;}}
+    h5{padding-bottom: 6%;}}
 @media (max-width:750px){
-    div.main__button-icons{   
+    div.main__button-icons{
         display: flex;
         flex-direction: column;
         align-items:center;
         justify-content: space-around;
-        transition: .5s ease-in-out;   
- 
-}}
+        transition: .5s ease-in-out;
+
+    }}
 @media(max-width:414px){ul{min-height: 60px;padding-left: 0px;}}
 @media(max-width:550px){
     nav{

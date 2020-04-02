@@ -5,8 +5,9 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Redirect
+    Redirect, Link
 } from "react-router-dom";
+import MainPage from "./components/MainPage/mainPage";
 
 function App() {
     return (
@@ -17,7 +18,10 @@ function App() {
                         <GameComponent/>
                     </Route>
                     <Route path="/">
-                        <Redirect to="/game"/>
+                        <MainPage/>
+                    </Route>
+                    <Route path="*">
+                        <Link to='/'/>
                     </Route>
                 </Switch>
             </Router>
