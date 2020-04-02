@@ -56,7 +56,6 @@ class PlayerDiv extends Component<Props, State> {
                 isVoting: false
             });
 
-
         if (this.state.circle !== this.props.circle) {
             this.setState({
                 checked: false
@@ -188,7 +187,8 @@ class PlayerDiv extends Component<Props, State> {
                                                 <i className="fas fa-user-slash"/>
                                             </button> : null}
                                     {!this.props.isKilled ?
-                                        <button className="red" onClick={this.killPlayer}><i className="far fa-dizzy"/>
+                                        <button className="red" onClick={this.killPlayer} title="Вбитий мафією">
+                                            <i className="far fa-dizzy"/>
                                         </button> : null}
                                 </div>
                                 {
