@@ -136,17 +136,19 @@ class InGame extends Component<Props, State> {
 
 
     endGame = (winner: string, countPlayers: any) => {
-        let players:any = [], sheriffIsKilled = false, typeWin='mafia is Dead', firstKill = this.props.kills[0].playerNumber;
-        if(winner==='mafia')
-            typeWin = countPlayers.black+'#'+countPlayers.black;
-        if(this.props.player['player'+firstKill].role == 'sheriff')
+        let players: any = [], sheriffIsKilled = false, typeWin = 'mafia is Dead',
+            firstKill = this.props.kills[0].playerNumber;
+        if (winner === 'mafia')
+            typeWin = countPlayers.black + '#' + countPlayers.black;
+        if (this.props.player['player' + firstKill].role === 'sheriff')
             sheriffIsKilled = true;
 
-        for (let i=1; i<=10;i++){
-            let player = this.props.player['player'+i];
+        for (let i = 1; i <= 10; i++) {
+            let player = this.props.player['player' + i];
             let _SIK = false;
-            if(sheriffIsKilled && player.role === 'mafia' || sheriffIsKilled && player.role === 'don' )
-                _SIK = true;
+            if (player.role === 'mafia' || player.role === 'don')
+                if (sheriffIsKilled)
+                    _SIK = true;
             players.push({
                 foulsQuantity: player.fouls,
                 firstKillSheriff: _SIK,
@@ -220,16 +222,20 @@ class InGame extends Component<Props, State> {
                                     <button onClick={this.clearTimer} className="btn-timer red">clear</button> : null}
                                 {this.state.pause || this.state.timer !== 0
                                     ? null
-                                    :<button onClick={() => this.startTimer(30)} className="btn-timer orange">30 сек</button>}
-                                {!this.state.pause && this.state.timer !== 0 ? <button onClick={this.pauseTimer} className="btn-timer red">pause</button> : null}
+                                    : <button onClick={() => this.startTimer(30)} className="btn-timer orange">30
+                                        сек</button>}
+                                {!this.state.pause && this.state.timer !== 0 ?
+                                    <button onClick={this.pauseTimer} className="btn-timer red">pause</button> : null}
 
-                                {this.state.pause ? <button onClick={this.resumeTimer} className="btn-timer red">resume</button> : null}
+                                {this.state.pause ?
+                                    <button onClick={this.resumeTimer} className="btn-timer red">resume</button> : null}
 
                             </div>
                             {this.state.pause ? <span className="time">PAUSE</span> : null}
                             {this.state.pause || this.state.timer !== 0
                                 ? null
-                                :<button onClick={() => this.startTimer(60)} className="btn-timer red">1 хвилина</button>}
+                                : <button onClick={() => this.startTimer(60)} className="btn-timer red">1
+                                    хвилина</button>}
 
                             <span className="time">{this.state.timer !== 0 ? this.state.timer : null}</span>
                             <i className="fas fa-stopwatch"/>

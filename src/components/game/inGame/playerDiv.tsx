@@ -48,9 +48,10 @@ class PlayerDiv extends Component<Props, State> {
                 if (parseInt(number) === this.props.player.number)
                     this.setState({
                         isVoting: true
-                    })
+                    });
+                return null
             });
-        else if (this.props.voting == 0)
+        else if (this.props.voting.length === 0)
             this.setState({
                 isVoting: false
             });
