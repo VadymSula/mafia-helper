@@ -3,13 +3,14 @@ import {
     CHANGE_ACTIVE_ROLE, CHANGE_CIRCLE,
     CHANGE_COUNT_ROLES, CHANGE_KICK_STATUS, CHANGE_KILL_STATUS,
     CHANGE_PLAYER_INFO,
-    CHANGE_VOTING,
+    CHANGE_VOTING, END_GAME,
     PLAYER_IS_READY,
     START_GAME
 } from "./actions";
 
 const defaultState = {
-    currentCircle: 1,
+    currentCircle: 0,
+    kills: [],
     voting: [],
     activeRole: 'civil',
     mafiaLeft: 2,
@@ -18,13 +19,8 @@ const defaultState = {
     civilLeft: 6,
     isKilled: true,
     isKicked: false,
-    checks: [
-        {
-            sheriff: null,
-            don: null,
-            circle: 1
-        },
-    ],
+    gameIsEnd: false,
+    checks: [],
     // player1: {
     //     ready: false,
     //     role: '',
@@ -127,7 +123,8 @@ export const rootReducer = (state = defaultState, action) => {
         case CHANGE_KILL_STATUS:
             return {
                 ...state,
-                isKilled: action.payload
+                isKilled: action.payload.status,
+                kills: action.payload.arr
             };
         case CHANGE_KICK_STATUS:
             return {
@@ -138,6 +135,11 @@ export const rootReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 checks: action.payload
+            };
+        case END_GAME:
+            return {
+                ...state,
+                gameIsEnd: action.payload
             };
 
     }
