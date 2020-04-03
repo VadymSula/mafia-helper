@@ -6,7 +6,7 @@ class MainPage extends Component {
 
     render() {
         return (
-            <div style={{width: '100%'}}>
+            <div>
                 <nav className="header__nav">
                     <ul>
                         <div>

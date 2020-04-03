@@ -4,18 +4,18 @@
 }
 /* css in heder begin */
 header{
-    /*background: url(./assets/images/mafia.png) no-repeat center fixed;*/
+    background: url("../../assets/mafia.png") no-repeat center fixed;
     background-size: cover;
     width: 100%;
     height: 100%;
 }
 a{
-    font-family: 'Montserrat';
+    font-family: 'Montserrat', sans-serif;
     text-decoration: none;
 }
 nav{
     position: sticky;
-    top: 0px;
+    top: 0;
 }
 ul{
     background-color: rgba(245, 245, 243, 0.8);
@@ -25,8 +25,8 @@ ul{
 }
 li{
     font-size:  22px;
-    padding: 7px 0px 7px 0px;
-    font-family: 'Montserrat';
+    padding: 7px 0;
+    font-family: 'Montserrat', sans-serif;
     display: inline-block;
 }
 .header__nav ul{
@@ -122,7 +122,7 @@ h5{
     color: gray;
     padding-top: 3%;
 }
-.fas {
+.main__button-icon i {
     color: gray;
     font-size: 8em;
 }
