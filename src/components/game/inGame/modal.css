@@ -21,6 +21,9 @@
     font-size: 18px;
     color: white;
 }
+.modal form{
+    text-align: center;
+}
 .modal button.foul{
     background-color: #D3455B;
 }
