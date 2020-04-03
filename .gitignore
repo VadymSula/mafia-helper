@@ -3,6 +3,7 @@
 *.ctxt
 
 .mtj.tmp/
+/node_modules
 
 *.war
 *.nar
