@@ -7,17 +7,6 @@ class MainPage extends Component {
     render() {
         return (
             <div>
-                <nav className="header__nav">
-                    <ul>
-                        <div>
-                            <li><Link className="nav" to="#">Головна</Link></li>
-                            <li><Link className="nav" to="#">Правила</Link></li>
-                            <li><Link className="nav" to="#">Рейтинг</Link></li>
-                            <li><Link className="nav" to="#">Посібник</Link></li>
-                        </div>
-                        <li className="login__button"><Link to="#" className="head__button__login ">Логін</Link></li>
-                    </ul>
-                </nav>
                 <header>
                     <div className="header">
                         <div className="head__button__play">
@@ -35,19 +24,19 @@ class MainPage extends Component {
                             </Link>
                         </div>
                         <div className="main__button-icon">
-                            <Link to="#">
+                            <Link to="/rules">
                                 <i className="fas fa-list-ul"/>
                                 <h5>Правила</h5>
                             </Link>
                         </div>
                         <div className="main__button-icon">
-                            <Link to="#">
+                            <Link to="/rating">
                                 <i className="fas fa-medal"/>
                                 <h5>Рейтинг</h5>
                             </Link>
                         </div>
                         <div className="main__button-icon">
-                            <Link to="#">
+                            <Link to="/guides">
                                 <i className="fas fa-book-open"/>
                                 <h5>Посібники</h5>
                             </Link>
