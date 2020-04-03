@@ -4,7 +4,7 @@ import {
     CHANGE_COUNT_ROLES, CHANGE_KICK_STATUS, CHANGE_KILL_STATUS,
     CHANGE_PLAYER_INFO,
     CHANGE_VOTING, END_GAME,
-    PLAYER_IS_READY,
+    PLAYER_IS_READY, SET_BEST_MOVE,
     START_GAME
 } from "./actions";
 
@@ -141,6 +141,11 @@ export const rootReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 gameIsEnd: action.payload
+            };
+        case SET_BEST_MOVE:
+            return {
+                ...state,
+                bestMove: action.payload
             };
 
     }

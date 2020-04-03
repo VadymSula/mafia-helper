@@ -48,13 +48,13 @@ class PlayerDiv extends Component<Props, State> {
                 if (parseInt(number) === this.props.player.number)
                     this.setState({
                         isVoting: true
-                    })
+                    });
+                return null
             });
-        else if (this.props.voting == 0)
+        else if (this.props.voting.length === 0)
             this.setState({
                 isVoting: false
             });
-
 
         if (this.state.circle !== this.props.circle) {
             this.setState({
@@ -187,7 +187,8 @@ class PlayerDiv extends Component<Props, State> {
                                                 <i className="fas fa-user-slash"/>
                                             </button> : null}
                                     {!this.props.isKilled ?
-                                        <button className="red" onClick={this.killPlayer}><i className="far fa-dizzy"/>
+                                        <button className="red" onClick={this.killPlayer} title="Вбитий мафією">
+                                            <i className="far fa-dizzy"/>
                                         </button> : null}
                                 </div>
                                 {

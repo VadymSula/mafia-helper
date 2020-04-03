@@ -9,6 +9,7 @@ export const CHANGE_CIRCLE = 'CHANGE_CIRCLE';
 export const CHANGE_KILL_STATUS = 'CHANGE_KILL_STATUS';
 export const CHANGE_KICK_STATUS = 'CHANGE_KICK_STATUS';
 export const ADD_CHECK = 'ADD_CHECK';
+export const SET_BEST_MOVE = 'SET_BEST_MOVE';
 
 export const startGame = value => ({
     type: START_GAME,
@@ -51,5 +52,9 @@ export const changeCircle = value => ({
 });
 export const addCheck = value => ({
     type: ADD_CHECK,
+    payload: value
+});
+export const setBestMove = value => ({
+    type: SET_BEST_MOVE,
     payload: value
 });
