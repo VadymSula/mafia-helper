@@ -31,6 +31,7 @@ interface Props {
     isKilled: boolean,
     endGame: any,
     kills: any,
+    gameIsStarted: any
     bestMove: any,
     setBestMove: any
 }
@@ -146,7 +147,8 @@ class InGame extends Component<Props, State> {
     };
 
     endGame = (winner: string, countPlayers: any) => {
-        let players: any = [], sheriffIsKilled = false, typeWin = 'mafia is Dead',
+        if (this.props.gameIsStarted) {
+             let players: any = [], sheriffIsKilled = false, typeWin = 'mafia is Dead',
             firstKill = this.props.kills[0].playerNumber;
         if (winner === 'mafia')
             typeWin = countPlayers.black + '#' + countPlayers.black;
@@ -184,6 +186,7 @@ class InGame extends Component<Props, State> {
         }).then(response => {
             console.log(response)
         });
+        }
     };
 
     componentDidMount() {
@@ -355,6 +358,7 @@ class InGame extends Component<Props, State> {
 
 const mapStateToProps = function (state) {
     return {
+        gameIsStarted: state.startGame,
         checks: state.checks,
         player: {
             player1: state.player1,

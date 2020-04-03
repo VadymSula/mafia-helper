@@ -4,13 +4,14 @@ import SetPlayers from "./setPlayers/setPlayers";
 import {connect} from "react-redux";
 import InGame from "./inGame/inGame";
 
-class GameComponent extends Component<{gameIsStarted:boolean}>{
+class GameComponent extends Component<{ gameIsStarted: boolean }> {
 
     render() {
         let {gameIsStarted} = this.props;
         return (
-            // gameIsStarted ?  <InGame/> :  <SetPlayers/>
-            <InGame/>
+            <div className="gameElement">
+                {gameIsStarted ? <InGame/> : <SetPlayers/>}
+            </div>
         );
     }
 }
@@ -21,4 +22,4 @@ const mapStateToProps = function (state) {
     }
 };
 
-export default connect(mapStateToProps,{})(GameComponent);
+export default connect(mapStateToProps, {})(GameComponent);
