@@ -305,17 +305,17 @@ class InGame extends Component<Props, State> {
                 <div className="footerBlock">
                     <div className="checks">
                         <div>
-                            <br/>
-                            <p>Перевірки Шеріфа:</p>
-                            <p>Перевірки Дона:</p>
+                            <p>Перевірки</p>
+                            <p>Шеріфа:</p>
+                            <p>Дона:</p>
                         </div>
                         {
                             this.props.checks.map(circle => {
                                 return (
                                     <div key={circle.numberOfTheCircle}>
                                         <p>{circle.numberOfTheCircle} день</p>
-                                        <p>{circle.sheriffCheck}</p>
-                                        <p>{circle.donCheck}</p>
+                                        <p>{circle.sheriffCheck ? circle.sheriffCheck : ' '}</p>
+                                        <p>{circle.donCheck ? circle.donCheck : ' '}</p>
                                     </div>
                                 )
                             })
