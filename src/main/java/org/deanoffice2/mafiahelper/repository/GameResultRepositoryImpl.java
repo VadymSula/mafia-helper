@@ -51,14 +51,14 @@ public class GameResultRepositoryImpl implements GameRepository<GameResult> {
 
     @Override
     public void addInfoFromGame(GameResult infoFromGame) throws IllegalInputDataException {
-//        MapSqlParameterSource parameters = new MapSqlParameterSource();
-//        String sql = "INSERT INTO game (win, game_duration, id_club) " +
-//                "VALUES (:win, :gameDuration, :idClub)";
-//            parameters.addValue("win", infoFromGame.getWin());
-//            parameters.addValue("gameDuration", infoFromGame.getGameDuration());
-//            parameters.addValue("idClub", infoFromGame.getIdClub());
-//
-//        jdbcTemplate.update(sql, parameters);
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        String sql = "INSERT INTO game (win, game_duration, id_club) " +
+                "VALUES (:win, :gameDuration, :idClub)";
+            parameters.addValue("win", infoFromGame.getWin());
+            parameters.addValue("gameDuration", infoFromGame.getGameDuration());
+            parameters.addValue("idClub", infoFromGame.getIdClub());
+
+        jdbcTemplate.update(sql, parameters);
     }
 
     private List<PlayerResult> getPlayerResultsFromDb(Integer idGame) {
