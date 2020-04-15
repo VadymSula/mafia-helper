@@ -65,7 +65,7 @@ public class GameResultRepositoryImpl implements GameRepository<GameResult> {
         List<PlayerResult> playerResults = new ArrayList<>();
 
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(
-                "SELECT first_kill_sheriff, role, fouls_quantity, golden_move " +
+                "SELECT first_kill_sheriff, id_role, fouls_quantity, golden_move " +
                         "FROM player_result " +
                         "WHERE id_game = :idGame",
                 new MapSqlParameterSource("idGame", idGame)
@@ -74,7 +74,7 @@ public class GameResultRepositoryImpl implements GameRepository<GameResult> {
         for (Map<String, Object> row : rows) {
             PlayerResult playerResult = new PlayerResult();
 
-            playerResult.setRoleInGame((String) row.get("role"));
+            playerResult.setRoleInGame((Integer) row.get("id_role"));
             playerResult.setFirstKillSheriff((Boolean) row.get("first_kill_sheriff"));
             playerResult.setFoulsQuantity((Integer) row.get("fouls_quantity"));
             playerResult.setGoldenMove((String) row.get("golden_move"));

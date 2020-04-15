@@ -34,7 +34,7 @@ public class PlayerResultRepositoryImpl implements GameRepository<PlayerResult> 
         parameters.addValue("idPlayer", idPlayer);
         try {
             return jdbcTemplate.queryForObject(
-                    "SELECT role, fouls_quantity, golden_move, first_kill_sheriff, is_killed " +
+                    "SELECT id_role, fouls_quantity, golden_move, first_kill_sheriff, is_killed " +
                             "FROM player_result " +
                             "WHERE id_game = :idGame AND id_player = :idPlayer",
                     parameters,
@@ -43,7 +43,7 @@ public class PlayerResultRepositoryImpl implements GameRepository<PlayerResult> 
                         playerResult1.setGoldenMove(rs.getString("golden_move"));
                         playerResult1.setFoulsQuantity(rs.getInt("fouls_quantity"));
                         playerResult1.setFirstKillSheriff(rs.getBoolean("first_kill_sheriff"));
-                        playerResult1.setRoleInGame(rs.getString("role"));
+                        playerResult1.setRoleInGame(rs.getInt("role"));
                         playerResult1.setKilled(rs.getBoolean("is_killed"));
                         return playerResult1;
                     });
@@ -55,7 +55,7 @@ public class PlayerResultRepositoryImpl implements GameRepository<PlayerResult> 
     @Override
     public void addInfoFromGame(PlayerResult infoFromGame) {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        String sql = "INSERT INTO player_result (id_person, role, fouls_quantity, golden_move, first_kill_sheriff, id_game, is_killed)" +
+        String sql = "INSERT INTO player_result (id_person, id_role, fouls_quantity, golden_move, first_kill_sheriff, id_game, is_killed)" +
                 "VALUES (:idPerson, :role, :foulsQuantity, :goldenMove, :firstKillSheriff, (SELECT id_game FROM game ORDER BY id_game DESC LIMIT 1), :isKilled)";
         parameters.addValue("idPerson", infoFromGame.getIdPerson());
         parameters.addValue("role", infoFromGame.getRoleInGame());
