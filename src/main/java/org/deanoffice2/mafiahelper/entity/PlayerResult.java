@@ -4,7 +4,7 @@ import java.util.List;
 
 public class PlayerResult implements DomainObject {
     private int idPerson;
-    private String roleInGame;
+    private Integer roleInGame;
     private int foulsQuantity;
     private boolean killed;
     private String goldenMove;
@@ -15,7 +15,7 @@ public class PlayerResult implements DomainObject {
     public PlayerResult() {
     }
 
-    public PlayerResult(int idPerson, String roleInGame, int foulsQuantity, String goldenMove, boolean firstKillSheriff, boolean killed, List<Integer> checks) {
+    public PlayerResult(int idPerson, Integer roleInGame, int foulsQuantity, String goldenMove, boolean firstKillSheriff, boolean killed, List<Integer> checks) {
         this.idPerson = idPerson;
         this.roleInGame = roleInGame;
         this.foulsQuantity = foulsQuantity;
@@ -33,11 +33,11 @@ public class PlayerResult implements DomainObject {
         this.idPerson = idPerson;
     }
 
-    public String getRoleInGame() {
+    public Integer getRoleInGame() {
         return roleInGame;
     }
 
-    public void setRoleInGame(String roleInGame) {
+    public void setRoleInGame(Integer roleInGame) {
         this.roleInGame = roleInGame;
     }
 
