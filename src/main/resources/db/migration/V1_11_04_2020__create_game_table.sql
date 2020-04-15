@@ -3,8 +3,8 @@ create table if not exists game
     id_game       serial not null
         constraint game_pkey
             primary key,
-    win           char(256),
-    game_duration char(256),
+    win           varchar(20),
+    game_duration varchar(20),
     id_club       integer
 );
 
