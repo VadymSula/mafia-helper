@@ -6,6 +6,7 @@ import org.deanoffice2.mafiahelper.entity.PlayerResult;
 import org.deanoffice2.mafiahelper.exceptions.IllegalInputDataException;
 import org.deanoffice2.mafiahelper.repository.GameListRepository;
 import org.deanoffice2.mafiahelper.repository.GameRepository;
+import org.deanoffice2.mafiahelper.repository.StaticDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,9 @@ public class GameServiceImpl implements GameService {
     @Autowired
     @Qualifier("checksResultRepository")
     private GameListRepository<CheckGame> checkListRepository;
+    @Autowired
+    @Qualifier("staticDataRepository")
+    private StaticDataRepository staticDataRepository;
 
     @Override
     public GameResult getGameResults(Integer idGame) {
@@ -60,16 +64,16 @@ public class GameServiceImpl implements GameService {
     public PlayerResult getPlayerResultByIdAndGameId(Integer idPlayer, Integer idGame) {
         PlayerResult playerResult = playerRepository.findById(idGame, idPlayer);
 
-        if (isRole(playerResult, "Sheriff", idPlayer, idGame)) {
+        if (isRole(playerResult, staticDataRepository.findByName("Sheriff"))) {
             playerResult.setChecks(getInfoIfPlayerIsSheriff(idGame));
-        } else if (isRole(playerResult, "Don", idPlayer, idGame)) {
+        } else if (isRole(playerResult, staticDataRepository.findByName("Don"))) {
             playerResult.setChecks(getInfoIfPlayerIsDon(idGame));
         }
 
         return playerResult;
     }
 
-    private boolean isRole(PlayerResult playerResult, String role, Integer idPlayer, Integer idGame) {
+    private boolean isRole(PlayerResult playerResult, Integer role) {
         return playerResult.getRoleInGame().equals(role);
     }
 
