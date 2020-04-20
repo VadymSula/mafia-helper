@@ -1,11 +1,8 @@
 create table if not exists player_result
 (
-    id_player          serial  not null
-        constraint player_result_pk
-            primary key,
-    id_person          integer
-        constraint player_result__id_person_fk
-            references person,
+    id_player          integer not null
+        constraint player_result__id_player_fk
+            references player,
     id_role            integer not null
         constraint player_result__id_role_fk
             references role,
