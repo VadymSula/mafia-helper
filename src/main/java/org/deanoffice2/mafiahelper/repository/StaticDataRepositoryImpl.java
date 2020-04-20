@@ -47,4 +47,11 @@ public class StaticDataRepositoryImpl implements StaticDataRepository {
                         new BeanPropertyRowMapper<>(Integer.class)
                 );
     }
+
+    @Override
+    public void addNewPlayer(String playerName) {
+        String sql = "INSERT INTO player (nickname) VALUES (:nickname)";
+        namedParameterJdbcTemplate
+                .update(sql, new MapSqlParameterSource("nickname", playerName));
+    }
 }
