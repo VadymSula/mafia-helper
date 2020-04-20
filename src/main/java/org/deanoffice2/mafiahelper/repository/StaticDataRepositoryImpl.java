@@ -54,4 +54,16 @@ public class StaticDataRepositoryImpl implements StaticDataRepository {
         namedParameterJdbcTemplate
                 .update(sql, new MapSqlParameterSource("nickname", playerName));
     }
+
+    @Override
+    public Map<Integer, String> getNicknamePlayers() {
+        Map<Integer, String> playersMap = new HashMap<>();
+        String sql = "SELECT * FROM player";
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+
+        for (Map<String, Object> row : rows) {
+            playersMap.put((Integer) row.get("id_player"), (String) row.get("nickname"));
+        }
+        return playersMap;
+    }
 }

@@ -8,4 +8,6 @@ public interface StaticDataRepository {
     Integer findByName(String name);
 
     void addNewPlayer(String playerName);
+
+    Map<Integer, String> getNicknamePlayers();
 }
