@@ -24,4 +24,10 @@ public class StaticServiceImpl implements StaticService {
         staticDataRepository
                 .addNewPlayer(playerName);
     }
+
+    @Override
+    public Map<Integer, String> getPlayersNicknames() {
+        return staticDataRepository
+                .getNicknamePlayers();
+    }
 }
