@@ -18,4 +18,16 @@ public class StaticServiceImpl implements StaticService {
     public Map<Integer, String> getRoles() {
         return staticDataRepository.findRolesForSelectList();
     }
+
+    @Override
+    public void addNewPlayer(String playerName) {
+        staticDataRepository
+                .addNewPlayer(playerName);
+    }
+
+    @Override
+    public Map<Integer, String> getPlayersNicknames() {
+        return staticDataRepository
+                .getNicknamePlayers();
+    }
 }

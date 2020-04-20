@@ -47,4 +47,23 @@ public class StaticDataRepositoryImpl implements StaticDataRepository {
                         new BeanPropertyRowMapper<>(Integer.class)
                 );
     }
+
+    @Override
+    public void addNewPlayer(String playerName) {
+        String sql = "INSERT INTO player (nickname) VALUES (:nickname)";
+        namedParameterJdbcTemplate
+                .update(sql, new MapSqlParameterSource("nickname", playerName));
+    }
+
+    @Override
+    public Map<Integer, String> getNicknamePlayers() {
+        Map<Integer, String> playersMap = new HashMap<>();
+        String sql = "SELECT * FROM player";
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+
+        for (Map<String, Object> row : rows) {
+            playersMap.put((Integer) row.get("id_player"), (String) row.get("nickname"));
+        }
+        return playersMap;
+    }
 }

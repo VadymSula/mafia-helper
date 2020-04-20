@@ -6,4 +6,8 @@ public interface StaticDataRepository {
     Map<Integer, String> findRolesForSelectList();
 
     Integer findByName(String name);
+
+    void addNewPlayer(String playerName);
+
+    Map<Integer, String> getNicknamePlayers();
 }
