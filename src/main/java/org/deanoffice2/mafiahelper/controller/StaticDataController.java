@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 public class StaticDataController {
 
@@ -26,5 +28,13 @@ public class StaticDataController {
     public ResponseEntity addNewPlayer(@RequestBody String playerNickName) {
         staticService.addNewPlayer(playerNickName);
         return ResponseEntity.ok(HttpStatus.CREATED);
+    }
+
+    @GetMapping("/create-game/select-player")
+    public ResponseEntity<Map<Integer, String>> getPlayersNicknames() {
+        return new ResponseEntity<>(
+                staticService.getPlayersNicknames(),
+                HttpStatus.OK
+        );
     }
 }
