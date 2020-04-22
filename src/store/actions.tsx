@@ -1,8 +1,6 @@
 export const START_GAME = 'START_GAME';
 export const END_GAME = 'END_GAME';
 export const PLAYER_IS_READY = 'PLAYER_IS_READY';
-export const CHANGE_COUNT_ROLES = 'CHANGE_COUNT_ROLES';
-export const CHANGE_ACTIVE_ROLE = 'CHANGE_ACTIVE_ROLE';
 export const CHANGE_PLAYER_INFO = 'CHANGE_PLAYER_INFO';
 export const CHANGE_VOTING = 'CHANGE_VOTING';
 export const CHANGE_CIRCLE = 'CHANGE_CIRCLE';
@@ -10,6 +8,7 @@ export const CHANGE_KILL_STATUS = 'CHANGE_KILL_STATUS';
 export const CHANGE_KICK_STATUS = 'CHANGE_KICK_STATUS';
 export const ADD_CHECK = 'ADD_CHECK';
 export const SET_BEST_MOVE = 'SET_BEST_MOVE';
+export const SET_ARRAY_PLAYERS = 'SET_ARRAY_PLAYERS';
 
 export const startGame = value => ({
     type: START_GAME,
@@ -20,14 +19,6 @@ export const startGame = value => ({
 });
 export const playersIsReady = value => ({
     type: PLAYER_IS_READY,
-    payload: value
-});
-export const changeCountRoles = value => ({
-    type: CHANGE_COUNT_ROLES,
-    payload: value
-});
-export const changeActiveRole = value => ({
-    type: CHANGE_ACTIVE_ROLE,
     payload: value
 });
 export const changePlayerInfo = value => ({
@@ -56,5 +47,9 @@ export const addCheck = value => ({
 });
 export const setBestMove = value => ({
     type: SET_BEST_MOVE,
+    payload: value
+});
+export const setArrayPlayers = value => ({
+    type: SET_ARRAY_PLAYERS,
     payload: value
 });

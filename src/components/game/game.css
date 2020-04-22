@@ -49,6 +49,10 @@ section h1{
     min-width: 200px;
     font-size: 25px;
 }
+.players-item p{
+    display: flex;
+    flex-direction: column;
+}
 .game .players-item p{
     margin: 0;
 }

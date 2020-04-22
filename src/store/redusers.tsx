@@ -1,10 +1,10 @@
 import {
     ADD_CHECK,
-    CHANGE_ACTIVE_ROLE, CHANGE_CIRCLE,
-    CHANGE_COUNT_ROLES, CHANGE_KICK_STATUS, CHANGE_KILL_STATUS,
+    CHANGE_CIRCLE,
+    CHANGE_KICK_STATUS, CHANGE_KILL_STATUS,
     CHANGE_PLAYER_INFO,
     CHANGE_VOTING, END_GAME,
-    PLAYER_IS_READY, SET_BEST_MOVE,
+    PLAYER_IS_READY, SET_ARRAY_PLAYERS, SET_BEST_MOVE,
     START_GAME
 } from "./actions";
 
@@ -12,11 +12,11 @@ const defaultState = {
     currentCircle: 0,
     kills: [],
     voting: [],
-    activeRole: 'civil',
-    mafiaLeft: 2,
-    donLeft: 1,
-    sheriffLeft: 1,
-    civilLeft: 6,
+    // activeRole: 'civil',
+    // mafiaLeft: 2,
+    // donLeft: 1,
+    // sheriffLeft: 1,
+    // civilLeft: 6,
     isKilled: true,
     isKicked: false,
     gameIsEnd: false,
@@ -96,20 +96,9 @@ export const rootReducer = (state = defaultState, action) => {
                 ...state,
                 ['player' + [action.payload.number]]: action.payload
             };
-        case CHANGE_COUNT_ROLES:
-            return {
-                ...state,
-                [action.payload.role]: action.payload.count
-            };
-        case CHANGE_ACTIVE_ROLE:
-            return {
-                ...state,
-                activeRole: action.payload
-            };
         case CHANGE_PLAYER_INFO:
             return {
-                ...state,
-                [action.payload.name]: action.payload.value
+                ...state
             };
         case CHANGE_VOTING:
             return {
@@ -146,6 +135,11 @@ export const rootReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 bestMove: action.payload
+            };
+        case SET_ARRAY_PLAYERS:
+            return {
+                ...state,
+                arrayStartPlayers: action.payload
             };
 
     }

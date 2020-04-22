@@ -5,7 +5,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Redirect, Link
+    Link
 } from "react-router-dom";
 import MainPage from "./components/MainPage/mainPage";
 import GuidesPage from "./components/GuidesPage/guidesPage";
