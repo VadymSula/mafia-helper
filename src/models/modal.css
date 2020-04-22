@@ -8,6 +8,7 @@
     transition: all .8s;
     width: 60%;
     top:200px;
+    cursor: auto;
 }
 
 .modal-wrapper__setPlayers .modal-header {
@@ -28,6 +29,10 @@
 .modal-wrapper__setPlayers .modal-body {
     padding: 10px 15px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .modal-wrapper__setPlayers .modal-footer {
@@ -40,7 +45,7 @@
     color: white;
     cursor: pointer;
     float: right;
-    font-size: 50px;
+    font-size: 40px;
     margin: 0;
     transition: .3s;
 }
@@ -95,11 +100,14 @@
     display: flex;
     justify-content: space-between;
 }
-.modal-wrapper__setPlayers form input, select{
-    width: 70%;
+.modal-wrapper__setPlayers  input,
+.modal-wrapper__setPlayers  select,
+.modal-wrapper__setPlayers  button{
+    width: 200px;
+    margin-top: 20px;
 }
-.modal-wrapper__setPlayers form button{
-    align-self: flex-end;
+.modal-wrapper__setPlayers button{
+    background-color: #207868;
 }
 .modal-wrapper__setPlayers form .btns{
     width: 100%;

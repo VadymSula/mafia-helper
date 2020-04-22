@@ -10,6 +10,7 @@ export const CHANGE_KILL_STATUS = 'CHANGE_KILL_STATUS';
 export const CHANGE_KICK_STATUS = 'CHANGE_KICK_STATUS';
 export const ADD_CHECK = 'ADD_CHECK';
 export const SET_BEST_MOVE = 'SET_BEST_MOVE';
+export const SET_ARRAY_PLAYERS = 'SET_ARRAY_PLAYERS';
 
 export const startGame = value => ({
     type: START_GAME,
@@ -56,5 +57,9 @@ export const addCheck = value => ({
 });
 export const setBestMove = value => ({
     type: SET_BEST_MOVE,
+    payload: value
+});
+export const setArrayPlayers = value => ({
+    type: SET_ARRAY_PLAYERS,
     payload: value
 });
