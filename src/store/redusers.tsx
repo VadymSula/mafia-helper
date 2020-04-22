@@ -1,7 +1,7 @@
 import {
     ADD_CHECK,
-    CHANGE_ACTIVE_ROLE, CHANGE_CIRCLE,
-    CHANGE_COUNT_ROLES, CHANGE_KICK_STATUS, CHANGE_KILL_STATUS,
+    CHANGE_CIRCLE,
+    CHANGE_KICK_STATUS, CHANGE_KILL_STATUS,
     CHANGE_PLAYER_INFO,
     CHANGE_VOTING, END_GAME,
     PLAYER_IS_READY, SET_ARRAY_PLAYERS, SET_BEST_MOVE,
@@ -96,16 +96,6 @@ export const rootReducer = (state = defaultState, action) => {
                 ...state,
                 ['player' + [action.payload.number]]: action.payload
             };
-        // case CHANGE_COUNT_ROLES:
-        //     return {
-        //         ...state,
-        //         [action.payload.role]: action.payload.count
-        //     };
-        // case CHANGE_ACTIVE_ROLE:
-        //     return {
-        //         ...state,
-        //         activeRole: action.payload
-        //     };
         case CHANGE_PLAYER_INFO:
             return {
                 ...state

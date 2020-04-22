@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import "./guidesPage.css";
-import {Link} from "react-router-dom";
 
 class GuidesPage extends Component {
 

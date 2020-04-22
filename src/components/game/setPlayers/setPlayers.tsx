@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {setArrayPlayers, startGame} from "../../../store/actions";
 import RenderPlayer from "./renderPlayer";
-import {API} from "../../../servise/apiServise";
+// import {API} from "../../../servise/apiServise";
 
 interface Props {
     startGame: any,
@@ -23,27 +23,8 @@ class SetPlayers extends Component<Props, State> {
         }
     }
 
-    upd = () => {
-        let countNotReady = 0;
-        for (let i = 1; i <= 10; i++) {
-            if (this.props.player['player' + i].ready === false)
-                countNotReady++;
-        }
-        if (countNotReady === 0) {
-            let roles = {
-                civil: 0,
-                mafia: 0,
-                don: 0,
-                sheriff: 0
-            }, arrayRoles;
-            arrayRoles = document.getElementsByClassName('ChangeRole')[0];
-            console.log(arrayRoles)
-            // arrayRoles.map(item => {
-            //     console.log(item)
-            // })
+    startGame = () => {
             this.props.startGame(true);
-        } else
-            alert(countNotReady + " players not ready :(")
     };
 
     componentDidMount() {
@@ -118,6 +99,7 @@ class SetPlayers extends Component<Props, State> {
         players.map(player => {
             if (player.role)
                 countRoles[player.role]++
+            return null
         });
         if (countRoles.civil === 6 && countRoles.mafia === 2 && countRoles.sheriff === 1 && countRoles.don === 1)
             isGood = true;
@@ -150,7 +132,7 @@ class SetPlayers extends Component<Props, State> {
                 </div>
                 {this.state.isHidden ?
                     <h2 style={{color:"#a4a4a4", userSelect:"none"}}>Виставте правильно ролі</h2>
-                    :<button className="game__start" onClick={this.upd}>Почати</button>
+                    :<button className="game__start" onClick={this.startGame}>Почати</button>
                 }
             </section>
         )

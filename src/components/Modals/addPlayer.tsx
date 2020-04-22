@@ -46,7 +46,7 @@ class AddPlayerModal extends Component<Props, State> {
             idPlayer = parseInt(this.state.arrayPlayers[0].id);
         else
             idPlayer = parseInt(this.state.player);
-        let player = this.state.arrayPlayers.filter(player => player.id == idPlayer)[0];
+        let player = this.state.arrayPlayers.filter(player => player.id === idPlayer)[0];
         this.props.playersIsReady({
             name: player.name,
             ready: true,
@@ -82,7 +82,7 @@ class AddPlayerModal extends Component<Props, State> {
 
     render() {
         let arr:any = [];
-        if (this.state.arrayPlayers != undefined){
+        if (this.state.arrayPlayers !== undefined){
             for (let i = 0; i<this.state.arrayPlayers.length;i++){
                 if (this.state.search === "" || this.state.arrayPlayers[i].name.indexOf(this.state.search) !== -1)
                 arr.push(this.state.arrayPlayers[i])
