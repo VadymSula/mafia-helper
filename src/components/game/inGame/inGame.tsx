@@ -7,17 +7,10 @@ import {
     changeKickStatus,
     changeKillStatus,
     changeVoting,
-    endGame, setBestMove
+    endGame, setBestMove, setResultGame
 } from "../../../store/actions";
 import {API} from "../../../servise/apiServise";
 
-// interface Player {
-//     name: string,
-//     role: string,
-//     ready: boolean,
-//     number: number,
-//     fouls: number
-// }
 
 interface Props {
     player: any,
@@ -33,7 +26,8 @@ interface Props {
     kills: any,
     gameIsStarted: any
     bestMove: any,
-    setBestMove: any
+    setBestMove: any,
+    setResultGame: any
 }
 
 interface State {
@@ -147,45 +141,69 @@ class InGame extends Component<Props, State> {
     };
 
     endGame = (winner: string, countPlayers: any) => {
-        if (this.props.gameIsStarted) {
-             let players: any = [], sheriffIsKilled = false, typeWin = 'mafia is Dead',
-            firstKill = this.props.kills[0].playerNumber;
-        if (winner === 'mafia')
-            typeWin = countPlayers.black + '#' + countPlayers.black;
-        if (this.props.player['player' + firstKill].role === 'sheriff')
-            sheriffIsKilled = true;
+        let date: any = new Date(), roles;
+        date = [date.getFullYear(), date.getMonth() + 1, date.getDate()];
+        if (!this.state.gameIsEnd) {
+            API.getAllRoles().then(responce => {
+                roles = responce;
+            })
+            let players: any = [], sheriffIsKilled = false, typeWin = 'mafia is Dead',
+                firstKill = this.props.kills[0].playerNumber;
+            if (winner === 'mafia')
+                typeWin = countPlayers.black + '#' + countPlayers.black;
+            if (this.props.player['player' + firstKill].role === 'sheriff')
+                sheriffIsKilled = true;
 
-        for (let i = 1; i <= 10; i++) {
-            let player = this.props.player['player' + i], _tmp_info;
-            _tmp_info = {
-                foulsQuantity: player.fouls,
-                firstKillSheriff: false,
-                killed: !player.active,
-                roleInGame: player.role,
-            };
-            if (player.role === 'mafia' || player.role === 'don')
-                if (sheriffIsKilled) {
-                    _tmp_info.firstKillSheriff = true;
+            for (let i = 1; i <= 10; i++) {
+                let player = this.props.player['player' + i], _tmp_info;
+                _tmp_info = {
+                    foulsQuantity: player.fouls,
+                    firstKillSheriff: false,
+                    killed: !player.active,
+                    roleInGame: player.role,
+                    name: player.name,
+                    number: player.number
+                };
+                if (player.role === 'mafia' || player.role === 'don')
+                    if (sheriffIsKilled) {
+                        _tmp_info.firstKillSheriff = true;
+                    }
+                if (this.props.kills[0].playerNumber === player.number) {
+                    _tmp_info.goldenMove = this.props.bestMove;
                 }
-            if (this.props.kills[0].playerNumber === player.number){
-                _tmp_info.goldenMove = this.props.bestMove;
+                // switch (_tmp_info.roleInGame) {
+                //     case "civil":
+                //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
+                //         break;
+                //     case "mafia":
+                //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
+                //         break;
+                //     case "don":
+                //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
+                //         break;
+                //     case "sheriff":
+                //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
+                //         break;
+                // }
+                players.push(_tmp_info);
             }
+            this.endTimerDurationGame();
+            this.setState({gameIsEnd: true});
+            this.props.endGame(true);
 
-            players.push(_tmp_info);
-        }
-        this.endTimerDurationGame();
-        this.setState({gameIsEnd: true});
-        this.props.endGame(true);
-        API.sendGameInformation({
-            checksResult: this.props.checks,
-            gameDuration: this.state.currentCount,
-            win: winner,
-            typeWin: typeWin,
-            playersResult: players,
-            kills: this.props.kills
-        }).then(response => {
-            console.log(response)
-        });
+            let resultGame = {
+                checksResult: this.props.checks,
+                gameDuration: this.state.currentCount,
+                win: winner,
+                typeWin: typeWin,
+                playersResult: players,
+                kills: this.props.kills,
+                gameDate: date.join('-'),
+            };
+            this.props.setResultGame(resultGame);
+            API.sendGameInformation(resultGame).then(response => {
+                console.log(response)
+            });
         }
     };
 
@@ -386,6 +404,8 @@ const mapDispatchToProps = {
     changeKickStatus,
     changeKillStatus,
     endGame,
-    setBestMove
+    setBestMove,
+    setResultGame
 };
 export default connect(mapStateToProps, mapDispatchToProps)(InGame)
+

@@ -20,4 +20,13 @@ export class API {
         });
         return await response.json();
     }
+    static async getAllRoles() {
+        let response = await fetch(this.defaultPath + "/create-game/", {
+            method: 'GET',
+            headers: {
+                'Accept': "*/*"
+            }
+        });
+        return await response.json();
+    }
 }

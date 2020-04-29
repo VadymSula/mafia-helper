@@ -4,7 +4,7 @@ import {
     CHANGE_KICK_STATUS, CHANGE_KILL_STATUS,
     CHANGE_PLAYER_INFO,
     CHANGE_VOTING, END_GAME,
-    PLAYER_IS_READY, SET_ARRAY_PLAYERS, SET_BEST_MOVE,
+    PLAYER_IS_READY, SET_ARRAY_PLAYERS, SET_BEST_MOVE, SET_RESULT_GAME,
     START_GAME
 } from "./actions";
 
@@ -82,7 +82,67 @@ const defaultState = {
     // player8: {name: "Микола", role: "don", ready: true, number: 8, fouls: 0, active: true},
     // player9: {name: "Михайло", role: "mafia", ready: true, number: 9, fouls: 0, active: true},
     // player10: {name: "Дьома", role: "mafia", ready: true, number: 10, fouls: 0, active: true},
+    // gameIsEnd: true,
+    // gameIsStarted: true,
+    // resultGame: {
+    //     "checksResult": [{"sheriffCheck": 1, "donCheck": 2, "numberOfTheCircle": 1}, {
+    //         "sheriffCheck": 3,
+    //         "donCheck": 3,
+    //         "numberOfTheCircle": 2
+    //     }, {"sheriffCheck": 4, "donCheck": 4, "numberOfTheCircle": 3}],
+    //     "gameDuration": 511,
+    //     "win": "draw",
+    //     "typeWin": "3#3",
+    //     "playersResult": [{"name":"amarsik",
+    //         "foulsQuantity": 0,
+    //         "firstKillSheriff": false,
+    //         "killed": false,
+    //         "roleInGame": "civil",
+    //         "role":"mafia"
+    //     },
+    //         {"name":"amarsik", "foulsQuantity": 0, "firstKillSheriff": false, "killed": true, "roleInGame": "civil"}, {
+    //         "name":"amarsik1","foulsQuantity": 0,
+    //         "firstKillSheriff": false,
+    //         "killed": false,
+    //         "roleInGame": "civil",
+    //             "role":"mafia"
+    //
+    //         }, {"name":"amarsik", "foulsQuantity": 0, "firstKillSheriff": false, "killed": true, "roleInGame": "civil"}, {
+    //         "name":"amarsik", "foulsQuantity": 0,
+    //         "firstKillSheriff": false,
+    //         "killed": false,
+    //         "roleInGame": "mafia"
+    //     }, {"name":"amarsik", "foulsQuantity": 0, "firstKillSheriff": false, "killed": false, "roleInGame": "mafia"}, {
+    //         "name":"amarsik", "foulsQuantity": 0,
+    //         "firstKillSheriff": true,
+    //         "killed": true,
+    //         "roleInGame": "civil",
+    //             "role":"don",
+    //             "number": 7,
+    //             "active": true
+    //
+    //         }, {
+    //         "name":"amarsik", "foulsQuantity": 0,"number":8,
+    //         "firstKillSheriff": false,
+    //         "killed": true,
+    //         "roleInGame": "civil",
+    //         "goldenMove": [5, 10, 6],
+    //             "role":"sheriff"
+    //
+    //         }, {
+    //         "name":"amarsik", "foulsQuantity": 0,
+    //         "firstKillSheriff": false,
+    //         "killed": false,
+    //         "roleInGame": "sheriff"
+    //     }, {"name":"amarsik", "foulsQuantity": 0, "firstKillSheriff": false, "killed": false, "roleInGame": "don"}],
+    //     "kills": [{"playerNumber": 1, "circleNumber": 1}, {"playerNumber": 2, "circleNumber": 2}, {
+    //         "playerNumber": 4,
+    //         "circleNumber": 3
+    //     }]
+    // },
+    /*                 End test                     */
 };
+
 
 export const rootReducer = (state = defaultState, action) => {
     switch (action.type) {
@@ -140,6 +200,11 @@ export const rootReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 arrayStartPlayers: action.payload
+            };
+        case SET_RESULT_GAME:
+            return {
+                ...state,
+                resultGame: action.payload
             };
 
     }
