@@ -3,28 +3,30 @@ package org.deanoffice2.mafiahelper.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class GameResult implements DomainObject {
     @JsonIgnore
     private Integer idGame;
-    @JsonIgnore
     private Integer idClub;
     private String win;
     private List<PlayerResult> playersResult = new ArrayList<>();
     private List<CheckGame> checksResult = new ArrayList<>();
     private String gameDuration;
+    private Date gameDate;
 
     public GameResult() {
     }
 
-    public GameResult(int idGame, int idClub, String win, List<PlayerResult> playersResult, List<CheckGame> checksResult, String gameDuration) {
+    public GameResult(int idGame, int idClub, String win, List<PlayerResult> playersResult, List<CheckGame> checksResult, String gameDuration, Date gameDate) {
         this.idGame = idGame;
         this.idClub = idClub;
         this.win = win;
         this.playersResult = playersResult;
         this.checksResult = checksResult;
         this.gameDuration = gameDuration;
+        this.gameDate = gameDate;
     }
 
     public Integer getIdGame() {
@@ -73,5 +75,13 @@ public class GameResult implements DomainObject {
 
     public void setGameDuration(String gameDuration) {
         this.gameDuration = gameDuration;
+    }
+
+    public Date getGameDate() {
+        return gameDate;
+    }
+
+    public void setGameDate(Date gameDate) {
+        this.gameDate = gameDate;
     }
 }
