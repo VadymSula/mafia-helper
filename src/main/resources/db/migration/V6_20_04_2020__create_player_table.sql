@@ -6,6 +6,3 @@ create table if not exists player
     nickname  varchar(30) not null,
     unique(nickname)
 );
-
-alter table player
-    owner to postgres;

@@ -1,11 +1,8 @@
 create table if not exists role
 (
-    id_role serial   not null
+    id_role      serial      not null
         constraint roles_pk
             primary key,
-    role    varchar(10) not null,
-    unique(role)
+    role_name    varchar(20) not null,
+    unique(role_name)
 );
-
-alter table role
-    owner to postgres;
