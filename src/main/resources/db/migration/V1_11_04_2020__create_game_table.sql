@@ -6,6 +6,8 @@ create table if not exists game
     win           varchar(20),
     game_duration varchar(20),
     id_club       integer
+        constraint club_game_id_club_fk
+            references club (id_club)
 );
 
 alter table game

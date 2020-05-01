@@ -41,7 +41,7 @@ public class PlayerResultRepositoryImpl implements GameRepository<PlayerResult> 
                     (rs, rowName) -> {
                         PlayerResult playerResult1 = new PlayerResult();
                         playerResult1.setGoldenMove(rs.getString("golden_move"));
-                        playerResult1.setFoulsQuantity(rs.getInt("fouls_quantity"));
+                        playerResult1.setFoulsQuantity(rs.getShort("fouls_quantity"));
                         playerResult1.setFirstKillSheriff(rs.getBoolean("first_kill_sheriff"));
                         playerResult1.setRoleInGame(rs.getInt("role"));
                         playerResult1.setKilled(rs.getBoolean("is_killed"));
@@ -57,7 +57,7 @@ public class PlayerResultRepositoryImpl implements GameRepository<PlayerResult> 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         String sql = "INSERT INTO player_result (id_player, id_role, fouls_quantity, golden_move, first_kill_sheriff, id_game, is_killed)" +
                 "VALUES (:idPlayer, :role, :foulsQuantity, :goldenMove, :firstKillSheriff, (SELECT id_game FROM game ORDER BY id_game DESC LIMIT 1), :isKilled)";
-        parameters.addValue("idPlayer", infoFromGame.getIdPerson());
+        parameters.addValue("idPlayer", infoFromGame.getIdPlayer());
         parameters.addValue("role", infoFromGame.getRoleInGame());
         parameters.addValue("foulsQuantity", infoFromGame.getFoulsQuantity());
         parameters.addValue("goldenMove", infoFromGame.getGoldenMove());

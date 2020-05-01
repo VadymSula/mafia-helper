@@ -3,21 +3,22 @@ package org.deanoffice2.mafiahelper.entity;
 import java.util.List;
 
 public class PlayerResult implements DomainObject {
-    private int idPerson;
+    private int idPlayer;
     private Integer roleInGame;
-    private int foulsQuantity;
+    private short playerNumberInGame;
+    private short foulsQuantity;
     private boolean killed;
     private String goldenMove;
     private List<Integer> checks;
-
     private boolean firstKillSheriff;
 
     public PlayerResult() {
     }
 
-    public PlayerResult(int idPerson, Integer roleInGame, int foulsQuantity, String goldenMove, boolean firstKillSheriff, boolean killed, List<Integer> checks) {
-        this.idPerson = idPerson;
+    public PlayerResult(int idPlayer, Integer roleInGame, byte playerNumberInGame, short foulsQuantity, String goldenMove, boolean firstKillSheriff, boolean killed, List<Integer> checks) {
+        this.idPlayer = idPlayer;
         this.roleInGame = roleInGame;
+        this.playerNumberInGame = playerNumberInGame;
         this.foulsQuantity = foulsQuantity;
         this.goldenMove = goldenMove;
         this.firstKillSheriff = firstKillSheriff;
@@ -25,12 +26,12 @@ public class PlayerResult implements DomainObject {
         this.checks = checks;
     }
 
-    public int getIdPerson() {
-        return idPerson;
+    public int getIdPlayer() {
+        return idPlayer;
     }
 
-    public void setIdPerson(int idPerson) {
-        this.idPerson = idPerson;
+    public void setIdPlayer(int idPlayer) {
+        this.idPlayer = idPlayer;
     }
 
     public Integer getRoleInGame() {
@@ -41,11 +42,11 @@ public class PlayerResult implements DomainObject {
         this.roleInGame = roleInGame;
     }
 
-    public int getFoulsQuantity() {
+    public short getFoulsQuantity() {
         return foulsQuantity;
     }
 
-    public void setFoulsQuantity(int foulsQuantity) {
+    public void setFoulsQuantity(short foulsQuantity) {
         this.foulsQuantity = foulsQuantity;
     }
 
@@ -79,5 +80,13 @@ public class PlayerResult implements DomainObject {
 
     public void setChecks(List<Integer> checks) {
         this.checks = checks;
+    }
+
+    public short getPlayerNumberInGame() {
+        return playerNumberInGame;
+    }
+
+    public void setPlayerNumberInGame(short playerNumberInGame) {
+        this.playerNumberInGame = playerNumberInGame;
     }
 }

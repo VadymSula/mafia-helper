@@ -76,7 +76,7 @@ public class GameResultRepositoryImpl implements GameRepository<GameResult> {
 
             playerResult.setRoleInGame((Integer) row.get("id_role"));
             playerResult.setFirstKillSheriff((Boolean) row.get("first_kill_sheriff"));
-            playerResult.setFoulsQuantity((Integer) row.get("fouls_quantity"));
+            playerResult.setFoulsQuantity((Short) row.get("fouls_quantity"));
             playerResult.setGoldenMove((String) row.get("golden_move"));
             playerResults.add(playerResult);
         }
