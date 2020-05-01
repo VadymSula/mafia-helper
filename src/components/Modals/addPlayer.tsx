@@ -52,7 +52,8 @@ class AddPlayerModal extends Component<Props, State> {
             ready: true,
             number: this.props.number,
             fouls: 0,
-            active: true
+            active: true,
+            role: "civil"
         });
         this.props.setArrayPlayers(this.state.arrayPlayers.filter(player => player.id !== idPlayer));
         this.closeModal();
@@ -92,7 +93,7 @@ class AddPlayerModal extends Component<Props, State> {
             this.props.arrayPlayers ?
             <div>
                 {this.state.isShowing ? <div onClick={this.closeModal} className="back-drop"/> : null}
-
+                {this.props.number + ') '}
                 <button onClick={this.openModal} className="players__add-player">+</button>
                 <Modal
                     header="Add Player"

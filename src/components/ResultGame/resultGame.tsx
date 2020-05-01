@@ -14,16 +14,14 @@ class ResultGame extends Component<Props> {
 
 
     calculateTime (time) {
-        let hrs = ~~(time / 3600);
-        let min = ~~((time) / 60);
-        let secs = ~~time % 60;
-
-        let ret = "";
+        let hrs = ~~(time / 3600),
+            min = ~~((time) / 60),
+            secs = ~~time % 60,
+            ret = "";
 
         ret += "" + hrs + ":" + (min < 10 ? "0" : "");
         ret += "" + min + ":" + (secs < 10 ? "0" : "");
         ret += "" + secs;
-
 
         return ret;
     }
@@ -33,7 +31,7 @@ class ResultGame extends Component<Props> {
              game = this.props.resultGame;
         game.gameDuration = this.calculateTime(game.gameDuration);
         // Гравець, який дає "кращий хід"
-        let playerBM = game.playersResult.filter( player => player.goldenMove !== undefined)[0], str_: any = [];
+        let playerBM = game.playersResult.filter( player => player.goldenMove !== undefined)[0], str_: any;
         str_ = playerBM.goldenMove;
         str_ = str_.join('/');
         // Перевірка в дона на перше вбивство шерифа
@@ -47,13 +45,9 @@ class ResultGame extends Component<Props> {
                     blackChecks.push(check.sheriffCheck)
                 }
             }
-        })
-        // let blackChecks = game.checksResult.filter(check => game.playersResult[check.sheriffCheck-1].role === 'mafia' || game.playersResult[check.sheriffCheck-1].role === 'don'), checkArr: any = [];
-        // for (let i = 0; i<blackChecks.length; i++)
-        //     checkArr.push(blackChecks[i].sheriffCheck)
+        });
         let checkArr = blackChecks.join('/');
         let sheriff = game.playersResult.filter( player => player.roleInGame === 'sheriff')[0];
-        console.log(game)
         return (
             <div className="body ResultGame">
                 <div className="header">
@@ -107,11 +101,12 @@ class ResultGame extends Component<Props> {
                                     if (check.sheriffCheck)
                                         sheriff = check.sheriffCheck;
                                     else
-                                        sheriff = "-"
+                                        sheriff = "-";
+
                                     if (check.donCheck)
                                         don = check.donCheck;
                                     else
-                                        don = "-"
+                                        don = "-";
                                     return(
                                         <div className="divTableRow">
                                             <div className="divTableCell">{sheriff}</div>

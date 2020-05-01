@@ -156,7 +156,7 @@ class PlayerDiv extends Component<Props, State> {
                 }
 
                 {this.props.player.active ?
-                    <div className={this.state.isVoting ? "players-item isVoting" : "players-item"}>
+                    <div className={this.state.isVoting ? "players-item game isVoting" : "players-item game"}>
 
                         {this.state.isShowing ? <div onClick={this.closeModal} className="back-drop"/> : null}
                         <p onClick={this.openModal}>

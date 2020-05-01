@@ -46,8 +46,7 @@ class RenderPlayer extends Component<Props, State> {
                                 this.state.role === 'sheriff' ? <i className="fab fa-empire"/> : null}
                             {this.props.number + ') ' + this.props.player.name}
                         </span>
-                        <select className="ChangeRole" required onChange={this.changeRole}>
-                            <option value="none">--Оберіть роль--</option>
+                        <select className="ChangeRole" required onChange={this.changeRole} defaultValue="civil">
                             <option value="civil">Мирний житель</option>
                             <option value="mafia">Мафія</option>
                             <option value="don">Дон</option>
