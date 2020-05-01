@@ -30,7 +30,7 @@ function App() {
 
 function Navigation() {
     return (
-            <nav className="header__nav">
+            <nav className="header__nav MainPage ">
                 <ul>
                     <div>
                         <li><Link className="nav" to="/">Головна</Link></li>

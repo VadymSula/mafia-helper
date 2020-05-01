@@ -6,7 +6,7 @@ class MainPage extends Component {
 
     render() {
         return (
-            <div>
+            <div className="MainPage ">
                 <header>
                     <div className="header">
                         <div className="head__button__play">

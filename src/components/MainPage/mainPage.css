@@ -1,45 +1,44 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
-*{
-    margin: 0;
-}
 /* css in heder begin */
-header{
-    background: url("../../assets/mafia.png") no-repeat center fixed;
+.MainPage header{
+    background: url("../../assets/images/mafia.png") no-repeat center fixed;
     background-size: cover;
     width: 100%;
     height: 100%;
 }
-a{
+.MainPage a{
     font-family: 'Montserrat', sans-serif;
     text-decoration: none;
 }
-nav{
+.MainPage nav{
     position: sticky;
     top: 0;
 }
-ul{
+.MainPage ul{
     background-color: rgba(245, 245, 243, 0.8);
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
-li{
+.MainPage li{
     font-size:  22px;
     padding: 7px 0;
     font-family: 'Montserrat', sans-serif;
     display: inline-block;
 }
-.header__nav ul{
+.MainPage.header__nav ul{
     display:flex ;
     flex-direction: row;
     justify-content: space-between;
+    margin: 0;
+    align-items: center;
 }
-a.nav{
+.MainPage a.nav{
     text-decoration: none;
     color:black;
     margin-left: 20px;
 }
-a.head__button__login{
+.MainPage a.head__button__login{
     font-size: 15px;
     display: inline-block;
     width: 5em;
@@ -57,22 +56,22 @@ a.head__button__login{
     background: linear-gradient(rgb(255,255,255), rgb(240,240,240));
     transition: .2s ease-in-out;
 }
-a.head__button__login:hover {
+.MainPage a.head__button__login:hover {
     background: rgb(240,240,240);
 }
-.login__button{
+.MainPage .login__button{
  margin-right: 15px;
 }
-a.nav:active{
+.MainPage a.nav:active{
     color: rgb(206, 31, 11);
     text-underline-position: above;
 }
 /* Center part  */
-p.h1{
+.MainPage p.h1{
     font-family: 'Montserrat';
     font-size: 10em;
 }
-a.button{
+.MainPage a.button{
     color: #fff;
     text-decoration: none;
     user-select: none;
@@ -81,20 +80,20 @@ a.button{
     outline: none;
     border-radius: 0%;
 }
-a.button:hover {
+.MainPage a.button:hover {
     background: rgb(232,95,76);
 } /* при наведении курсора мышки */
-a.button:active {
+.MainPage a.button:active {
     background: rgb(152,15,0);
 } /* при нажатии */
-.header{
+.MainPage .header{
     background-color:  rgba(215, 217, 224, 0.8);
     height: 100%;
     max-width: 100%;
     min-height: 727px;
 
 }
-.head__button__play{
+.MainPage .head__button__play{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -103,11 +102,11 @@ a.button:active {
 }
 /* css in header end */
 /* main css begin */
-main{
+.MainPage main{
     background-color: whitesmoke;
 
 }
-div.main__button-icons{
+.MainPage div.main__button-icons{
     padding: 1% 0% 1.5% 0%;
     display: flex;
     flex-direction: row;
@@ -115,45 +114,45 @@ div.main__button-icons{
     align-items: flex-end;
     flex-wrap: wrap;
 }
-h5{
+.MainPage h5{
     font-size: 1.875em;
     display: flex;
     justify-content: center;
     color: gray;
     padding-top: 3%;
 }
-.main__button-icon i {
+.MainPage .main__button-icon i {
     color: gray;
     font-size: 8em;
 }
-.main__button-icon{
+.MainPage .main__button-icon{
     margin: 30px 30px;
 }
-.fa-play {
+.MainPage .fa-play {
     padding-left: 40px;
 }
-.fa-book-open{
+.MainPage .fa-book-open{
     padding-left: 12px;
 
 }
 /* @media begin */
 @media (max-width:741px){
-    header {
+    .MainPage header {
         background-size: cover;
         transition: .5s ease-in-out;}}
 @media screen and (max-width:725px) {
-    p.h1{
+    .MainPage p.h1{
         font-size: 5em;
         transition: .5s ease-in-out;}}
 @media screen and (max-width:600px) {
-    .head__button__play{
+    .MainPage .head__button__play{
         display: flex;
         padding-top: 50%;
         justify-content: center;
         align-items: center;;transition: .5s ease-in-out;}
-    h5{padding-bottom: 6%;}}
+    .MainPage h5{padding-bottom: 6%;}}
 @media (max-width:750px){
-    div.main__button-icons{
+    .MainPage div.main__button-icons{
         display: flex;
         flex-direction: column;
         align-items:center;
@@ -161,9 +160,9 @@ h5{
         transition: .5s ease-in-out;
 
     }}
-@media(max-width:414px){ul{min-height: 60px;padding-left: 0px;}}
+@media(max-width:414px){.MainPage ul{min-height: 60px;padding-left: 0px;}}
 @media(max-width:550px){
-    nav{
+    .MainPage nav{
         display: none;
     }}
 /* @media end */

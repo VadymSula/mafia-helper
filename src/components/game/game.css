@@ -52,8 +52,10 @@ section h1{
 .players-item p{
     display: flex;
     flex-direction: column;
+    margin: 0;
 }
-.game .players-item p{
+.players-item.game p{
+    display: inline;
     margin: 0;
 }
 .game .players-item{

@@ -9,6 +9,8 @@ export const CHANGE_KICK_STATUS = 'CHANGE_KICK_STATUS';
 export const ADD_CHECK = 'ADD_CHECK';
 export const SET_BEST_MOVE = 'SET_BEST_MOVE';
 export const SET_ARRAY_PLAYERS = 'SET_ARRAY_PLAYERS';
+export const SET_RESULT_GAME = 'SET_RESULT_GAME';
+export const CHANGE_SHOW_INFO = 'CHANGE_SHOW_INFO';
 
 export const startGame = value => ({
     type: START_GAME,
@@ -51,5 +53,13 @@ export const setBestMove = value => ({
 });
 export const setArrayPlayers = value => ({
     type: SET_ARRAY_PLAYERS,
+    payload: value
+});
+export const setResultGame = value => ({
+    type: SET_RESULT_GAME,
+    payload: value
+});
+export const changeShowInfo = value => ({
+    type: CHANGE_SHOW_INFO,
     payload: value
 });
