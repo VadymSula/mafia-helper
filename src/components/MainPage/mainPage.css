@@ -23,7 +23,7 @@
 .MainPage li{
     font-size:  22px;
     padding: 7px 0;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif !important;
     display: inline-block;
 }
 .MainPage.header__nav ul{
@@ -70,6 +70,7 @@
 .MainPage p.h1{
     font-family: 'Montserrat';
     font-size: 10em;
+    margin: 0;
 }
 .MainPage a.button{
     color: #fff;

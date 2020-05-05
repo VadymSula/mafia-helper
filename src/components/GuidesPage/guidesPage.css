@@ -4,7 +4,7 @@ html {
 }
 h1 {
     text-align:center;
-    font-family: Сomic Sans MS, cursive;
+    /*font-family: Сomic Sans MS, cursive;*/
     color: #293845;
 }
 @media (min-width: 500px) {
@@ -21,8 +21,8 @@ h1 {
 .blocks__guides__text h2{
     font-size:20px;
     color: #374551;
-    font-family:  cursive;
     font-weight: 700;
+    text-align: justify;
 }
 .blocks__guides__author__date__time {
     margin: 1% 2px 20px 2px;
@@ -41,7 +41,6 @@ h1 {
 }
 .author_name h3 {
     align-items: stretch; /*центрирование*/
-    font-family:  cursive;
     font-weight: 500;
     color: #43505c;
     font-size:20px;
@@ -54,7 +53,6 @@ h1 {
 }
 .author__time-date_post h3 {
     font-size:20px;
-    font-family:  cursive;
     font-weight: 500;
 
 }
