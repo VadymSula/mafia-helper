@@ -36,7 +36,7 @@ function Navigation() {
                         <li><Link className="nav" to="/">Головна</Link></li>
                         <li><Link className="nav" to="/rules">Правила</Link></li>
                         <li><Link className="nav" to="/rating">Рейтинг</Link></li>
-                        <li><Link className="nav" to="/guides">Посібник</Link></li>
+                        <li><Link className="nav" to="/guides">Посібники</Link></li>
                     </div>
                     <li className="login__button"><Link to="#" className="head__button__login ">Логін</Link>
                     </li>
