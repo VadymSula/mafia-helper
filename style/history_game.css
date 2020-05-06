@@ -3,11 +3,24 @@
 body {
   font-family: "Montserrat";
 }
-header span{
+nav{
+  margin-top: 20px;
+}
+header span {  
   padding-left: 25px;
   font-size: 20px;
-  
 }
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
+}
+.name_PAGE {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  border-bottom: 1px solid black;
+  margin: 0px 100px;
+  padding-bottom: 10px;
+}
+.name_PAGE img {
+  height: 75px;
 }
