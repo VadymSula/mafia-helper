@@ -1,11 +1,13 @@
 package org.deanoffice2.mafiahelper.service;
 
+import org.deanoffice2.mafiahelper.entity.Player;
+import org.deanoffice2.mafiahelper.entity.RoleGame;
 import org.deanoffice2.mafiahelper.repository.StaticDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
+import java.util.List;
 
 @Service("staticService")
 public class StaticServiceImpl implements StaticService {
@@ -15,7 +17,7 @@ public class StaticServiceImpl implements StaticService {
     private StaticDataRepository staticDataRepository;
 
     @Override
-    public Map<Integer, String> getRoles() {
+    public List<RoleGame> getRoles() {
         return staticDataRepository.findRolesForSelectList();
     }
 
@@ -26,7 +28,7 @@ public class StaticServiceImpl implements StaticService {
     }
 
     @Override
-    public Map<Integer, String> getPlayersNicknames() {
+    public List<Player> getPlayersNicknames() {
         return staticDataRepository
                 .getNicknamePlayers();
     }

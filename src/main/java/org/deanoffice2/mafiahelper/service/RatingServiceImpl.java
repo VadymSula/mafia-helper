@@ -2,6 +2,7 @@ package org.deanoffice2.mafiahelper.service;
 
 import org.deanoffice2.mafiahelper.entity.GameResult;
 import org.deanoffice2.mafiahelper.entity.PlayerResult;
+import org.deanoffice2.mafiahelper.entity.RoleGame;
 import org.deanoffice2.mafiahelper.repository.RatingRepository;
 import org.deanoffice2.mafiahelper.repository.StaticDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service("ratingService")
@@ -101,9 +100,9 @@ public class RatingServiceImpl implements RatingService {
 
     private Float calculateMajorPointsForWin(GameResult gameResult, PlayerResult playerResult) {
         if (isTeamWin(gameResult, 'i')) {
-            return addMajorPointForRoleWin(CITY, playerResult);       // WIN City
+            return addMajorPointForRoleWin(CITY, playerResult);
         } else if (isTeamWin(gameResult, 'a')) {
-            return addMajorPointForRoleWin(MAFIA, playerResult);      // WIN Mafia
+            return addMajorPointForRoleWin(MAFIA, playerResult);
         }
         return 0F;
     }
@@ -113,8 +112,8 @@ public class RatingServiceImpl implements RatingService {
     }
 
     private Float addMajorPointForRoleWin(String roleTeam, PlayerResult playerResult) {
-        for (Map.Entry<Integer, String> entry : getMapRolesByTeam(roleTeam).entrySet()) {
-            if (entry.getKey().equals(playerResult.getRoleInGame())) {
+        for (RoleGame roleGame : getListRolesByTeam(roleTeam)) {
+            if (roleGame.getIdRole().equals(playerResult.getRoleInGame())) {
                 return 1F;
             }
         }
@@ -137,20 +136,27 @@ public class RatingServiceImpl implements RatingService {
         return gameResult
                 .getPlayersResult()
                 .stream()
-                .filter(playerResult -> getMapRolesByTeam(MAFIA)
-                        .keySet()
-                        .stream()
-                        .filter(key -> key.equals(playerResult.getRoleInGame()))
-                        .findFirst().equals(Optional.of(playerResult.getRoleInGame())))
+                .filter(playerResult -> {
+                    return playerResult.getRoleInGame().equals(isNumberMafiaPlayer(playerResult));
+                })
                 .collect(Collectors.toList());
     }
 
-    private Map<Integer, String> getMapRolesByTeam(String roleTeam) {
-        return staticDataRepository.findRolesForSelectList()
-                .entrySet()
+    private Integer isNumberMafiaPlayer(PlayerResult playerResult) {
+        return getListRolesByTeam(MAFIA)
                 .stream()
-                .filter((entry) -> entry.getValue().matches(roleTeam))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                .filter(role -> role.getIdRole().equals(playerResult.getRoleInGame()))
+                .findFirst()
+                .orElse(new RoleGame())
+                .getIdRole();
+
+    }
+
+    private List<RoleGame> getListRolesByTeam(String roleTeam) {
+        return staticDataRepository.findRolesForSelectList()
+                .stream()
+                .filter(role -> role.getRoleName().matches(roleTeam))
+                .collect(Collectors.toList());
     }
 
     private Float addPointsByCountGuessedMafiaPlayers(int guessedMafiaPlayers) {

@@ -3,7 +3,7 @@ create table if not exists player_result
     id_player          integer not null
         constraint player_result__id_player_fk
             references player,
-    id_role            smallint not null
+    id_role            integer not null
         constraint player_result__id_role_fk
             references role,
     fouls_quantity     smallint,

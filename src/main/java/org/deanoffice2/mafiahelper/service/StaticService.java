@@ -1,11 +1,14 @@
 package org.deanoffice2.mafiahelper.service;
 
-import java.util.Map;
+import org.deanoffice2.mafiahelper.entity.Player;
+import org.deanoffice2.mafiahelper.entity.RoleGame;
+
+import java.util.List;
 
 public interface StaticService {
-    Map<Integer, String> getRoles();
+    List<RoleGame> getRoles();
 
     void addNewPlayer(String playerName);
 
-    Map<Integer, String> getPlayersNicknames();
+    List<Player> getPlayersNicknames();
 }
