@@ -3,7 +3,6 @@ package org.deanoffice2.mafiahelper.repository;
 import org.deanoffice2.mafiahelper.entity.Player;
 import org.deanoffice2.mafiahelper.entity.RoleGame;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -34,7 +33,7 @@ public class StaticDataRepositoryImpl implements StaticDataRepository {
         for (Map<String, Object> row : rows) {
             RoleGame roleGame = new RoleGame();
 
-            roleGame.setId_role((Integer) row.get("id_role"));
+            roleGame.setIdRole((Integer) row.get("id_role"));
             roleGame.setRoleName((String) row.get("role_name"));
 
             rolesList.add(roleGame);
@@ -51,7 +50,7 @@ public class StaticDataRepositoryImpl implements StaticDataRepository {
                                 "FROM role " +
                                 "WHERE role_name = :roleName",
                         new MapSqlParameterSource("roleName", name),
-                        new BeanPropertyRowMapper<>(Integer.class)
+                        (Integer.class)
                 );
     }
 

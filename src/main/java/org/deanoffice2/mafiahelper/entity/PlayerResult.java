@@ -4,9 +4,9 @@ import java.util.List;
 
 public class PlayerResult implements DomainObject {
     private int idPlayer;
-    private Integer roleInGame;
-    private short playerNumberInGame;
-    private short foulsQuantity;
+    private RoleGame roleInGame;
+    private Integer playerNumberInGame;
+    private Integer foulsQuantity;
     private boolean killed;
     private String goldenMove;
     private List<Integer> checks;
@@ -15,7 +15,7 @@ public class PlayerResult implements DomainObject {
     public PlayerResult() {
     }
 
-    public PlayerResult(int idPlayer, Integer roleInGame, byte playerNumberInGame, short foulsQuantity, String goldenMove, boolean firstKillSheriff, boolean killed, List<Integer> checks) {
+    public PlayerResult(int idPlayer, RoleGame roleInGame, Integer playerNumberInGame, Integer foulsQuantity, String goldenMove, boolean firstKillSheriff, boolean killed, List<Integer> checks) {
         this.idPlayer = idPlayer;
         this.roleInGame = roleInGame;
         this.playerNumberInGame = playerNumberInGame;
@@ -34,19 +34,19 @@ public class PlayerResult implements DomainObject {
         this.idPlayer = idPlayer;
     }
 
-    public Integer getRoleInGame() {
+    public RoleGame getRoleInGame() {
         return roleInGame;
     }
 
-    public void setRoleInGame(Integer roleInGame) {
+    public void setRoleInGame(RoleGame roleInGame) {
         this.roleInGame = roleInGame;
     }
 
-    public short getFoulsQuantity() {
+    public Integer getFoulsQuantity() {
         return foulsQuantity;
     }
 
-    public void setFoulsQuantity(short foulsQuantity) {
+    public void setFoulsQuantity(Integer foulsQuantity) {
         this.foulsQuantity = foulsQuantity;
     }
 
@@ -82,11 +82,11 @@ public class PlayerResult implements DomainObject {
         this.checks = checks;
     }
 
-    public short getPlayerNumberInGame() {
+    public Integer getPlayerNumberInGame() {
         return playerNumberInGame;
     }
 
-    public void setPlayerNumberInGame(short playerNumberInGame) {
+    public void setPlayerNumberInGame(Integer playerNumberInGame) {
         this.playerNumberInGame = playerNumberInGame;
     }
 }

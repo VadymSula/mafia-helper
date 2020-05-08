@@ -27,7 +27,7 @@ public class GameController {
     }
 
     @GetMapping("/game-end/id-game={idGame}")
-    public ResponseEntity<GameResult> getGameResult(@PathVariable("idGame") int idGame) {
+    public ResponseEntity<GameResult> getGameResult(@PathVariable("idGame") Integer idGame) {
         return new ResponseEntity<>(
                 gameService.getGameResults(idGame),
                 HttpStatus.OK
@@ -39,7 +39,7 @@ public class GameController {
             @PathVariable Integer idGame,
             @PathVariable Integer idPlayer) {
         return new ResponseEntity<>(
-                gameService.getPlayerResultByIdAndGameId(idPlayer, idGame),
+                gameService.getPlayerResultByIdAndGameId(idGame, idPlayer),
                 HttpStatus.OK
         );
     }

@@ -11,7 +11,7 @@ public interface GameService {
 
     List<CheckGame> getGameChecks(Integer idGame);
 
-    PlayerResult getPlayerResultByIdAndGameId(Integer idPlayer, Integer idGame);
+    PlayerResult getPlayerResultByIdAndGameId(Integer idGame, Integer idPlayer);
 
     void saveGameResults(GameResult gameResult);
 }

@@ -41,7 +41,7 @@ public class RatingServiceImpl implements RatingService {
             );
 
             ratingRepository.updateRatingPlayer(
-                    gameResult.getIdClub(),
+                    gameResult.getClub().getIdClub(),
                     playerResult.getIdPlayer(),
                     newRating
             );
@@ -59,7 +59,7 @@ public class RatingServiceImpl implements RatingService {
                             getRatingValue(gameResult, playerResult)
                     );
                     ratingRepository.updateRatingPlayer(
-                            gameResult.getIdClub(),
+                            gameResult.getClub().getIdClub(),
                             playerResult.getIdPlayer(),
                             newRating
                     );
@@ -89,7 +89,7 @@ public class RatingServiceImpl implements RatingService {
     private Float getRatingValue(GameResult gameResult, PlayerResult playerResult) {
         return ratingRepository
                 .getPlayerRatingValue(
-                        gameResult.getIdClub(),
+                        gameResult.getClub().getIdClub(),
                         playerResult.getIdPlayer()
                 );
     }
@@ -113,7 +113,7 @@ public class RatingServiceImpl implements RatingService {
 
     private Float addMajorPointForRoleWin(String roleTeam, PlayerResult playerResult) {
         for (RoleGame roleGame : getListRolesByTeam(roleTeam)) {
-            if (roleGame.getIdRole().equals(playerResult.getRoleInGame())) {
+            if (roleGame.getIdRole().equals(playerResult.getRoleInGame().getIdRole())) {
                 return 1F;
             }
         }
@@ -122,7 +122,7 @@ public class RatingServiceImpl implements RatingService {
 
     private int getGuessedNumberMafiaPlayers(PlayerResult playerResult, List<PlayerResult> playerResultList) {
         int repeatCounter = 0;
-        for (Short playerNumberIsMafia : parseStringArrToListShort(playerResult.getGoldenMove())) {
+        for (Integer playerNumberIsMafia : parseStringArrToListShort(playerResult.getGoldenMove())) {
             for (PlayerResult result : playerResultList) {
                 if (playerNumberIsMafia.equals(result.getPlayerNumberInGame())) {
                     repeatCounter++;
@@ -137,7 +137,7 @@ public class RatingServiceImpl implements RatingService {
                 .getPlayersResult()
                 .stream()
                 .filter(playerResult -> {
-                    return playerResult.getRoleInGame().equals(isNumberMafiaPlayer(playerResult));
+                    return playerResult.getRoleInGame().getIdRole().equals(isNumberMafiaPlayer(playerResult));
                 })
                 .collect(Collectors.toList());
     }
@@ -145,7 +145,7 @@ public class RatingServiceImpl implements RatingService {
     private Integer isNumberMafiaPlayer(PlayerResult playerResult) {
         return getListRolesByTeam(MAFIA)
                 .stream()
-                .filter(role -> role.getIdRole().equals(playerResult.getRoleInGame()))
+                .filter(role -> role.getIdRole().equals(playerResult.getRoleInGame().getIdRole()))
                 .findFirst()
                 .orElse(new RoleGame())
                 .getIdRole();
@@ -165,15 +165,15 @@ public class RatingServiceImpl implements RatingService {
                 : 0F;
     }
 
-    private List<Short> parseStringArrToListShort(String bestMove) {
-        List<Short> shortList = new ArrayList<>();
+    private List<Integer> parseStringArrToListShort(String bestMove) {
+        List<Integer> integerList = new ArrayList<>();
         String[] stringArray = bestMove.split("/");
 
         for (String playerNumber : stringArray) {
-            shortList.add(Short.valueOf(playerNumber));
+            integerList.add(Integer.valueOf(playerNumber));
         }
 
-        return shortList;
+        return integerList;
     }
 
 //    private Float addMainVictoryPoint(Float ratingValue) {
