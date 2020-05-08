@@ -61,7 +61,7 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public PlayerResult getPlayerResultByIdAndGameId(Integer idPlayer, Integer idGame) {
+    public PlayerResult getPlayerResultByIdAndGameId(Integer idGame, Integer idPlayer) {
         PlayerResult playerResult = playerRepository.findById(idGame, idPlayer);
 
         if (isRole(playerResult, staticDataRepository.findByName("Sheriff"))) {
@@ -74,7 +74,7 @@ public class GameServiceImpl implements GameService {
     }
 
     private boolean isRole(PlayerResult playerResult, Integer role) {
-        return playerResult.getRoleInGame().equals(role);
+        return playerResult.getRoleInGame().getIdRole().equals(role);
     }
 
     private List<Integer> getInfoIfPlayerIsSheriff(Integer idGame) {
