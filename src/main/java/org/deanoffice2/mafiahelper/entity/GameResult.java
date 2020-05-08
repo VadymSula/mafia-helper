@@ -9,7 +9,8 @@ import java.util.List;
 public class GameResult implements DomainObject {
     @JsonIgnore
     private Integer idGame;
-    private Integer idClub;
+    private Club club;
+    private boolean gameIsRating;
     private String win;
     private List<PlayerResult> playersResult = new ArrayList<>();
     private List<CheckGame> checksResult = new ArrayList<>();
@@ -19,9 +20,18 @@ public class GameResult implements DomainObject {
     public GameResult() {
     }
 
-    public GameResult(int idGame, int idClub, String win, List<PlayerResult> playersResult, List<CheckGame> checksResult, String gameDuration, Date gameDate) {
+    public GameResult(
+            Integer idGame,
+            Club club,
+            boolean gameIsRating,
+            String win,
+            List<PlayerResult> playersResult,
+            List<CheckGame> checksResult,
+            String gameDuration,
+            Date gameDate) {
         this.idGame = idGame;
-        this.idClub = idClub;
+        this.club = club;
+        this.gameIsRating = gameIsRating;
         this.win = win;
         this.playersResult = playersResult;
         this.checksResult = checksResult;
@@ -37,12 +47,12 @@ public class GameResult implements DomainObject {
         this.idGame = idGame;
     }
 
-    public Integer getIdClub() {
-        return idClub;
+    public Club getClub() {
+        return club;
     }
 
-    public void setIdClub(Integer idClub) {
-        this.idClub = idClub;
+    public void setClub(Club club) {
+        this.club = club;
     }
 
     public String getWin() {
@@ -83,5 +93,13 @@ public class GameResult implements DomainObject {
 
     public void setGameDate(Date gameDate) {
         this.gameDate = gameDate;
+    }
+
+    public boolean isGameIsRating() {
+        return gameIsRating;
+    }
+
+    public void setGameIsRating(boolean gameIsRating) {
+        this.gameIsRating = gameIsRating;
     }
 }

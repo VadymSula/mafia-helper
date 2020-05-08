@@ -16,7 +16,7 @@ public class RoleGame {
         return idRole;
     }
 
-    public void setId_role(Integer idRole) {
+    public void setIdRole(Integer idRole) {
         this.idRole = idRole;
     }
 
