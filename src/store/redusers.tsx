@@ -1,6 +1,6 @@
 import {
     ADD_CHECK,
-    CHANGE_CIRCLE,
+    CHANGE_CIRCLE, CHANGE_COURT_STATUS,
     CHANGE_KICK_STATUS, CHANGE_KILL_STATUS,
     CHANGE_PLAYER_INFO, CHANGE_SHOW_INFO,
     CHANGE_VOTING, END_GAME,
@@ -12,16 +12,12 @@ const defaultState = {
     currentCircle: 0,
     kills: [],
     voting: [],
-    // activeRole: 'civil',
-    // mafiaLeft: 2,
-    // donLeft: 1,
-    // sheriffLeft: 1,
-    // civilLeft: 6,
     isKilled: true,
     isKicked: false,
     gameIsEnd: false,
     checks: [],
     showInfo:false,
+    courtStatus: false,
     player1: {
         ready: false,
         role: '',
@@ -211,6 +207,11 @@ export const rootReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 showInfo: action.payload
+            };
+        case CHANGE_COURT_STATUS:
+            return {
+                ...state,
+                courtStatus: action.payload
             };
 
     }

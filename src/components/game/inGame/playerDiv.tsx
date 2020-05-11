@@ -1,7 +1,14 @@
 import React, {Component} from "react";
 import "./modal.css";
 import {connect} from "react-redux";
-import {changePlayerInfo, changeVoting, addCheck, changeKillStatus, changeKickStatus} from "../../../store/actions";
+import {
+    changePlayerInfo,
+    changeVoting,
+    addCheck,
+    changeKillStatus,
+    changeKickStatus,
+    changeCourtStatus
+} from "../../../store/actions";
 
 interface Props {
     player?: any,
@@ -18,7 +25,8 @@ interface Props {
     isKicked: boolean,
     changeKillStatus: any,
     changeKickStatus: any,
-    kills: any
+    kills: any,
+    changeCourtStatus: any;
 }
 
 interface State {
@@ -72,7 +80,8 @@ class PlayerDiv extends Component<Props, State> {
         this.props.changeVoting(arr);
         this.setState({
             isShowing: false
-        })
+        });
+        this.props.changeCourtStatus(true);
     };
 
     banPlayer = () => {
@@ -181,11 +190,6 @@ class PlayerDiv extends Component<Props, State> {
                                                 title="Виставити на голосування">
                                             <i className="fas fa-thumbs-up"/>
                                         </button> : null}
-                                    {
-                                        this.state.isVoting && !this.props.isKicked ?
-                                            <button onClick={this.banPlayer} className="del" title="Вигнати через суд">
-                                                <i className="fas fa-user-slash"/>
-                                            </button> : null}
                                     {!this.props.isKilled ?
                                         <button className="red" onClick={this.killPlayer} title="Вбитий мафією">
                                             <i className="far fa-dizzy"/>
@@ -237,6 +241,7 @@ const mapDispatchToProps = {
     changeVoting,
     addCheck,
     changeKillStatus,
-    changeKickStatus
+    changeKickStatus,
+    changeCourtStatus
 };
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerDiv)

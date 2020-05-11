@@ -6,6 +6,29 @@
     border: 2px #b74d82 solid;
     border-radius: 10px;
 }
+.modal-wrapper.court{
+    position: fixed;
+    width: 60%;
+    left: 17%;
+    top:100px;
+    z-index: 1;
+}
+.modal-wrapper.court h2{
+    text-align: center;
+}
+.modal-wrapper.court input{
+    margin: 0 15px;
+}
+.modal-wrapper.court .errorMessage{
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+.modal-wrapper.court .resultMessage{
+    color: green;
+    font-weight: bold;
+    text-align: center;
+}
 
 .back-drop {
     background-color: rgba(48, 49, 48, 0.09);
