@@ -10,6 +10,7 @@ import {
     endGame, setBestMove, setResultGame
 } from "../../../store/actions";
 import {API} from "../../../servise/apiServise";
+import Court from "./court";
 
 
 interface Props {
@@ -27,7 +28,8 @@ interface Props {
     gameIsStarted: any
     bestMove: any,
     setBestMove: any,
-    setResultGame: any
+    setResultGame: any,
+    courtStatus: any
 }
 
 interface State {
@@ -69,17 +71,21 @@ class InGame extends Component<Props, State> {
 
     endCircle = () => {
         if (!this.state.isShowingBestMoveButton) {
-            this.props.changeVoting([]);
-            this.props.changeCircle(this.props.circle + 1);
-            let _tmp = this.props.checks;
-            _tmp[this.props.circle] = {
-                sheriffCheck: null,
-                donCheck: null,
-                numberOfTheCircle: this.props.circle + 1
-            };
-            this.props.addCheck(_tmp);
-            this.props.changeKickStatus(false);
-            this.props.changeKillStatus({status: false, arr: this.props.kills});
+            if (!this.props.courtStatus) {
+                this.props.changeVoting([]);
+                this.props.changeCircle(this.props.circle + 1);
+                let _tmp = this.props.checks;
+                _tmp[this.props.circle] = {
+                    sheriffCheck: null,
+                    donCheck: null,
+                    numberOfTheCircle: this.props.circle + 1
+                };
+                this.props.addCheck(_tmp);
+                this.props.changeKickStatus(false);
+                this.props.changeKillStatus({status: false, arr: this.props.kills});
+            } else {
+                alert("Проведіть суд");
+            }
         } else {
             alert("Введіть кращий хід");
         }
@@ -144,21 +150,26 @@ class InGame extends Component<Props, State> {
         let date: any = new Date(), roles;
         date = [date.getFullYear(), date.getMonth() + 1, date.getDate()];
         if (!this.state.gameIsEnd) {
-            API.getAllRoles().then(responce => {
-                roles = responce;
-            })
-            let players: any = [], sheriffIsKilled = false, typeWin = 'mafia is Dead',
+            API.getAllRoles().then(response => {
+                roles = response;
+            });
+            let players: any = [], sheriffIsKilled = false, typeWin = 'mafia is Dead', firstKill;
+
+            if (this.props.kills.length > 0) {
                 firstKill = this.props.kills[0].playerNumber;
+                if (this.props.player['player' + firstKill].role === 'sheriff')
+                    sheriffIsKilled = true;
+            }
+
             if (winner === 'mafia')
                 typeWin = countPlayers.black + '#' + countPlayers.black;
-            if (this.props.player['player' + firstKill].role === 'sheriff')
-                sheriffIsKilled = true;
+
 
             for (let i = 1; i <= 10; i++) {
                 let player = this.props.player['player' + i], _tmp_info;
                 _tmp_info = {
                     foulsQuantity: player.fouls,
-                    firstKillSheriff: false,
+                    // firstKillSheriff: false,
                     killed: !player.active,
                     roleInGame: player.role,
                     name: player.name,
@@ -168,9 +179,10 @@ class InGame extends Component<Props, State> {
                     if (sheriffIsKilled) {
                         _tmp_info.firstKillSheriff = true;
                     }
-                if (this.props.kills[0].playerNumber === player.number) {
-                    _tmp_info.goldenMove = this.props.bestMove;
-                }
+                if (this.props.kills.length > 0)
+                    if (this.props.kills[0].playerNumber === player.number)
+                        _tmp_info.goldenMove = this.props.bestMove;
+
                 // switch (_tmp_info.roleInGame) {
                 //     case "civil":
                 //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
@@ -341,6 +353,7 @@ class InGame extends Component<Props, State> {
                     </div>
                     <div className="btns-End">
                         <button onClick={this.endCircle} className="green">Закінчити круг</button>
+                        <Court/>
                         <div>
                             {this.state.isShowingBestMoveModal ?
                                 <div onClick={this.closeModal} className="back-drop"/> : null}
@@ -393,7 +406,8 @@ const mapStateToProps = function (state) {
         circle: state.currentCircle,
         isKilled: state.isKilled,
         kills: state.kills,
-        bestMove: state.bestMove
+        bestMove: state.bestMove,
+        courtStatus: state.courtStatus
     }
 };
 

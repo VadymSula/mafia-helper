@@ -3,10 +3,10 @@
     background: white;
     border: 1px solid #d0cccc;
     box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
-    left: 17%;
     color: black;
     transition: all .8s;
     width: 60%;
+    left: 17%;
     top:200px;
     cursor: auto;
 }
