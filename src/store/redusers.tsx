@@ -12,80 +12,75 @@ const defaultState = {
     currentCircle: 0,
     kills: [],
     voting: [],
-    // activeRole: 'civil',
-    // mafiaLeft: 2,
-    // donLeft: 1,
-    // sheriffLeft: 1,
-    // civilLeft: 6,
     isKilled: true,
     isKicked: false,
     gameIsEnd: false,
     checks: [],
     showInfo:false,
     courtStatus: false,
-    // player1: {
-    //     ready: false,
-    //     role: '',
-    //     fouls: 0
-    // },
-    // player2: {
-    //     ready: false,
-    //     role: '',
-    //     fouls: 0
-    // },
-    // player3: {
-    //     ready: false,
-    //     role: '',
-    //     fouls: 0
-    // },
-    // player4: {
-    //     ready: false,
-    //     role: '',
-    //     fouls: 0
-    // },
-    // player5: {
-    //     ready: false,
-    //     role: '',
-    //     fouls: 0
-    // },
-    // player6: {
-    //     ready: false,
-    //     role: '',
-    //     fouls: 0
-    // },
-    // player7: {
-    //     ready: false,
-    //     role: '',
-    //     fouls: 0
-    // },
-    // player8: {
-    //     ready: false,
-    //     role: '',
-    //     fouls: 0
-    // },
-    // player9: {
-    //     ready: false,
-    //     role: '',
-    //     fouls: 0
-    // },
-    // player10: {
-    //     ready: false,
-    //     role: '',
-    //     fouls: 0
-    // },
+    player1: {
+        ready: false,
+        role: '',
+        fouls: 0
+    },
+    player2: {
+        ready: false,
+        role: '',
+        fouls: 0
+    },
+    player3: {
+        ready: false,
+        role: '',
+        fouls: 0
+    },
+    player4: {
+        ready: false,
+        role: '',
+        fouls: 0
+    },
+    player5: {
+        ready: false,
+        role: '',
+        fouls: 0
+    },
+    player6: {
+        ready: false,
+        role: '',
+        fouls: 0
+    },
+    player7: {
+        ready: false,
+        role: '',
+        fouls: 0
+    },
+    player8: {
+        ready: false,
+        role: '',
+        fouls: 0
+    },
+    player9: {
+        ready: false,
+        role: '',
+        fouls: 0
+    },
+    player10: {
+        ready: false,
+        role: '',
+        fouls: 0
+    },
     /*             TEST PLAYERS              */
-    player1: {name: "Zalypelnik", role: "civil", ready: true, number: 1, fouls: 0, active: true},
-    player2: {name: "Mr.Od1n", role: "civil", ready: true, number: 2, fouls: 0, active: true},
-    player3: {name: "WhoAmI", role: "civil", ready: true, number: 3, fouls: 0, active: true},
-    player4: {name: "SUBARIST", role: "civil", ready: true, number: 4, fouls: 0, active: true},
-    player5: {name: "Drews", role: "civil", ready: true, number: 5, fouls: 0, active: true},
-    player6: {name: "Vitalik", role: "civil", ready: true, number: 6, fouls: 0, active: true},
-    player7: {name: "Bananator", role: "sheriff", ready: true, number: 7, fouls: 0, active: true},
-    player8: {name: "Микола", role: "don", ready: true, number: 8, fouls: 0, active: true},
-    player9: {name: "Михайло", role: "mafia", ready: true, number: 9, fouls: 0, active: true},
-    player10: {name: "Дьома", role: "mafia", ready: true, number: 10, fouls: 0, active: true},
-    // gameIsEnd: true,
-    gameIsStarted: true,
+    // player1: {name: "Zalypelnik", role: "civil", ready: true, number: 1, fouls: 0, active: true},
+    // player2: {name: "Mr.Od1n", role: "civil", ready: true, number: 2, fouls: 0, active: true},
+    // player3: {name: "WhoAmI", role: "civil", ready: true, number: 3, fouls: 0, active: true},
+    // player4: {name: "SUBARIST", role: "civil", ready: true, number: 4, fouls: 0, active: true},
+    // player5: {name: "Drews", role: "civil", ready: true, number: 5, fouls: 0, active: true},
+    // player6: {name: "Vitalik", role: "civil", ready: true, number: 6, fouls: 0, active: true},
+    // player7: {name: "Bananator", role: "sheriff", ready: true, number: 7, fouls: 0, active: true},
+    // player8: {name: "Микола", role: "don", ready: true, number: 8, fouls: 0, active: true},
+    // player9: {name: "Михайло", role: "mafia", ready: true, number: 9, fouls: 0, active: true},
+    // player10: {name: "Дьома", role: "mafia", ready: true, number: 10, fouls: 0, active: true},
+    // // gameIsEnd: true,
+    // gameIsStarted: true,
     // resultGame: {
     //     "checksResult": [{"sheriffCheck": 1, "donCheck": 2, "numberOfTheCircle": 1}, {
     //         "sheriffCheck": 3,
