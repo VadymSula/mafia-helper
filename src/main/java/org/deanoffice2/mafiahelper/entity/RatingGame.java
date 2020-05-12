@@ -2,17 +2,17 @@ package org.deanoffice2.mafiahelper.entity;
 
 public class RatingGame {
     private Integer idRating;
-    private Integer idClub;
-    private Integer idPlayer;
+    private Club club;
+    private Player player;
     private Float ratingValue;
 
     public RatingGame() {
     }
 
-    public RatingGame(Integer idRating, Integer idClub, Integer idPlayer, Float ratingValue) {
+    public RatingGame(Integer idRating, Club club, Player player, Float ratingValue) {
         this.idRating = idRating;
-        this.idClub = idClub;
-        this.idPlayer = idPlayer;
+        this.club = club;
+        this.player = player;
         this.ratingValue = ratingValue;
     }
 
@@ -24,20 +24,20 @@ public class RatingGame {
         this.idRating = idRating;
     }
 
-    public Integer getIdClub() {
-        return idClub;
+    public Club getClub() {
+        return club;
     }
 
-    public void setIdClub(Integer idClub) {
-        this.idClub = idClub;
+    public void setClub(Club club) {
+        this.club = club;
     }
 
-    public Integer getIdPlayer() {
-        return idPlayer;
+    public Player getPlayer() {
+        return player;
     }
 
-    public void setIdPlayer(Integer idPlayer) {
-        this.idPlayer = idPlayer;
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     public Float getRatingValue() {

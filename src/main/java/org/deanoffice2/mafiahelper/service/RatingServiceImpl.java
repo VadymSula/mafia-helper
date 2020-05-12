@@ -2,6 +2,7 @@ package org.deanoffice2.mafiahelper.service;
 
 import org.deanoffice2.mafiahelper.entity.GameResult;
 import org.deanoffice2.mafiahelper.entity.PlayerResult;
+import org.deanoffice2.mafiahelper.entity.RatingGame;
 import org.deanoffice2.mafiahelper.entity.RoleGame;
 import org.deanoffice2.mafiahelper.repository.RatingRepository;
 import org.deanoffice2.mafiahelper.repository.StaticDataRepository;
@@ -30,6 +31,11 @@ public class RatingServiceImpl implements RatingService {
     public void updateRatingForMajorPoints(GameResult gameResult) {
         updateRatingForWin(gameResult);
         updateRatingForBestMove(gameResult);
+    }
+
+    @Override
+    public void updateRatingForExtraPoints(List<RatingGame> ratingList) {
+        ratingList.forEach(this::updatePlayerRating);
     }
 
     private void updateRatingForWin(GameResult gameResult) {
@@ -66,6 +72,17 @@ public class RatingServiceImpl implements RatingService {
                 });
     }
 
+    private void updatePlayerRating(RatingGame ratingGame) {
+        ratingRepository.updateRatingPlayer(
+                ratingGame.getClub().getIdClub(),
+                ratingGame.getPlayer().getIdPlayer(),
+                addExtraPointsToRating(
+                        ratingGame.getClub().getIdClub(),
+                        ratingGame.getPlayer().getIdPlayer(),
+                        ratingGame.getRatingValue()
+                )
+        );
+    }
 //    private void updateRatingOnBestMoveForSheriff(GameResult gameResult) {
 //        gameResult.getPlayersResult()
 //                .stream()
@@ -94,8 +111,16 @@ public class RatingServiceImpl implements RatingService {
                 );
     }
 
-    public Float addPointsToRatingForWin(GameResult gameResult, PlayerResult playerResult, Float ratingValue) {
+    private Float getRatingValue(Integer idClub, Integer idPlayer) {
+        return ratingRepository.getPlayerRatingValue(idClub, idPlayer);
+    }
+
+    private Float addPointsToRatingForWin(GameResult gameResult, PlayerResult playerResult, Float ratingValue) {
         return ratingValue + calculateMajorPointsForWin(gameResult, playerResult);
+    }
+
+    private Float addExtraPointsToRating(Integer idClub, Integer idPlayer, Float ratingValue) {
+        return ratingValue + getRatingValue(idClub, idPlayer);
     }
 
     private Float calculateMajorPointsForWin(GameResult gameResult, PlayerResult playerResult) {
