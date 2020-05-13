@@ -28,7 +28,7 @@ class RenderPlayer extends Component<Props, State> {
         pl.role = value;
         this.props.changePlayerInfo(pl);
         this.setState({role: value})
-    }
+    };
 
     componentDidUpdate() {
         if (this.state.role !== this.props.player.role)

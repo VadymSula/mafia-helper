@@ -2,11 +2,12 @@ import React, {Component} from 'react';
 import Modal from "../../models/modal";
 import {connect} from "react-redux";
 import {playersIsReady, setArrayPlayers} from "../../store/actions";
+import playerDiv from "../game/inGame/playerDiv";
 
 interface State {
     isShowing: boolean,
     player?: any,
-    arrayPlayers:any,
+    arrayPlayers: any,
     search?: string,
     searchResult?: any
 }
@@ -14,7 +15,7 @@ interface State {
 interface Props {
     playersIsReady: any,
     number: number,
-    arrayPlayers:any,
+    arrayPlayers: any,
     setArrayPlayers: any
 }
 
@@ -25,12 +26,14 @@ class AddPlayerModal extends Component<Props, State> {
         this.state = {
             isShowing: false,
             arrayPlayers: [],
-            search: ""
+            search: "",
+            player: 0
         }
     }
+
     changeSearch = (event) => {
         this.setState({
-            search: event.target.value
+            search: event.target.value.toUpperCase()
         });
     };
 
@@ -41,7 +44,7 @@ class AddPlayerModal extends Component<Props, State> {
     };
 
     sendPlayer = () => {
-        let idPlayer:any;
+        let idPlayer: any;
         if (!this.state.player)
             idPlayer = parseInt(this.state.arrayPlayers[0].id);
         else
@@ -60,12 +63,12 @@ class AddPlayerModal extends Component<Props, State> {
     };
 
     componentDidMount() {
-        this.setState({arrayPlayers:this.props.arrayPlayers});
+        this.setState({arrayPlayers: this.props.arrayPlayers});
     }
 
     componentDidUpdate() {
-        if (!this.state.arrayPlayers || this.state.arrayPlayers.length !== this.props.arrayPlayers.length){
-            this.setState({arrayPlayers:this.props.arrayPlayers});
+        if (!this.state.arrayPlayers || this.state.arrayPlayers.length !== this.props.arrayPlayers.length) {
+            this.setState({arrayPlayers: this.props.arrayPlayers});
         }
     }
 
@@ -82,35 +85,53 @@ class AddPlayerModal extends Component<Props, State> {
     };
 
     render() {
-        let arr:any = [];
-        if (this.state.arrayPlayers !== undefined){
-            for (let i = 0; i<this.state.arrayPlayers.length;i++){
-                if (this.state.search === "" || this.state.arrayPlayers[i].name.indexOf(this.state.search) !== -1)
-                arr.push(this.state.arrayPlayers[i])
+        let arr: any = [];
+        if (this.state.arrayPlayers !== undefined) {
+            for (let i = 0; i < this.state.arrayPlayers.length; i++) {
+                let searchInput = this.state.search,
+                    name =  this.state.arrayPlayers[i].name.toUpperCase();
+                if (this.state.search === "" || name.indexOf(searchInput as string) !== -1)
+                    arr.push(this.state.arrayPlayers[i])
             }
         }
         return (
             this.props.arrayPlayers ?
-            <div>
-                {this.state.isShowing ? <div onClick={this.closeModal} className="back-drop"/> : null}
-                {this.props.number + ') '}
-                <button onClick={this.openModal} className="players__add-player">+</button>
-                <Modal
-                    header="Add Player"
-                    className="modal"
-                    show={this.state.isShowing}
-                    close={this.closeModal}>
-                    <input type="text" onChange={this.changeSearch}/>
-                    <select required name="name" onChange={this.changePlayer}>
-                        {arr.map(function (player) {
+                <div>
+                    {this.state.isShowing ? <div onClick={this.closeModal} className="back-drop"/> : null}
+                    {this.props.number + ') '}
+                    <button onClick={this.openModal} className="players__add-player">+</button>
+                    <Modal
+                        header="Add Player"
+                        className="modal"
+                        show={this.state.isShowing}
+                        close={this.closeModal}>
+                        <input type="text" onChange={this.changeSearch} placeholder="Введіть для пошуку"/>
+                        <div className="radio_buttons">
+                            {arr.map((player) => {
                                 return (
-                                    <option key={player.id} value={player.id}>{player.name}</option>
+                                    <div key={player.id}>
+                                        <label>
+                                            <input onChange={this.changePlayer} name='player'
+                                                   type="radio"
+                                                   value={player.id}/>
+                                            {player.name}
+                                        </label>
+                                    </div>
                                 )
-                        })}
-                    </select>
-                    <button onClick={this.sendPlayer}>Add</button>
-                </Modal>
-            </div>
+                            })}
+                        </div>
+
+                        {/*<select required name="name" onChange={this.changePlayer}>*/}
+                        {/*    <option value="default">--Оберіть гравця--</option>*/}
+                        {/*    {arr.map(function (player) {*/}
+                        {/*            return (*/}
+                        {/*                <option key={player.id} value={player.id}>{player.name}</option>*/}
+                        {/*            )*/}
+                        {/*    })}*/}
+                        {/*</select>*/}
+                        {this.state.player !== 0 ? <button onClick={this.sendPlayer}>Add</button> : null}
+                    </Modal>
+                </div>
                 : "Немає гравців в базі данних"
         );
     }

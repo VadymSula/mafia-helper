@@ -7,7 +7,7 @@
     transition: all .8s;
     width: 60%;
     left: 17%;
-    top:200px;
+    top:100px;
     cursor: auto;
 }
 
@@ -114,4 +114,24 @@
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
+}
+
+.radio_buttons{
+    max-height: 400px;
+    overflow: auto;
+}
+.radio_buttons div{
+    min-width: 250px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.radio_buttons input{
+    width: 13px;
+}
+.radio_buttons input:checked + label{
+    color: #b71c1c;
+}
+.radio_buttons input[type="radio"]:checked ~ * {
+    background:pink !important;
 }
