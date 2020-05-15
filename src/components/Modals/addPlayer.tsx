@@ -105,27 +105,31 @@ class AddPlayerModal extends Component<Props, State> {
             arr.length ?
                 <div>
                     {this.state.isShowing ? <div onClick={this.closeModal} className="back-drop"/> : null}
-                    <button onClick={this.openModal} className={this.props.number === 0 ? "players__add-player orange" : "players__add-player"}>+</button>
+                    <button onClick={this.openModal}
+                            className={this.props.number === 0 ? "players__add-player orange" : "players__add-player"}>+
+                    </button>
                     <Modal
                         header={this.props.number === 0 ? "Ведучий" : "Додати гравця"}
                         className="modal"
                         show={this.state.isShowing}
                         close={this.closeModal}>
-                        <input type="text" onChange={this.changeSearch} placeholder="Введіть для пошуку"/>
-                        <div className="radio_buttons">
+                        <div>
+                            <input type="text" onChange={this.changeSearch} placeholder="Введіть для пошуку"/>
+                            <div className="radio_buttons">
 
-                            {arr.map((player) => {
-                                return (
-                                    <div key={player.id}>
-                                        <label>
-                                            <input onChange={this.changePlayer} name='player'
-                                                   type="radio"
-                                                   value={player.id}/>
-                                            {player.name}
-                                        </label>
-                                    </div>
-                                )
-                            })}
+                                {arr.map((player) => {
+                                    return (
+                                        <div key={player.id}>
+                                            <label>
+                                                <input onChange={this.changePlayer} name='player'
+                                                       type="radio"
+                                                       value={player.id}/>
+                                                {player.name}
+                                            </label>
+                                        </div>
+                                    )
+                                })}
+                            </div>
                         </div>
                         {this.state.player !== 0 ? <button onClick={this.sendPlayer}>Add</button> :
                             <button className='disab'>Add</button>}

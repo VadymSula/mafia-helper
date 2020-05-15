@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import "./guidesPage.css";
-import Post from "../ResultGame/post";
+import Post from "./post";
 
 class GuidesPage extends Component {
 
