@@ -15,7 +15,7 @@ li.disabledPlayer{
 .ResultGame p,
 .ResultGame time,
 .ResultGame li {
-    font-family: 'Montserrat';
+    font-family: 'Montserrat', sans-serif;
     margin: 0;
 }
 
@@ -24,7 +24,6 @@ li.disabledPlayer{
     flex-direction: row;
     justify-content: space-around;
     border-bottom: 4px gray solid;
-    padding-bottom: 5px;
 }
 
 .ResultGame .result-name {
@@ -46,7 +45,6 @@ li.disabledPlayer{
 .ResultGame .column_one {
     display: flex;
     font-size: 50px;
-    margin-top: 15px;
 }
 
 .ResultGame ol {

@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import PlayerDiv from "./playerDiv";
 import {
     addCheck,
-    changeCircle,
+    changeCircle, changeCountActivePLayers,
     changeKickStatus,
     changeKillStatus,
     changeVoting,
@@ -29,7 +29,9 @@ interface Props {
     bestMove: any,
     setBestMove: any,
     setResultGame: any,
-    courtStatus: any
+    courtStatus: any,
+    changeCountActivePLayers: any,
+    countActivePlayers: number
 }
 
 interface State {
@@ -44,7 +46,8 @@ interface State {
     isShowingBestMoveModal: boolean,
     isShowingBestMoveButton: boolean,
     messageErrorBestMove?: string,
-    bestMoveIsOk?: boolean
+    bestMoveIsOk?: boolean,
+    countToDraw: number
 }
 
 class InGame extends Component<Props, State> {
@@ -62,6 +65,7 @@ class InGame extends Component<Props, State> {
             gameIsEnd: false,
             isShowingBestMoveModal: false,
             isShowingBestMoveButton: false,
+            countToDraw: 0
         }
     }
 
@@ -69,9 +73,30 @@ class InGame extends Component<Props, State> {
         this.props.changeKillStatus({status: true, arr: this.props.kills})
     };
 
+    howMuchActivePlayers = () => {
+        let count = 0;
+        for (let i = 1; i <= 10; i++)
+            if (this.props.player['player' + i].active)
+                count++;
+        return count;
+    };
+
     endCircle = () => {
         if (!this.state.isShowingBestMoveButton) {
             if (!this.props.courtStatus) {
+                console.log(this.state.countToDraw)
+                if (this.state.countToDraw + 1 === 4) {
+                    this.endGame('draw', this.howMuchColorPlayers())
+                } else {
+                    if (this.props.countActivePlayers === this.howMuchActivePlayers())
+                        this.setState({countToDraw: this.state.countToDraw + 1});
+                    else {
+                        this.props.changeCountActivePLayers(this.howMuchActivePlayers());
+                        this.setState({countToDraw: 0})
+                    }
+                }
+
+
                 this.props.changeVoting([]);
                 this.props.changeCircle(this.props.circle + 1);
                 let _tmp = this.props.checks;
@@ -154,7 +179,7 @@ class InGame extends Component<Props, State> {
             // API.getAllRoles().then(response => {
             //     roles = response;
             // });
-            let players: any = [], sheriffIsKilled = false, typeWin = 'mafia is Dead', firstKill;
+            let players: any = [], sheriffIsKilled = false, typeWin, firstKill;
 
             if (this.props.kills.length > 0) {
                 firstKill = this.props.kills[0].playerNumber;
@@ -162,53 +187,61 @@ class InGame extends Component<Props, State> {
                     sheriffIsKilled = true;
             }
 
-            if (winner === 'mafia')
-                typeWin = countPlayers.black + '#' + countPlayers.black;
-
-
-            for (let i = 0; i <= 10; i++) {
-                let player = this.props.player['player' + i], _tmp_info;
-                if (i === 0)
-                    _tmp_info = {
-                        foulsQuantity: null,
-                        killed: false,
-                        roleInGame: player.role,
-                        name: player.name,
-                        number: player.number
-                    };
-                else
-                    _tmp_info = {
-                        foulsQuantity: player.fouls,
-                        // firstKillSheriff: false,
-                        killed: !player.active,
-                        roleInGame: player.role,
-                        name: player.name,
-                        number: player.number
-                    };
-                if (player.role === 'mafia' || player.role === 'don')
-                    if (sheriffIsKilled) {
-                        _tmp_info.firstKillSheriff = true;
-                    }
-                if (this.props.kills.length > 0)
-                    if (this.props.kills[0].playerNumber === player.number)
-                        _tmp_info.goldenMove = this.props.bestMove;
-
-                // switch (_tmp_info.roleInGame) {
-                //     case "civil":
-                //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
-                //         break;
-                //     case "mafia":
-                //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
-                //         break;
-                //     case "don":
-                //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
-                //         break;
-                //     case "sheriff":
-                //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
-                //         break;
-                // }
-                players.push(_tmp_info);
+            switch (winner) {
+                case "mafia":
+                    typeWin = countPlayers.black + '#' + countPlayers.black;
+                    break;
+                case "city":
+                    typeWin = 'мафія вигнана з міста';
+                    break;
+                case 'draw':
+                    typeWin = 'в місті наступила нічия';
+                    break;
             }
+
+                for (let i = 0; i <= 10; i++) {
+                    let player = this.props.player['player' + i], _tmp_info;
+                    if (i === 0)
+                        _tmp_info = {
+                            foulsQuantity: null,
+                            killed: false,
+                            roleInGame: player.role,
+                            name: player.name,
+                            number: player.number
+                        };
+                    else
+                        _tmp_info = {
+                            foulsQuantity: player.fouls,
+                            // firstKillSheriff: false,
+                            killed: !player.active,
+                            roleInGame: player.role,
+                            name: player.name,
+                            number: player.number
+                        };
+                    if (player.role === 'mafia' || player.role === 'don')
+                        if (sheriffIsKilled) {
+                            _tmp_info.firstKillSheriff = true;
+                        }
+                    if (this.props.kills.length > 0)
+                        if (this.props.kills[0].playerNumber === player.number)
+                            _tmp_info.goldenMove = this.props.bestMove;
+
+                    // switch (_tmp_info.roleInGame) {
+                    //     case "civil":
+                    //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
+                    //         break;
+                    //     case "mafia":
+                    //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
+                    //         break;
+                    //     case "don":
+                    //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
+                    //         break;
+                    //     case "sheriff":
+                    //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
+                    //         break;
+                    // }
+                    players.push(_tmp_info);
+                }
             this.endTimerDurationGame();
             this.setState({gameIsEnd: true});
             this.props.endGame(true);
@@ -233,19 +266,25 @@ class InGame extends Component<Props, State> {
         this.startTimerDurationGame();
     }
 
+    howMuchColorPlayers = () => {
+        let countPlayers = {
+            red: 0,
+            black: 0
+        };
+        for (let i = 1; i <= 10; i++) {
+            if (this.props.player['player' + i].active === true)
+                if (this.props.player['player' + i].role === 'civil' || this.props.player['player' + i].role === 'sheriff')
+                    countPlayers.red++;
+                else
+                    countPlayers.black++;
+        }
+        return countPlayers;
+    };
+
     componentDidUpdate() {
         if (!this.state.gameIsEnd) {
-            let countPlayers = {
-                red: 0,
-                black: 0
-            };
-            for (let i = 1; i <= 10; i++) {
-                if (this.props.player['player' + i].active === true)
-                    if (this.props.player['player' + i].role === 'civil' || this.props.player['player' + i].role === 'sheriff')
-                        countPlayers.red++;
-                    else
-                        countPlayers.black++;
-            }
+            let countPlayers = this.howMuchColorPlayers();
+
             if (countPlayers.red === countPlayers.black) {
                 this.endGame('mafia', countPlayers);
             } else if (countPlayers.black === 0) {
@@ -296,7 +335,7 @@ class InGame extends Component<Props, State> {
         return (
             <section>
                 <h1>{this.state.timeOutDurGame}</h1>
-                <h2>Ведучий: {this.props.player.lead.name}</h2>
+                <h2>Ведучий: {this.props.player.player0.name}</h2>
                 <div className="players game">
                     <div className="first_col col">
                         <PlayerDiv player={this.props.player.player5}/>
@@ -403,7 +442,7 @@ const mapStateToProps = function (state) {
         gameIsStarted: state.startGame,
         checks: state.checks,
         player: {
-            lead: state.player0,
+            player0: state.player0,
             player1: state.player1,
             player2: state.player2,
             player3: state.player3,
@@ -419,7 +458,8 @@ const mapStateToProps = function (state) {
         isKilled: state.isKilled,
         kills: state.kills,
         bestMove: state.bestMove,
-        courtStatus: state.courtStatus
+        courtStatus: state.courtStatus,
+        countActivePlayers: state.countActivePlayers
     }
 };
 
@@ -431,7 +471,8 @@ const mapDispatchToProps = {
     changeKillStatus,
     endGame,
     setBestMove,
-    setResultGame
+    setResultGame,
+    changeCountActivePLayers
 };
 export default connect(mapStateToProps, mapDispatchToProps)(InGame)
 
