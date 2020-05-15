@@ -165,16 +165,25 @@ class InGame extends Component<Props, State> {
                 typeWin = countPlayers.black + '#' + countPlayers.black;
 
 
-            for (let i = 1; i <= 10; i++) {
+            for (let i = 0; i <= 10; i++) {
                 let player = this.props.player['player' + i], _tmp_info;
-                _tmp_info = {
-                    foulsQuantity: player.fouls,
-                    // firstKillSheriff: false,
-                    killed: !player.active,
-                    roleInGame: player.role,
-                    name: player.name,
-                    number: player.number
-                };
+                if (i === 0)
+                    _tmp_info = {
+                        foulsQuantity: null,
+                        killed: false,
+                        roleInGame: player.role,
+                        name: player.name,
+                        number: player.number
+                    };
+                else
+                    _tmp_info = {
+                        foulsQuantity: player.fouls,
+                        // firstKillSheriff: false,
+                        killed: !player.active,
+                        roleInGame: player.role,
+                        name: player.name,
+                        number: player.number
+                    };
                 if (player.role === 'mafia' || player.role === 'don')
                     if (sheriffIsKilled) {
                         _tmp_info.firstKillSheriff = true;
@@ -286,6 +295,7 @@ class InGame extends Component<Props, State> {
         return (
             <section>
                 <h1>{this.state.timeOutDurGame}</h1>
+                <h2>Ведучий: {this.props.player.lead.name}</h2>
                 <div className="players game">
                     <div className="first_col col">
                         <PlayerDiv player={this.props.player.player5}/>
@@ -392,6 +402,7 @@ const mapStateToProps = function (state) {
         gameIsStarted: state.startGame,
         checks: state.checks,
         player: {
+            lead: state.player0,
             player1: state.player1,
             player2: state.player2,
             player3: state.player3,

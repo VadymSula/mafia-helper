@@ -109,6 +109,10 @@
 .modal-wrapper__setPlayers button{
     background-color: #207868;
 }
+.modal-wrapper__setPlayers button.disab{
+    cursor: default;
+    background-color: #9c9e9d;
+}
 .modal-wrapper__setPlayers form .btns{
     width: 100%;
     display: flex;

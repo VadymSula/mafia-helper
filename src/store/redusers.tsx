@@ -18,56 +18,17 @@ const defaultState = {
     checks: [],
     showInfo:false,
     courtStatus: false,
-    player1: {
-        ready: false,
-        role: '',
-        fouls: 0
-    },
-    player2: {
-        ready: false,
-        role: '',
-        fouls: 0
-    },
-    player3: {
-        ready: false,
-        role: '',
-        fouls: 0
-    },
-    player4: {
-        ready: false,
-        role: '',
-        fouls: 0
-    },
-    player5: {
-        ready: false,
-        role: '',
-        fouls: 0
-    },
-    player6: {
-        ready: false,
-        role: '',
-        fouls: 0
-    },
-    player7: {
-        ready: false,
-        role: '',
-        fouls: 0
-    },
-    player8: {
-        ready: false,
-        role: '',
-        fouls: 0
-    },
-    player9: {
-        ready: false,
-        role: '',
-        fouls: 0
-    },
-    player10: {
-        ready: false,
-        role: '',
-        fouls: 0
-    },
+    player0: {},
+    player1: {},
+    player2: {},
+    player3: {},
+    player4: {},
+    player5: {},
+    player6: {},
+    player7: {},
+    player8: {},
+    player9: {},
+    player10: {},
     /*             TEST PLAYERS              */
     // player1: {name: "Zalypelnik", role: "civil", ready: true, number: 1, fouls: 0, active: true},
     // player2: {name: "Mr.Od1n", role: "civil", ready: true, number: 2, fouls: 0, active: true},
