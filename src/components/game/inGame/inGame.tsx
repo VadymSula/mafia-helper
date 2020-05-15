@@ -147,12 +147,13 @@ class InGame extends Component<Props, State> {
     };
 
     endGame = (winner: string, countPlayers: any) => {
-        let date: any = new Date(), roles;
+        let date: any = new Date();
+        // let roles;
         date = [date.getFullYear(), date.getMonth() + 1, date.getDate()];
         if (!this.state.gameIsEnd) {
-            API.getAllRoles().then(response => {
-                roles = response;
-            });
+            // API.getAllRoles().then(response => {
+            //     roles = response;
+            // });
             let players: any = [], sheriffIsKilled = false, typeWin = 'mafia is Dead', firstKill;
 
             if (this.props.kills.length > 0) {
