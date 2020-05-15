@@ -90,6 +90,9 @@ class ResultGame extends Component<Props> {
                         </ol>
                     </div>
                     <div className="column_second">
+                        <div className='lead'>
+                            <h3>Ведучий: {game.playersResult[0].name}</h3>
+                        </div>
                         <div className="timer">
                             <h3>
                                 <span>Тривалість гри:</span>

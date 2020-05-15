@@ -80,9 +80,11 @@ class SetPlayers extends Component<Props, State> {
                 civil: 0,
                 mafia: 0,
                 don: 0,
-                sheriff: 0
+                sheriff: 0,
+                lead: 0
             },
             players = [
+                this.props.player.player0,
                 this.props.player.player1,
                 this.props.player.player2,
                 this.props.player.player3,
@@ -101,17 +103,13 @@ class SetPlayers extends Component<Props, State> {
                 countRoles[player.role]++
             return null
         });
-        if (countRoles.civil === 6 && countRoles.mafia === 2 && countRoles.sheriff === 1 && countRoles.don === 1)
-            isGood = true;
-        else
-            isGood = false;
+        isGood = countRoles.civil === 6 && countRoles.mafia === 2 && countRoles.sheriff === 1 && countRoles.don === 1 && countRoles.lead === 1;
 
 
         if (this.state.isHidden && isGood)
             this.setState({isHidden: false});
         else if (!this.state.isHidden && !isGood)
             this.setState({isHidden: true})
-
     }
 
     render() {
@@ -132,7 +130,7 @@ class SetPlayers extends Component<Props, State> {
                     <RenderPlayer player={this.props.player.player10} number={10}/>
                 </div>
                 {this.state.isHidden ?
-                    <h2 style={{color:"#a4a4a4", userSelect:"none"}}>Виставте правильно ролі</h2>
+                    <h2 style={{color:"#a4a4a4", userSelect:"none"}}>Не вистачає гравців чи неправильно виставлені ролі</h2>
                     :<button className="game__start" onClick={this.startGame}>Почати</button>
                 }
             </section>

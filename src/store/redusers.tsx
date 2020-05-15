@@ -1,6 +1,6 @@
 import {
     ADD_CHECK,
-    CHANGE_CIRCLE, CHANGE_COURT_STATUS,
+    CHANGE_CIRCLE, CHANGE_COUNT_ACTIVE_PLAYERS, CHANGE_COURT_STATUS,
     CHANGE_KICK_STATUS, CHANGE_KILL_STATUS,
     CHANGE_PLAYER_INFO, CHANGE_SHOW_INFO,
     CHANGE_VOTING, END_GAME,
@@ -18,6 +18,7 @@ const defaultState = {
     checks: [],
     showInfo:false,
     courtStatus: false,
+    countActivePlayers: 10,
     player0: {},
     player1: {},
     player2: {},
@@ -174,7 +175,11 @@ export const rootReducer = (state = defaultState, action) => {
                 ...state,
                 courtStatus: action.payload
             };
-
+        case CHANGE_COUNT_ACTIVE_PLAYERS:
+            return {
+                ...state,
+                countActivePlayers: action.payload
+            };
     }
     return state;
 };
