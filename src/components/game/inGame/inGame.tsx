@@ -84,7 +84,6 @@ class InGame extends Component<Props, State> {
     endCircle = () => {
         if (!this.state.isShowingBestMoveButton) {
             if (!this.props.courtStatus) {
-                console.log(this.state.countToDraw)
                 if (this.state.countToDraw + 1 === 4) {
                     this.endGame('draw', this.howMuchColorPlayers())
                 } else {

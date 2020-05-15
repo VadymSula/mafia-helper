@@ -73,6 +73,13 @@ li.disabledPlayer{
     padding-bottom: 5px;
     border-bottom: 1px solid gray;
 }
+.ResultGame .lead {
+    padding-bottom: 5px;
+    border-bottom: 1px solid gray;
+}
+.ResultGame .lead h3{
+   text-align: center;
+}
 .ResultGame .timer h3 {
      display: flex;
     flex-direction: row;

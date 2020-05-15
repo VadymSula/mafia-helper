@@ -110,8 +110,6 @@ class SetPlayers extends Component<Props, State> {
             this.setState({isHidden: false});
         else if (!this.state.isHidden && !isGood)
             this.setState({isHidden: true})
-
-        console.log(countRoles)
     }
 
     render() {
