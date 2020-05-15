@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Modal from "../../models/modal";
 import {connect} from "react-redux";
 import {playersIsReady, setArrayPlayers} from "../../store/actions";
-import playerDiv from "../game/inGame/playerDiv";
 
 interface State {
     isShowing: boolean,
@@ -50,14 +49,22 @@ class AddPlayerModal extends Component<Props, State> {
         else
             idPlayer = parseInt(this.state.player);
         let player = this.state.arrayPlayers.filter(player => player.id === idPlayer)[0];
-        this.props.playersIsReady({
-            name: player.name,
-            ready: true,
-            number: this.props.number,
-            fouls: 0,
-            active: true,
-            role: "civil"
-        });
+        if (this.props.number === 0)
+            this.props.playersIsReady({
+                name: player.name,
+                number: this.props.number,
+                role: "lead",
+                ready: true
+            });
+        else
+            this.props.playersIsReady({
+                name: player.name,
+                ready: true,
+                number: this.props.number,
+                fouls: 0,
+                active: true,
+                role: "civil"
+            });
         this.props.setArrayPlayers(this.state.arrayPlayers.filter(player => player.id !== idPlayer));
         this.closeModal();
     };
@@ -89,50 +96,46 @@ class AddPlayerModal extends Component<Props, State> {
         if (this.state.arrayPlayers !== undefined) {
             for (let i = 0; i < this.state.arrayPlayers.length; i++) {
                 let searchInput = this.state.search,
-                    name =  this.state.arrayPlayers[i].name.toUpperCase();
+                    name = this.state.arrayPlayers[i].name.toUpperCase();
                 if (this.state.search === "" || name.indexOf(searchInput as string) !== -1)
                     arr.push(this.state.arrayPlayers[i])
             }
         }
         return (
-            this.props.arrayPlayers ?
+            arr.length ?
                 <div>
                     {this.state.isShowing ? <div onClick={this.closeModal} className="back-drop"/> : null}
-                    {this.props.number + ') '}
-                    <button onClick={this.openModal} className="players__add-player">+</button>
+                    <button onClick={this.openModal}
+                            className={this.props.number === 0 ? "players__add-player orange" : "players__add-player"}>+
+                    </button>
                     <Modal
-                        header="Add Player"
+                        header={this.props.number === 0 ? "Ведучий" : "Додати гравця"}
                         className="modal"
                         show={this.state.isShowing}
                         close={this.closeModal}>
-                        <input type="text" onChange={this.changeSearch} placeholder="Введіть для пошуку"/>
-                        <div className="radio_buttons">
-                            {arr.map((player) => {
-                                return (
-                                    <div key={player.id}>
-                                        <label>
-                                            <input onChange={this.changePlayer} name='player'
-                                                   type="radio"
-                                                   value={player.id}/>
-                                            {player.name}
-                                        </label>
-                                    </div>
-                                )
-                            })}
-                        </div>
+                        <div>
+                            <input type="text" onChange={this.changeSearch} placeholder="Введіть для пошуку"/>
+                            <div className="radio_buttons">
 
-                        {/*<select required name="name" onChange={this.changePlayer}>*/}
-                        {/*    <option value="default">--Оберіть гравця--</option>*/}
-                        {/*    {arr.map(function (player) {*/}
-                        {/*            return (*/}
-                        {/*                <option key={player.id} value={player.id}>{player.name}</option>*/}
-                        {/*            )*/}
-                        {/*    })}*/}
-                        {/*</select>*/}
-                        {this.state.player !== 0 ? <button onClick={this.sendPlayer}>Add</button> : null}
+                                {arr.map((player) => {
+                                    return (
+                                        <div key={player.id}>
+                                            <label>
+                                                <input onChange={this.changePlayer} name='player'
+                                                       type="radio"
+                                                       value={player.id}/>
+                                                {player.name}
+                                            </label>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                        {this.state.player !== 0 ? <button onClick={this.sendPlayer}>Add</button> :
+                            <button className='disab'>Add</button>}
                     </Modal>
                 </div>
-                : "Немає гравців в базі данних"
+                : "Упс... В нас закінчились гравці"
         );
     }
 }

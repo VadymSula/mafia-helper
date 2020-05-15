@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import "./guidesPage.css";
-import  Author from "../../assets/images/icons_people.png";
-import Post from "../ResultGame/post";
+import Post from "./post";
 
 class GuidesPage extends Component {
 
@@ -17,7 +16,7 @@ class GuidesPage extends Component {
             "                            жест... ",
         nameAuthor: "Vlad Kyselov",
         time: "19:52 | 8.12.2019",
-    }]
+    }];
 
     render() {
         return (

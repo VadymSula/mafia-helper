@@ -214,6 +214,7 @@ class Court extends Component<Props, State> {
             case 'ban2': {
                 this.state.step.num.map(num => {
                     this.banPlayer(num);
+                    return 0;
                 });
                 this.endCourt();
                 break;
@@ -223,10 +224,12 @@ class Court extends Component<Props, State> {
                 this.state.voting.map(vot => {
                     if (vot.count > max)
                         max = vot.count;
+                    return 0;
                 });
                 this.state.voting.map(vot => {
                     if (vot.count === max)
-                        array.push(vot.number)
+                        array.push(vot.number);
+                    return 0;
                 });
                 this.setState({startArray: array});
                 this.setState({isCut: true});
@@ -259,6 +262,7 @@ class Court extends Component<Props, State> {
         let countVoting = 0;
         this.state.voting.map(vot => {
             countVoting += vot.count;
+            return 0;
         });
         if (this.state.sumVoting !== countVoting)
             this.setState({sumVoting: countVoting});

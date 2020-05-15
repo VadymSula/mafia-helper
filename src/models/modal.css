@@ -31,8 +31,9 @@
     text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    height: 90%;
 }
 
 .modal-wrapper__setPlayers .modal-footer {
@@ -109,6 +110,10 @@
 .modal-wrapper__setPlayers button{
     background-color: #207868;
 }
+.modal-wrapper__setPlayers button.disab{
+    cursor: default;
+    background-color: #9c9e9d;
+}
 .modal-wrapper__setPlayers form .btns{
     width: 100%;
     display: flex;
@@ -134,4 +139,14 @@
 }
 .radio_buttons input[type="radio"]:checked ~ * {
     background:pink !important;
+}
+
+@media screen and (max-width: 470px){
+    .modal-wrapper__setPlayers {
+        width: 100%;
+        left: 0;
+        top:0;
+        max-height: 100vh;
+        height: 100%;
+    }
 }

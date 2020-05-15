@@ -37,26 +37,38 @@ class RenderPlayer extends Component<Props, State> {
 
     render() {
         return (
-            <div className="players-item">
-                {this.props.player.number ?
-                    <p>
+            <fieldset className="players-item">
+                <legend>{this.props.number === 0 ? 'Ведучий' : this.props.number}</legend>
+                {this.props.number === 0 ?
+                    <div>
+                        {this.props.player.ready ?
+                            <p>
+                        <span>
+                            {this.props.player.name}
+                        </span>
+                            </p>
+                            :
+                            <AddPlayerModal number={this.props.number}/>}
+                    </div>
+                    : this.props.player.number ?
+                        <p>
                         <span>
                         {this.state.role === 'don' ? <i className="fas fa-user-secret"/> :
                             this.state.role === 'mafia' ? <i className="fas fa-crosshairs"/> :
                                 this.state.role === 'sheriff' ? <i className="fab fa-empire"/> : null}
-                            {this.props.number + ') ' + this.props.player.name}
+                            {this.props.player.name}
                         </span>
-                        <select className="ChangeRole" required onChange={this.changeRole} defaultValue="civil">
-                            <option value="civil">Мирний житель</option>
-                            <option value="mafia">Мафія</option>
-                            <option value="don">Дон</option>
-                            <option value="sheriff">Шериф</option>
-                        </select>
-                    </p>
-                    :
-                    <AddPlayerModal number={this.props.number}/>
+                            <select className="ChangeRole" required onChange={this.changeRole} defaultValue="civil">
+                                <option value="civil">Мирний житель</option>
+                                <option value="mafia">Мафія</option>
+                                <option value="don">Дон</option>
+                                <option value="sheriff">Шериф</option>
+                            </select>
+                        </p>
+                        :
+                        <AddPlayerModal number={this.props.number}/>
                 }
-            </div>
+            </fieldset>
         )
     }
 }
