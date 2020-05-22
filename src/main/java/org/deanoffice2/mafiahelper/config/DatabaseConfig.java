@@ -13,7 +13,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import javax.sql.DataSource;
 
 @Configuration
-@PropertySource("classpath:database.properties")
 public class DatabaseConfig {
 
     @Value("${spring.datasource.url}")
