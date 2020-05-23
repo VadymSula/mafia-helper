@@ -19,7 +19,7 @@
 .modal-wrapper.court input{
     margin: 0 15px;
 }
-.modal-wrapper.court .errorMessage{
+.modal-wrapper.court .errorMessage, .errorMessage{
     color: red;
     font-weight: bold;
     text-align: center;
