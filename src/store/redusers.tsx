@@ -14,11 +14,11 @@ const defaultState = {
     voting: [],
     isKilled: true,
     isKicked: false,
-    gameIsEnd: false,
     checks: [],
     showInfo:false,
     courtStatus: false,
     countActivePlayers: 10,
+    gameIsEnd: false,
     player0: {},
     player1: {},
     player2: {},
@@ -31,6 +31,7 @@ const defaultState = {
     player9: {},
     player10: {},
     /*             TEST PLAYERS              */
+    // player0: {name: "Zalypelnik", role: "lead", ready: true, number: 1, fouls: 0, active: true},
     // player1: {name: "Zalypelnik", role: "civil", ready: true, number: 1, fouls: 0, active: true},
     // player2: {name: "Mr.Od1n", role: "civil", ready: true, number: 2, fouls: 0, active: true},
     // player3: {name: "WhoAmI", role: "civil", ready: true, number: 3, fouls: 0, active: true},
@@ -41,7 +42,7 @@ const defaultState = {
     // player8: {name: "Микола", role: "don", ready: true, number: 8, fouls: 0, active: true},
     // player9: {name: "Михайло", role: "mafia", ready: true, number: 9, fouls: 0, active: true},
     // player10: {name: "Дьома", role: "mafia", ready: true, number: 10, fouls: 0, active: true},
-    // // gameIsEnd: true,
+    // gameIsEnd: true,
     // gameIsStarted: true,
     // resultGame: {
     //     "checksResult": [{"sheriffCheck": 1, "donCheck": 2, "numberOfTheCircle": 1}, {
@@ -52,48 +53,77 @@ const defaultState = {
     //     "gameDuration": 511,
     //     "win": "draw",
     //     "typeWin": "3#3",
-    //     "playersResult": [{"name":"amarsik",
+    //     "playersResult": [{
+    //         "name": "1",
+    //         "number": '1',
     //         "foulsQuantity": 0,
     //         "firstKillSheriff": false,
     //         "killed": false,
     //         "roleInGame": "civil",
-    //         "role":"mafia"
+    //         "role": "mafia"
     //     },
-    //         {"name":"amarsik", "foulsQuantity": 0, "firstKillSheriff": false, "killed": true, "roleInGame": "civil"}, {
-    //         "name":"amarsik1","foulsQuantity": 0,
-    //         "firstKillSheriff": false,
-    //         "killed": false,
-    //         "roleInGame": "civil",
-    //             "role":"mafia"
+    //         {
+    //             "name": "2",
+    //             "number": '2',
+    //             "foulsQuantity": 0,
+    //             "firstKillSheriff": false,
+    //             "killed": true,
+    //             "roleInGame": "civil"
+    //         }, {
+    //             "name": "3", "foulsQuantity": 0,
+    //             "firstKillSheriff": false, "number": '3',
+    //             "killed": false,
+    //             "roleInGame": "civil",
+    //             "role": "mafia"
     //
-    //         }, {"name":"amarsik", "foulsQuantity": 0, "firstKillSheriff": false, "killed": true, "roleInGame": "civil"}, {
-    //         "name":"amarsik", "foulsQuantity": 0,
-    //         "firstKillSheriff": false,
-    //         "killed": false,
-    //         "roleInGame": "mafia"
-    //     }, {"name":"amarsik", "foulsQuantity": 0, "firstKillSheriff": false, "killed": false, "roleInGame": "mafia"}, {
-    //         "name":"amarsik", "foulsQuantity": 0,
-    //         "firstKillSheriff": true,
-    //         "killed": true,
-    //         "roleInGame": "civil",
-    //             "role":"don",
-    //             "number": 7,
+    //         }, {
+    //             "name": "4",
+    //             "foulsQuantity": 0,
+    //             "number": '4',
+    //             "firstKillSheriff": false,
+    //             "killed": true,
+    //             "roleInGame": "civil"
+    //         }, {
+    //             "name": "55", "foulsQuantity": 0, "number": '5',
+    //             "firstKillSheriff": false,
+    //             "killed": false,
+    //             "roleInGame": "mafia"
+    //         }, {
+    //             "name": "6",
+    //             "foulsQuantity": 0,
+    //             "number": '6',
+    //             "firstKillSheriff": false,
+    //             "killed": false,
+    //             "roleInGame": "mafia"
+    //         }, {
+    //             "name": "amrgdfarsik", "foulsQuantity": 0,
+    //             "firstKillSheriff": true,
+    //             "killed": true,
+    //             "roleInGame": "civil",
+    //             "role": "don",
+    //             "number": '7',
     //             "active": true
     //
     //         }, {
-    //         "name":"amarsik", "foulsQuantity": 0,"number":8,
-    //         "firstKillSheriff": false,
-    //         "killed": true,
-    //         "roleInGame": "civil",
-    //         "goldenMove": [5, 10, 6],
-    //             "role":"sheriff"
+    //             "name": "sdfgdfs", "foulsQuantity": 0, "number": '8',
+    //             "firstKillSheriff": false,
+    //             "killed": true,
+    //             "roleInGame": "civil",
+    //             "goldenMove": [5, 10, 6],
+    //             "role": "sheriff"
     //
     //         }, {
-    //         "name":"amarsik", "foulsQuantity": 0,
-    //         "firstKillSheriff": false,
-    //         "killed": false,
-    //         "roleInGame": "sheriff"
-    //     }, {"name":"amarsik", "foulsQuantity": 0, "firstKillSheriff": false, "killed": false, "roleInGame": "don"}],
+    //             "name": "dsfgdsfg", "foulsQuantity": 0,
+    //             "firstKillSheriff": false,
+    //             "killed": false,
+    //             "roleInGame": "sheriff", "number": '9',
+    //         }, {
+    //             "name": "amarssdfsfdik",
+    //             "foulsQuantity": 0,
+    //             "firstKillSheriff": false,
+    //             "killed": false,
+    //             "roleInGame": "don","number": '10',
+    //         }],
     //     "kills": [{"playerNumber": 1, "circleNumber": 1}, {"playerNumber": 2, "circleNumber": 2}, {
     //         "playerNumber": 4,
     //         "circleNumber": 3

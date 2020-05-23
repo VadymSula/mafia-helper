@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {setArrayPlayers, startGame} from "../../../store/actions";
 import RenderPlayer from "./renderPlayer";
-// import {API} from "../../../servise/apiServise";
+import {API} from "../../../servise/apiServise";
 
 interface Props {
     startGame: any,
@@ -29,48 +29,52 @@ class SetPlayers extends Component<Props, State> {
 
     componentDidMount() {
         // API.getAllPlayers().then(response => {
-        //     this.props.setArrayPlayers(response)
+        //     this.props.setArrayPlayers(response);
         // });
         this.props.setArrayPlayers([
             {
-                name: "amarsik1",
+                name: "amarsik",
                 id: 1
             },
             {
-                name: "Sula",
+                name: "WhoAmI",
                 id: 2
             },
             {
-                name: "Zalypa",
+                name: "SUBARIST",
                 id: 3
             },
             {
-                name: "Danila",
+                name: "Odin",
                 id: 4
             },
             {
-                name: "Danila-Durak",
+                name: "Drews",
                 id: 5
             },
             {
-                name: "amarsik1",
+                name: "Bananator",
                 id: 6
             },
             {
-                name: "Sula",
+                name: "Vitalik",
                 id: 7
             },
             {
-                name: "Zalypa",
+                name: "Ostin",
                 id: 8
             },
             {
-                name: "Danila",
+                name: "Seezov",
                 id: 9
             },
             {
-                name: "Danila-Durak",
+                name: "Braun",
                 id: 10
+            },
+            {
+                name: "Floppy",
+                id: 11
             },
         ])
     }

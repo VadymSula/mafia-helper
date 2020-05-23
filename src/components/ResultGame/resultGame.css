@@ -46,6 +46,38 @@ li.disabledPlayer{
     display: flex;
     font-size: 50px;
 }
+.ResultGame .column_one li {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ResultGame .column_one li input {
+    width: 60px;
+    height: 40px;
+    border: 1px #ccc solid;
+    color: #ffffff;
+    text-align: center;
+    font-size: 30px;
+}
+.ResultGame .column_one li .Inputs {
+    display: flex;
+    margin: 0 10px;
+}
+.ResultGame .column_one li .Inputs p  {
+    font-size: 30px;
+}
+.ResultGame .column_one li .plus input {
+    background-color: rgb(26, 174, 159);
+}
+.ResultGame .column_one li .minus input {
+    background-color: rgb(211, 69, 91)
+}
+.ResultGame .column_one li .minus  {
+    margin-left: 15px;
+}
+.ResultGame .column_one li div.Inputs {
+    margin-top: -10px;
+ }
 
 .ResultGame ol {
     list-style-type: none;

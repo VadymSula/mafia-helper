@@ -31,7 +31,8 @@ interface Props {
     setResultGame: any,
     courtStatus: any,
     changeCountActivePLayers: any,
-    countActivePlayers: number
+    countActivePlayers: number,
+    isRatingGame: boolean
 }
 
 interface State {
@@ -198,49 +199,49 @@ class InGame extends Component<Props, State> {
                     break;
             }
 
-                for (let i = 0; i <= 10; i++) {
-                    let player = this.props.player['player' + i], _tmp_info;
-                    if (i === 0)
-                        _tmp_info = {
-                            foulsQuantity: null,
-                            killed: false,
-                            roleInGame: player.role,
-                            name: player.name,
-                            number: player.number
-                        };
-                    else
-                        _tmp_info = {
-                            foulsQuantity: player.fouls,
-                            // firstKillSheriff: false,
-                            killed: !player.active,
-                            roleInGame: player.role,
-                            name: player.name,
-                            number: player.number
-                        };
-                    if (player.role === 'mafia' || player.role === 'don')
-                        if (sheriffIsKilled) {
-                            _tmp_info.firstKillSheriff = true;
-                        }
-                    if (this.props.kills.length > 0)
-                        if (this.props.kills[0].playerNumber === player.number)
-                            _tmp_info.goldenMove = this.props.bestMove;
+            for (let i = 0; i <= 10; i++) {
+                let player = this.props.player['player' + i], _tmp_info;
+                if (i === 0)
+                    _tmp_info = {
+                        foulsQuantity: null,
+                        killed: false,
+                        roleInGame: player.role,
+                        name: player.name,
+                        number: player.number.toString(),
+                    };
+                else
+                    _tmp_info = {
+                        foulsQuantity: player.fouls,
+                        // firstKillSheriff: false,
+                        killed: !player.active,
+                        roleInGame: player.role,
+                        name: player.name,
+                        number: player.number.toString()
+                    };
+                if (player.role === 'mafia' || player.role === 'don')
+                    if (sheriffIsKilled) {
+                        _tmp_info.firstKillSheriff = true;
+                    }
+                if (this.props.kills.length > 0)
+                    if (this.props.kills[0].playerNumber === player.number)
+                        _tmp_info.goldenMove = this.props.bestMove;
 
-                    // switch (_tmp_info.roleInGame) {
-                    //     case "civil":
-                    //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
-                    //         break;
-                    //     case "mafia":
-                    //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
-                    //         break;
-                    //     case "don":
-                    //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
-                    //         break;
-                    //     case "sheriff":
-                    //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
-                    //         break;
-                    // }
-                    players.push(_tmp_info);
-                }
+                // switch (_tmp_info.roleInGame) {
+                //     case "civil":
+                //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
+                //         break;
+                //     case "mafia":
+                //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
+                //         break;
+                //     case "don":
+                //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
+                //         break;
+                //     case "sheriff":
+                //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
+                //         break;
+                // }
+                players.push(_tmp_info);
+            }
             this.endTimerDurationGame();
             this.setState({gameIsEnd: true});
             this.props.endGame(true);
@@ -253,11 +254,17 @@ class InGame extends Component<Props, State> {
                 playersResult: players,
                 kills: this.props.kills,
                 gameDate: date.join('-'),
+                isEnd: true
             };
             this.props.setResultGame(resultGame);
-            API.sendGameInformation(resultGame).then(response => {
-                console.log(response)
-            });
+            delete resultGame.isEnd;
+            // API.sendGameInformation(resultGame).then(response => {
+            //     console.log(response)
+            // });
+            // if (this.props.isRatingGame)
+            //     API.sendGameInformationRating(resultGame).then(responce => {
+            //         console.log(responce)
+            //     })
         }
     };
 
@@ -458,7 +465,8 @@ const mapStateToProps = function (state) {
         kills: state.kills,
         bestMove: state.bestMove,
         courtStatus: state.courtStatus,
-        countActivePlayers: state.countActivePlayers
+        countActivePlayers: state.countActivePlayers,
+        isRatingGame: state.isRatingGame
     }
 };
 

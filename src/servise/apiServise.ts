@@ -1,9 +1,19 @@
 export class API {
-    private static defaultPath: 'localhost:8080';
+    private static defaultPath = 'http"://http://mafia-helper-back.herokuapp.com';
 
     static async sendGameInformation(body) {
-        let response = await fetch(this.defaultPath + "/game-end/save", {
+        let response = await fetch(this.defaultPath + "/game-end", {
             method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: body.toString()
+        });
+        return await response.json();
+    }
+    static async sendGameInformationRating(body) {
+        let response = await fetch(this.defaultPath + "/rating-game/game-end/mp", {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -26,6 +36,16 @@ export class API {
             headers: {
                 'Accept': "*/*"
             }
+        });
+        return await response.json();
+    }
+    static async sendExtraPoints(body) {
+        let response = await fetch(this.defaultPath + "/rating-game/game-end/ep", {
+            method: 'POST',
+            headers: {
+                'Accept': "*/*"
+            },
+            body: body.toString()
         });
         return await response.json();
     }

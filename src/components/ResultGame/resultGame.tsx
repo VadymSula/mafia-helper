@@ -4,16 +4,211 @@ import "./resultGame.css";
 import Mafia from "../../assets/images/mafiaWin.png";
 import City from "../../assets/images/townWin.png";
 import {setResultGame} from "../../store/actions";
+import {Input, InputAdornment} from "@material-ui/core";
+import {API} from "../../servise/apiServise";
+
 
 interface Props {
     setResultGame: any,
     resultGame: any
 }
 
-class ResultGame extends Component<Props> {
+interface State {
+    positive: any,
+    negative: any,
+    pointsSum: number,
+    gameDuration?: any
+}
 
+class ResultGame extends Component<Props, State> {
 
-    calculateTime(time) {
+    constructor(props) {
+        super(props);
+        this.state = {
+            positive: [],
+            negative: [],
+            pointsSum: 0,
+        }
+    }
+
+    sendPoints = () => {
+        let {resultGame} = this.props,
+            playersPoint = [
+                {
+                    "club": {
+                        "clubName": "FMC",
+                        "idClub": 1
+                    },
+                    "player": {
+                        "idPlayer": 1,
+                        "nickName": "string"
+                    },
+                    "ratingValue": 0,
+                },
+                {
+                    "club": {
+                        "clubName": "FMC",
+                        "idClub": 1
+                    },
+                    "player": {
+                        "idPlayer": 2,
+                        "nickName": "string"
+                    },
+                    "ratingValue": 0
+                },
+                {
+                    "club": {
+                        "clubName": "FMC",
+                        "idClub": 1
+                    },
+                    "player": {
+                        "idPlayer": 3,
+                        "nickName": "string"
+                    },
+                    "ratingValue": 0
+                },
+                {
+                    "club": {
+                        "clubName": "FMC",
+                        "idClub": 1
+                    },
+                    "player": {
+                        "idPlayer": 4,
+                        "nickName": "string"
+                    },
+                    "ratingValue": 0
+                },
+                {
+                    "club": {
+                        "clubName": "FMC",
+                        "idClub": 1
+                    },
+                    "player": {
+                        "idPlayer": 5,
+                        "nickName": "string"
+                    },
+                    "ratingValue": 0
+                },
+                {
+                    "club": {
+                        "clubName": "FMC",
+                        "idClub": 1
+                    },
+                    "player": {
+                        "idPlayer": 6,
+                        "nickName": "string"
+                    },
+                    "ratingValue": 0
+                },
+                {
+                    "club": {
+                        "clubName": "FMC",
+                        "idClub": 1
+                    },
+                    "player": {
+                        "idPlayer": 7,
+                        "nickName": "string"
+                    },
+                    "ratingValue": 0
+                },
+                {
+                    "club": {
+                        "clubName": "FMC",
+                        "idClub": 1
+                    },
+                    "player": {
+                        "idPlayer": 8,
+                        "nickName": "string"
+                    },
+                    "ratingValue": 0
+                },
+                {
+                    "club": {
+                        "clubName": "FMC",
+                        "idClub": 1
+                    },
+                    "player": {
+                        "idPlayer": 9,
+                        "nickName": "string"
+                    },
+                    "ratingValue": 0
+                },
+                {
+                    "club": {
+                        "clubName": "FMC",
+                        "idClub": 1
+                    },
+                    "player": {
+                        "idPlayer": 10,
+                        "nickName": "string"
+                    },
+                    "ratingValue": 0
+                }
+            ],
+            positive = this.state.positive,
+            negative = this.state.negative;
+        playersPoint.map((player, index) => {
+            let i = player.player.idPlayer;
+            player.player.nickName = resultGame.playersResult[index].name;
+            let playerP = positive.filter(pl => pl.number === i)[0];
+            if (playerP)
+                player.ratingValue += playerP.value;
+            let playerN = negative.filter((pl, key) => key === i)[0];
+            if (playerN)
+                player.ratingValue -= playerN;
+            player.ratingValue = parseFloat(player.ratingValue.toFixed(1));
+            return 0;
+        });
+        // API.sendExtraPoints(resultGame).then(responce => {
+        //     console.log(responce)
+        // })
+    };
+
+    changePlusPoints = (event) => {
+        let arr: any = this.state.positive,
+            val = parseFloat(event.target.value),
+            sum = 0,
+            num = parseInt(event.target.id);
+        arr = arr.filter(pl => parseInt(pl.number) !== num);
+        if (val >= 0.7) {
+            event.target.value = 0.7;
+            arr.push({
+                number: num,
+                value: 0.7
+            })
+        } else if (val <= 0)
+            event.target.value = 0;
+        else if (val > 0 && val < 0.7) {
+            event.target.value = val;
+            arr.push({
+                number: num,
+                value: val
+            })
+        }
+        arr.map(pl => sum += pl.value);
+        sum = parseFloat(sum.toFixed(1));
+        console.log(arr)
+        this.setState({pointsSum: sum});
+        this.setState({positive: arr});
+    };
+
+    changeMinusPoints = (event) => {
+        let arr: any = this.state.negative,
+            val = parseFloat(event.target.value),
+            num = event.target.id;
+        if (val >= 0.4) {
+            event.target.value = 0.4;
+            arr[num] = 0.4;
+        } else if (val <= 0) {
+            event.target.value = 0;
+        } else{
+            event.target.value = val;
+            arr[num] = val;
+        }
+        this.setState({negative: arr})
+    };
+
+    calculateTime = (time) => {
         let hrs = ~~(time / 3600),
             min = ~~((time) / 60),
             secs = ~~time % 60,
@@ -24,13 +219,19 @@ class ResultGame extends Component<Props> {
         ret += "" + secs;
 
         return ret;
+    };
+
+    componentDidMount(): void {
+        if (this.props.resultGame) {
+            let game = this.props.resultGame;
+            this.setState({gameDuration: this.calculateTime(game.gameDuration)})
+        }
     }
 
     render() {
         let game: any;
         if (this.props.resultGame)
             game = this.props.resultGame;
-        game.gameDuration = this.calculateTime(game.gameDuration);
         // Гравець, який дає "кращий хід"
         let playerBM = game.playersResult.filter(player => player.goldenMove !== undefined)[0], str_: any;
         if (playerBM) {
@@ -75,15 +276,50 @@ class ResultGame extends Component<Props> {
                         <ol className="player">
                             {game.playersResult.map(player => {
                                 return (
-                                    <li key={player.id} className={!player.killed ? "" : "disabledPlayer"}>
-                                        {player.name}
-                                        {
-                                            player.roleInGame === 'don' ? <i className="fas fa-user-secret iRole"/> :
-                                                player.roleInGame === 'mafia' ?
-                                                    <i className="fas fa-crosshairs iRole"/> :
-                                                    player.roleInGame === 'sheriff' ?
-                                                        <i className="fab fa-empire iRole"/> : null
-                                        }
+                                    <li key={player.number} className={!player.killed ? "" : "disabledPlayer"}>
+                                        <div>
+
+                                            {player.name}
+                                            {
+                                                player.roleInGame === 'don' ?
+                                                    <i className="fas fa-user-secret iRole"/> :
+                                                    player.roleInGame === 'mafia' ?
+                                                        <i className="fas fa-crosshairs iRole"/> :
+                                                        player.roleInGame === 'sheriff' ?
+                                                            <i className="fab fa-empire iRole"/> : null
+                                            }
+                                        </div>
+                                        {/*{*/}
+                                        {/*    game.isEnd && game.isRating ?*/}
+                                        <div className="Inputs">
+                                            <div className="plus">
+                                                <Input
+                                                    id={player.number}
+                                                    onChange={this.changePlusPoints}
+                                                    placeholder={'0'}
+                                                    type='number'
+                                                    defaultValue=''
+                                                    value={this.state.positive[player.number] > 0 ? '' : this.state.positive[player.number]}
+                                                    startAdornment={<InputAdornment position="start">+</InputAdornment>}
+                                                />
+                                            </div>
+                                            <div className="minus">
+                                                <Input
+                                                    id={player.number}
+                                                    onChange={this.changeMinusPoints}
+                                                    placeholder={'0'}
+                                                    defaultValue=''
+                                                    value={this.state.negative[player.number]}
+                                                    type='number'
+                                                    startAdornment={<InputAdornment position="start">-</InputAdornment>}
+                                                />
+                                            </div>
+
+                                            {/*<input className='plus' type="text"/>*/}
+                                            {/*<input className='minus' type="text"/>*/}
+                                        </div>
+                                        {/*: null*/}
+                                        {/*}*/}
                                     </li>
                                 )
                             })}
@@ -96,7 +332,7 @@ class ResultGame extends Component<Props> {
                         <div className="timer">
                             <h3>
                                 <span>Тривалість гри:</span>
-                                <span>{game.gameDuration}</span>
+                                <span>{this.state.gameDuration}</span>
                             </h3>
                         </div>
                         <div className="divTable checkTable">
@@ -119,7 +355,7 @@ class ResultGame extends Component<Props> {
                                     else
                                         don = "-";
                                     return (
-                                        <div className="divTableRow">
+                                        <div key={check.numberOfTheCircle} className="divTableRow">
                                             <div className="divTableCell">{sheriff}</div>
                                             <div className="divTableCell">{don}</div>
                                         </div>
@@ -151,6 +387,14 @@ class ResultGame extends Component<Props> {
                                 </div> : null
                             }
                         </div>
+                        {
+                            this.state.pointsSum <= 1.0 ?
+                                <div>
+                                    <button onClick={this.sendPoints} className='green'>Відправити бали й вийти</button>
+                                </div>
+                                : <p className='errorMessage'>Невірно розставлені додаткові бали <br/>
+                                    Максимальна сума має бути не більше 1</p>
+                        }
                     </div>
                 </div>
             </div>
