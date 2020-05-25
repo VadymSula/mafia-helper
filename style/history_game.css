@@ -2,13 +2,17 @@
 
 body {
   font-family: "Montserrat";
+  color: gray;
 }
-nav{
+nav {
   margin-top: 20px;
 }
-header span {  
+header span {
   padding-left: 25px;
   font-size: 20px;
+}
+.margin {
+  margin: 0px 100px;
 }
 a {
   text-decoration: none;
@@ -18,9 +22,54 @@ a {
   justify-content: center;
   padding-top: 50px;
   border-bottom: 1px solid black;
-  margin: 0px 100px;
+
   padding-bottom: 10px;
 }
-.name_PAGE img {
-  height: 75px;
+.contanier {
+  display: flex;
+  justify-content: space-around;
+}
+h2 {
+  text-align: center;
+}
+.table {
+  border: dashed 2px;
+  border-radius: 10px;
+}
+.button {
+  color: gray;
+  font-size: 50px;
+}
+.costul {
+  color: white;
+}
+.table {
+  margin-bottom: 10px;
+}
+/*----------------------- all @media--------------------------------------- */
+@media (max-width: 700px) {
+  .margin {
+    margin: 0px;
+  }
+  .table {
+    margin-bottom: 10px;
+  }
+  .button {
+    font-size: 40px;
+  }
+}
+/* iPhone 5/SE */
+@media (max-width: 376px) {
+  p {
+    font-size: 10px;
+  }
+  h3 {
+    font-size: 14px;
+  }
+  h1 {
+    font-size: 20px;
+  }
+  .button {
+    font-size: 30px;
+  }
 }
