@@ -1,5 +1,5 @@
 export class API {
-    private static defaultPath = 'http://mafia-helper-back.herokuapp.com';
+    private static defaultPath = 'https://mafia-helper-back.herokuapp.com';
 
     static async sendGameInformation(body) {
         let response = await fetch(this.defaultPath + "/game-end", {
