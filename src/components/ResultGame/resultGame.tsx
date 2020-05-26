@@ -201,7 +201,7 @@ class ResultGame extends Component<Props, State> {
             arr[num] = 0.4;
         } else if (val <= 0) {
             event.target.value = 0;
-        } else{
+        } else {
             event.target.value = val;
             arr[num] = val;
         }
@@ -209,16 +209,15 @@ class ResultGame extends Component<Props, State> {
     };
 
     calculateTime = (time) => {
-        let hrs = ~~(time / 3600),
-            min = ~~((time) / 60),
-            secs = ~~time % 60,
-            ret = "";
+        let d = Number(time);
+        let h = Math.floor(d / 3600);
+        let m = Math.floor(d % 3600 / 60);
+        let s = Math.floor(d % 3600 % 60);
 
-        ret += "" + hrs + ":" + (min < 10 ? "0" : "");
-        ret += "" + min + ":" + (secs < 10 ? "0" : "");
-        ret += "" + secs;
-
-        return ret;
+        let hDisplay = h;
+        let mDisplay = m < 10 ? '0' + m : m;
+        let sDisplay = s < 10 ? '0' + m : s;
+        return hDisplay + ':' + mDisplay + ':' + sDisplay;
     };
 
     componentDidMount(): void {
@@ -232,6 +231,7 @@ class ResultGame extends Component<Props, State> {
         let game: any;
         if (this.props.resultGame)
             game = this.props.resultGame;
+        let arrayPlayers = game.playersResult.filter(pl => pl.roleInGame !== 'lead');
         // Гравець, який дає "кращий хід"
         let playerBM = game.playersResult.filter(player => player.goldenMove !== undefined)[0], str_: any;
         if (playerBM) {
@@ -273,12 +273,13 @@ class ResultGame extends Component<Props, State> {
                 </div>
                 <div className="content">
                     <div className="column_one">
-                        <ol className="player">
-                            {game.playersResult.map(player => {
+                        <ul className="player">
+                            {arrayPlayers.map(player => {
+                                let num = player.number.toString();
                                 return (
                                     <li key={player.number} className={!player.killed ? "" : "disabledPlayer"}>
-                                        <div>
-
+                                        <p>
+                                            <span>{num})</span>
                                             {player.name}
                                             {
                                                 player.roleInGame === 'don' ?
@@ -288,13 +289,13 @@ class ResultGame extends Component<Props, State> {
                                                         player.roleInGame === 'sheriff' ?
                                                             <i className="fab fa-empire iRole"/> : null
                                             }
-                                        </div>
+                                        </p>
                                         {/*{*/}
                                         {/*    game.isEnd && game.isRating ?*/}
                                         <div className="Inputs">
                                             <div className="plus">
                                                 <Input
-                                                    id={player.number}
+                                                    id={num}
                                                     onChange={this.changePlusPoints}
                                                     placeholder={'0'}
                                                     type='number'
@@ -305,7 +306,7 @@ class ResultGame extends Component<Props, State> {
                                             </div>
                                             <div className="minus">
                                                 <Input
-                                                    id={player.number}
+                                                    id={num}
                                                     onChange={this.changeMinusPoints}
                                                     placeholder={'0'}
                                                     defaultValue=''
@@ -323,7 +324,7 @@ class ResultGame extends Component<Props, State> {
                                     </li>
                                 )
                             })}
-                        </ol>
+                        </ul>
                     </div>
                     <div className="column_second">
                         <div className='lead'>

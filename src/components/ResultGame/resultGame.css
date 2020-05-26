@@ -79,17 +79,13 @@ li.disabledPlayer{
     margin-top: -10px;
  }
 
-.ResultGame ol {
+.ResultGame ul {
     list-style-type: none;
     counter-reset: item;
+    margin: 0;
 }.ResultGame ol li i{
     margin-left: 10px;
  }
-
-.ResultGame li:before {
-    content: counter(item) ') ';
-    counter-increment: item;
-}
 
 .ResultGame .player {
     padding: 10px 10px 1px 0px;
@@ -216,8 +212,10 @@ li.disabledPlayer{
     }
 
     .column_one {
-        margin-left: 35%;
-        padding-bottom: 50px;
+        justify-content: center;
+    }
+    .ResultGame .header img {
+        display: none;
     }
 }
 

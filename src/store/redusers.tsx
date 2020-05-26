@@ -4,7 +4,7 @@ import {
     CHANGE_KICK_STATUS, CHANGE_KILL_STATUS,
     CHANGE_PLAYER_INFO, CHANGE_SHOW_INFO,
     CHANGE_VOTING, END_GAME,
-    PLAYER_IS_READY, SET_ARRAY_PLAYERS, SET_BEST_MOVE, SET_RESULT_GAME,
+    PLAYER_IS_READY, SET_ARRAY_PLAYERS, SET_BEST_MOVE, SET_RESULT_GAME, SHOW_INFO_FOR_LEAD,
     START_GAME
 } from "./actions";
 
@@ -18,6 +18,7 @@ const defaultState = {
     showInfo:false,
     courtStatus: false,
     countActivePlayers: 10,
+    showInfoForLead: false,
     gameIsEnd: false,
     player0: {},
     player1: {},
@@ -50,12 +51,20 @@ const defaultState = {
     //         "donCheck": 3,
     //         "numberOfTheCircle": 2
     //     }, {"sheriffCheck": 4, "donCheck": 4, "numberOfTheCircle": 3}],
-    //     "gameDuration": 511,
+    //     "gameDuration": 7300,
     //     "win": "draw",
     //     "typeWin": "3#3",
     //     "playersResult": [{
+    //         "name": "lead",
+    //         "number": 0,
+    //         "foulsQuantity": 0,
+    //         "firstKillSheriff": false,
+    //         "killed": false,
+    //         "roleInGame": "civil",
+    //         "role": "mafia"
+    //     },{
     //         "name": "1",
-    //         "number": '1',
+    //         "number": 1,
     //         "foulsQuantity": 0,
     //         "firstKillSheriff": false,
     //         "killed": false,
@@ -64,14 +73,14 @@ const defaultState = {
     //     },
     //         {
     //             "name": "2",
-    //             "number": '2',
+    //             "number": 2,
     //             "foulsQuantity": 0,
     //             "firstKillSheriff": false,
     //             "killed": true,
     //             "roleInGame": "civil"
     //         }, {
     //             "name": "3", "foulsQuantity": 0,
-    //             "firstKillSheriff": false, "number": '3',
+    //             "firstKillSheriff": false, "number": 3,
     //             "killed": false,
     //             "roleInGame": "civil",
     //             "role": "mafia"
@@ -79,19 +88,19 @@ const defaultState = {
     //         }, {
     //             "name": "4",
     //             "foulsQuantity": 0,
-    //             "number": '4',
+    //             "number": 4,
     //             "firstKillSheriff": false,
     //             "killed": true,
     //             "roleInGame": "civil"
     //         }, {
-    //             "name": "55", "foulsQuantity": 0, "number": '5',
+    //             "name": "55", "foulsQuantity": 0, "number": 5,
     //             "firstKillSheriff": false,
     //             "killed": false,
     //             "roleInGame": "mafia"
     //         }, {
     //             "name": "6",
     //             "foulsQuantity": 0,
-    //             "number": '6',
+    //             "number": 6,
     //             "firstKillSheriff": false,
     //             "killed": false,
     //             "roleInGame": "mafia"
@@ -101,11 +110,11 @@ const defaultState = {
     //             "killed": true,
     //             "roleInGame": "civil",
     //             "role": "don",
-    //             "number": '7',
+    //             "number": 7,
     //             "active": true
     //
     //         }, {
-    //             "name": "sdfgdfs", "foulsQuantity": 0, "number": '8',
+    //             "name": "sdfgdfs", "foulsQuantity": 0, "number": 8,
     //             "firstKillSheriff": false,
     //             "killed": true,
     //             "roleInGame": "civil",
@@ -116,13 +125,13 @@ const defaultState = {
     //             "name": "dsfgdsfg", "foulsQuantity": 0,
     //             "firstKillSheriff": false,
     //             "killed": false,
-    //             "roleInGame": "sheriff", "number": '9',
+    //             "roleInGame": "sheriff", "number": 9,
     //         }, {
     //             "name": "amarssdfsfdik",
     //             "foulsQuantity": 0,
     //             "firstKillSheriff": false,
     //             "killed": false,
-    //             "roleInGame": "don","number": '10',
+    //             "roleInGame": "don","number": 10,
     //         }],
     //     "kills": [{"playerNumber": 1, "circleNumber": 1}, {"playerNumber": 2, "circleNumber": 2}, {
     //         "playerNumber": 4,
@@ -209,6 +218,11 @@ export const rootReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 countActivePlayers: action.payload
+            };
+        case SHOW_INFO_FOR_LEAD:
+            return {
+                ...state,
+                showInfoForLead: action.payload
             };
     }
     return state;

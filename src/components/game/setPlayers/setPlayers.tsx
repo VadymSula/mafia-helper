@@ -24,59 +24,69 @@ class SetPlayers extends Component<Props, State> {
     }
 
     startGame = () => {
-            this.props.startGame(true);
+        this.props.startGame(true);
     };
 
     componentDidMount() {
-        // API.getAllPlayers().then(response => {
-        //     this.props.setArrayPlayers(response);
-        // });
-        this.props.setArrayPlayers([
-            {
-                name: "amarsik",
-                id: 1
-            },
-            {
-                name: "WhoAmI",
-                id: 2
-            },
-            {
-                name: "SUBARIST",
-                id: 3
-            },
-            {
-                name: "Odin",
-                id: 4
-            },
-            {
-                name: "Drews",
-                id: 5
-            },
-            {
-                name: "Bananator",
-                id: 6
-            },
-            {
-                name: "Vitalik",
-                id: 7
-            },
-            {
-                name: "Ostin",
-                id: 8
-            },
-            {
-                name: "Seezov",
-                id: 9
-            },
-            {
-                name: "Braun",
-                id: 10
-            },
-            {
-                name: "Floppy",
-                id: 11
-            },
-        ])
+        this.props.setArrayPlayers([]);
+        API.getAllPlayers().then(response => {
+            let _arr:any = [];
+            response.map(pl => {
+                _arr.push({
+                    id: pl.idPlayer,
+                    name: pl.nickName
+                })
+            });
+            this.props.setArrayPlayers(_arr);
+        }).catch(error => {
+            console.error(error)
+        });
+        // this.props.setArrayPlayers([
+        //     {
+        //         name: "amarsik",
+        //         id: 1
+        //     },
+        //     {
+        //         name: "WhoAmI",
+        //         id: 2
+        //     },
+        //     {
+        //         name: "SUBARIST",
+        //         id: 3
+        //     },
+        //     {
+        //         name: "Odin",
+        //         id: 4
+        //     },
+        //     {
+        //         name: "Drews",
+        //         id: 5
+        //     },
+        //     {
+        //         name: "Bananator",
+        //         id: 6
+        //     },
+        //     {
+        //         name: "Vitalik",
+        //         id: 7
+        //     },
+        //     {
+        //         name: "Ostin",
+        //         id: 8
+        //     },
+        //     {
+        //         name: "Seezov",
+        //         id: 9
+        //     },
+        //     {
+        //         name: "Braun",
+        //         id: 10
+        //     },
+        //     {
+        //         name: "Floppy",
+        //         id: 11
+        //     },
+        // ])
     }
 
     componentDidUpdate() {
@@ -134,8 +144,9 @@ class SetPlayers extends Component<Props, State> {
                     <RenderPlayer player={this.props.player.player10} number={10}/>
                 </div>
                 {this.state.isHidden ?
-                    <h2 style={{color:"#a4a4a4", userSelect:"none"}}>Не вистачає гравців чи неправильно виставлені ролі</h2>
-                    :<button className="game__start" onClick={this.startGame}>Почати</button>
+                    <h2 style={{color: "#a4a4a4", userSelect: "none"}}>Не вистачає гравців чи неправильно виставлені
+                        ролі</h2>
+                    : <button className="game__start" onClick={this.startGame}>Почати</button>
                 }
             </section>
         )

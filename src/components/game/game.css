@@ -114,6 +114,20 @@ button.purple{
 button.green{
     background-color: #207868;
 }
+button.gray{
+    background-color: rgba(204, 204, 204, 0.54);
+    color: black;
+}
+button.yellow{
+    background-color: #f1c40f;
+    color: black;
+}
+.leadName{
+    margin: 0;
+}
+.leadName span{
+    color:red
+}
 button:hover{
     cursor: pointer;
     transition: .2s;
