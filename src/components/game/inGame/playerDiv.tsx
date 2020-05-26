@@ -26,7 +26,8 @@ interface Props {
     changeKillStatus: any,
     changeKickStatus: any,
     kills: any,
-    changeCourtStatus: any;
+    changeCourtStatus: any,
+    showInfoForLead: boolean
 }
 
 interface State {
@@ -158,10 +159,11 @@ class PlayerDiv extends Component<Props, State> {
 
             <div className={this.props.player.active ? this.props.player.fouls === 3 ? 'player danger' : 'player'
                 : 'player disabled'}>
-                {
+                {this.props.showInfoForLead ?
                     this.props.player.role === 'don' ? <i className="fas fa-user-secret iRole"/> :
                         this.props.player.role === 'mafia' ? <i className="fas fa-crosshairs iRole"/> :
                             this.props.player.role === 'sheriff' ? <i className="fab fa-empire iRole"/> : null
+                    : null
                 }
 
                 {this.props.player.active ?
@@ -233,7 +235,9 @@ const mapStateToProps = function (state) {
         checks: state.checks,
         isKilled: state.isKilled,
         isKicked: state.isKicked,
-        kills: state.kills
+        kills: state.kills,
+        showInfoForLead: state.showInfoForLead
+
     }
 };
 const mapDispatchToProps = {

@@ -13,6 +13,8 @@ export const SET_RESULT_GAME = 'SET_RESULT_GAME';
 export const CHANGE_SHOW_INFO = 'CHANGE_SHOW_INFO';
 export const CHANGE_COURT_STATUS = 'CHANGE_COURT_STATUS';
 export const CHANGE_COUNT_ACTIVE_PLAYERS = 'CHANGE_COUNT_ACTIVE_PLAYERS';
+export const SHOW_INFO_FOR_LEAD = 'SHOW_INFO_FOR_LEAD';
+
 
 export const startGame = value => ({
     type: START_GAME,
@@ -71,5 +73,9 @@ export const changeCourtStatus = value => ({
 });
 export const changeCountActivePLayers = value => ({
     type: CHANGE_COUNT_ACTIVE_PLAYERS,
+    payload: value
+});
+export const showInfoForLead= value => ({
+    type: SHOW_INFO_FOR_LEAD,
     payload: value
 });

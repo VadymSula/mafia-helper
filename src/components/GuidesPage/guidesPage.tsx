@@ -20,8 +20,8 @@ class GuidesPage extends Component {
 
     render() {
         return (
-            <div className="guidesPage">
-                <h1>Посібники</h1>
+            <div id='news' className="guidesPage">
+                <h1>Новини</h1>
                 {
                     this.post_tpm.map(post => {
                         return (

@@ -7,7 +7,7 @@ import {
     changeKickStatus,
     changeKillStatus,
     changeVoting,
-    endGame, setBestMove, setResultGame
+    endGame, setBestMove, setResultGame, showInfoForLead
 } from "../../../store/actions";
 import {API} from "../../../servise/apiServise";
 import Court from "./court";
@@ -32,7 +32,10 @@ interface Props {
     courtStatus: any,
     changeCountActivePLayers: any,
     countActivePlayers: number,
-    isRatingGame: boolean
+    isRatingGame: boolean,
+    showInfoForLead: any,
+    showInfoForLeadBool: boolean,
+
 }
 
 interface State {
@@ -48,7 +51,7 @@ interface State {
     isShowingBestMoveButton: boolean,
     messageErrorBestMove?: string,
     bestMoveIsOk?: boolean,
-    countToDraw: number
+    countToDraw: number,
 }
 
 class InGame extends Component<Props, State> {
@@ -178,7 +181,12 @@ class InGame extends Component<Props, State> {
         if (!this.state.gameIsEnd) {
             // API.getAllRoles().then(response => {
             //     roles = response;
+            //     console.log(response)
+            // }).catch(error => {
+            //     console.log(error)
             // });
+
+            // console.log(roles)
             let players: any = [], sheriffIsKilled = false, typeWin, firstKill;
 
             if (this.props.kills.length > 0) {
@@ -239,7 +247,11 @@ class InGame extends Component<Props, State> {
                 //     case "sheriff":
                 //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
                 //         break;
+                //     case "lead":
+                //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
+                //         break;
                 // }
+                // console.log(_tmp_info)
                 players.push(_tmp_info);
             }
             this.endTimerDurationGame();
@@ -337,11 +349,22 @@ class InGame extends Component<Props, State> {
         }
     };
 
+    changeShowInfoForLead = () => {
+        this.props.showInfoForLead(!this.props.showInfoForLeadBool)
+    };
+
     render() {
         return (
             <section>
                 <h1>{this.state.timeOutDurGame}</h1>
-                <h2>Ведучий: {this.props.player.player0.name}</h2>
+                <h2 className="leadName">Ведучий: <span>{this.props.player.player0.name}</span></h2>
+                {
+                    this.props.showInfoForLeadBool ?
+                        <button className='buttonShowInfo red'
+                                onClick={this.changeShowInfoForLead}>Приховати інформацію</button> :
+                        <button className='buttonShowInfo gray'
+                                onClick={this.changeShowInfoForLead}>Показати інформацію</button>
+                }
                 <div className="players game">
                     <div className="first_col col">
                         <PlayerDiv player={this.props.player.player5}/>
@@ -389,24 +412,27 @@ class InGame extends Component<Props, State> {
                     </div>
                 </div>
                 <div className="footerBlock">
-                    <div className="checks">
-                        <div>
-                            <p>Перевірки</p>
-                            <p>Шеріфа:</p>
-                            <p>Дона:</p>
-                        </div>
-                        {
-                            this.props.checks.map(circle => {
-                                return (
-                                    <div key={circle.numberOfTheCircle}>
-                                        <p>{circle.numberOfTheCircle} день</p>
-                                        <p>{circle.sheriffCheck ? circle.sheriffCheck : ' '}</p>
-                                        <p>{circle.donCheck ? circle.donCheck : ' '}</p>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
+                    {
+                        this.props.showInfoForLeadBool ?
+                            <div className="checks">
+                                <div>
+                                    <p>Перевірки</p>
+                                    <p>Шеріфа:</p>
+                                    <p>Дона:</p>
+                                </div>
+                                {
+                                    this.props.checks.map(circle => {
+                                        return (
+                                            <div key={circle.numberOfTheCircle}>
+                                                <p>{circle.numberOfTheCircle} день</p>
+                                                <p>{circle.sheriffCheck ? circle.sheriffCheck : ' '}</p>
+                                                <p>{circle.donCheck ? circle.donCheck : ' '}</p>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div> : null
+                    }
                     <div className="btns-End">
                         <button onClick={this.endCircle} className="green">Закінчити круг</button>
                         <Court/>
@@ -414,7 +440,7 @@ class InGame extends Component<Props, State> {
                             {this.state.isShowingBestMoveModal ?
                                 <div onClick={this.closeModal} className="back-drop"/> : null}
                             {this.state.isShowingBestMoveButton
-                                ? <button onClick={this.openModal} className="orange">Кращий хід</button>
+                                ? <button onClick={this.openModal} className="yellow">Кращий хід</button>
                                 : null
                             }
                             <div className="modal-wrapper"
@@ -466,7 +492,8 @@ const mapStateToProps = function (state) {
         bestMove: state.bestMove,
         courtStatus: state.courtStatus,
         countActivePlayers: state.countActivePlayers,
-        isRatingGame: state.isRatingGame
+        isRatingGame: state.isRatingGame,
+        showInfoForLeadBool: state.showInfoForLead
     }
 };
 
@@ -479,7 +506,8 @@ const mapDispatchToProps = {
     endGame,
     setBestMove,
     setResultGame,
-    changeCountActivePLayers
+    changeCountActivePLayers,
+    showInfoForLead
 };
 export default connect(mapStateToProps, mapDispatchToProps)(InGame)
 
