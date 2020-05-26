@@ -10,6 +10,3 @@ create table if not exists game
         constraint club_game_id_club_fk
             references club (id_club)
 );
-
-alter table game
-    owner to postgres;
