@@ -17,7 +17,7 @@ p#time{
     transition: .2s;
 
 }
-section{
+section.setPlayers{
     width: 100%;
     display: flex;
     align-items: center;

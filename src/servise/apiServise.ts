@@ -24,14 +24,10 @@ export class API {
     }
 
     static async getAllPlayers() {
-        // return await fetch(this.defaultPath + "/create-game/select-player", {
-        //     method: 'GET'
-        // });
-
-         let response = await fetch(this.defaultPath+"/create-game/select-player", {
+        let response = await fetch(this.defaultPath + "/create-game/select-player", {
             method: "GET"
         });
-         return  response.json()
+        return response.json()
     }
 
     static async getAllRoles() {

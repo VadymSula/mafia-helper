@@ -128,7 +128,7 @@ class SetPlayers extends Component<Props, State> {
 
     render() {
         return (
-            <section>
+            <section className="setPlayers">
                 <h1>Набір гравців</h1>
                 <RenderPlayer player={this.props.player.player0} number={0}/>
                 <div className="players">
