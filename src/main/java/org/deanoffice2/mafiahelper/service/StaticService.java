@@ -8,7 +8,7 @@ import java.util.List;
 public interface StaticService {
     List<RoleGame> getRoles();
 
-    void addNewPlayer(String playerName);
+    void addNewPlayer(String playerName, String gender);
 
     List<Player> getPlayersNicknames();
 }
