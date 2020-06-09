@@ -5,26 +5,30 @@ import org.deanoffice2.mafiahelper.exceptions.DataNotFoundException;
 import org.deanoffice2.mafiahelper.exceptions.IllegalInputDataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 @org.springframework.stereotype.Repository("gameResultRepository")
 public class GameResultRepositoryImpl implements GameRepository<GameResult> {
-    private final NamedParameterJdbcTemplate jdbcTemplate;
+    private final NamedParameterJdbcTemplate parameterJdbcTemplate;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public GameResultRepositoryImpl(NamedParameterJdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public GameResultRepositoryImpl(NamedParameterJdbcTemplate parameterJdbcTemplate) {
+        this.parameterJdbcTemplate = parameterJdbcTemplate;
     }
 
     @Override
     public GameResult findById(Integer idGame) {
         try {
-            return jdbcTemplate.queryForObject(
+            return parameterJdbcTemplate.queryForObject(
                     "SELECT game.win, game.game_duration, game.game_date, game.game_is_rating, " +
                             "club.club_name " +
                             "FROM game " +
@@ -56,23 +60,52 @@ public class GameResultRepositoryImpl implements GameRepository<GameResult> {
     }
 
     @Override
+    public List<GameResult> getGamesList() {
+        List<GameResult> gameResults = new ArrayList<>();
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(
+                "SELECT game.id_game, game.win, game.game_duration, game.game_date, game.game_is_rating, " +
+                        "club.club_name, club.id_club " +
+                        "FROM game " +
+                        "JOIN club ON game.id_club = club.id_club "
+        );
+
+        for (Map<String, Object> row : rows) {
+            GameResult gameResult = new GameResult();
+            Club club = new Club();
+
+            club.setIdClub((Integer) row.get("id_club"));
+            club.setClubName((String) row.get("club_name"));
+            gameResult.setGameDate((Date) row.get("game_date"));
+            gameResult.setWin((String) row.get("win"));
+            gameResult.setGameDuration((String) row.get("game_duration"));
+            gameResult.setGameIsRating((Boolean) row.get("game_is_rating"));
+            gameResult.setClub(club);
+            gameResult.setChecksResult(getGameChecksFromDb((Integer) row.get("id_game")));
+            gameResult.setPlayersResult(getPlayerResultsFromDb((Integer) row.get("id_game")));
+
+            gameResults.add(gameResult);
+        }
+        return gameResults;
+    }
+
+    @Override
     public void addInfoFromGame(GameResult infoFromGame) throws IllegalInputDataException {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         String sql = "INSERT INTO game (win, game_duration, id_club, game_date, game_is_rating) " +
                 "VALUES (:win, :gameDuration, :idClub, :gameDate, :gameIsRating)";
-            parameters.addValue("win", infoFromGame.getWin());
-            parameters.addValue("gameDuration", infoFromGame.getGameDuration());
-            parameters.addValue("idClub", infoFromGame.getClub().getIdClub());
-            parameters.addValue("gameDate", infoFromGame.getGameDate());
-            parameters.addValue("gameIsRating", infoFromGame.isGameIsRating());
+        parameters.addValue("win", infoFromGame.getWin());
+        parameters.addValue("gameDuration", infoFromGame.getGameDuration());
+        parameters.addValue("idClub", infoFromGame.getClub().getIdClub());
+        parameters.addValue("gameDate", infoFromGame.getGameDate());
+        parameters.addValue("gameIsRating", infoFromGame.isGameIsRating());
 
-        jdbcTemplate.update(sql, parameters);
+        parameterJdbcTemplate.update(sql, parameters);
     }
 
     private List<PlayerResult> getPlayerResultsFromDb(Integer idGame) {
         List<PlayerResult> playerResults = new ArrayList<>();
 
-        List<Map<String, Object>> rows = jdbcTemplate.queryForList(
+        List<Map<String, Object>> rows = parameterJdbcTemplate.queryForList(
                 "SELECT player_result.fouls_quantity, player_result.golden_move, player_result.first_kill_sheriff, player_result.is_killed, player_result.player_number, role.role_name " +
                         "FROM player_result " +
                         "INNER JOIN role ON player_result.id_role = role.id_role " +
@@ -100,7 +133,7 @@ public class GameResultRepositoryImpl implements GameRepository<GameResult> {
     private List<CheckGame> getGameChecksFromDb(Integer idGame) {
         List<CheckGame> gameChecks = new ArrayList<>();
 
-        List<Map<String, Object>> rows = jdbcTemplate.queryForList(
+        List<Map<String, Object>> rows = parameterJdbcTemplate.queryForList(
                 "SELECT don_check, sheriff_check, circle_number " +
                         "FROM checks " +
                         "WHERE id_game = :idGame",

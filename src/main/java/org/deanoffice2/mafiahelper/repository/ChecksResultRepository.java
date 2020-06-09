@@ -37,6 +37,11 @@ public class ChecksResultRepository implements GameRepository<CheckGame>, GameLi
     }
 
     @Override
+    public List<CheckGame> getGamesList() {
+        return null;
+    }
+
+    @Override
     public List<CheckGame> findListById(Integer idGame) {
         List<CheckGame> checksGame = new ArrayList<>();
 
