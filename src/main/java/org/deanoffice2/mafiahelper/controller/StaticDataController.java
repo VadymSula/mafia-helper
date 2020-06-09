@@ -7,13 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
 public class StaticDataController {
 
@@ -30,8 +28,10 @@ public class StaticDataController {
     }
 
     @PutMapping("/create-game/")
-    public ResponseEntity<HttpStatus> addNewPlayer(@RequestBody String playerNickName) {
-        staticService.addNewPlayer(playerNickName);
+    public ResponseEntity<HttpStatus> addNewPlayer(
+            @RequestBody String playerNickName,
+            @RequestBody String gender) {
+        staticService.addNewPlayer(playerNickName, gender);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
