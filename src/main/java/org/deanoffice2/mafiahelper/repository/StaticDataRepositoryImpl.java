@@ -55,8 +55,11 @@ public class StaticDataRepositoryImpl implements StaticDataRepository {
     }
 
     @Override
-    public void addNewPlayer(String playerName) {
-        String sql = "INSERT INTO player (nickname) VALUES (:nickname)";
+    public void addNewPlayer(String playerName, String gender) {
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        String sql = "INSERT INTO player (nickname, gender) VALUES (:nickname, :gender)";
+        parameters.addValue("nickname", playerName);
+        parameters.addValue("gender", gender);
         namedParameterJdbcTemplate
                 .update(sql, new MapSqlParameterSource("nickname", playerName));
     }
@@ -72,6 +75,7 @@ public class StaticDataRepositoryImpl implements StaticDataRepository {
 
             player.setIdPlayer((Integer) row.get("id_player"));
             player.setNickName((String) row.get("nickname"));
+            player.setGender((String) row.get("gender"));
 
             playersList.add(player);
         }

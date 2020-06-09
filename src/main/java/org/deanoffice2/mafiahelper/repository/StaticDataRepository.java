@@ -10,7 +10,7 @@ public interface StaticDataRepository {
 
     Integer findByName(String name);
 
-    void addNewPlayer(String playerName);
+    void addNewPlayer(String playerName, String gender);
 
     List<Player> getNicknamePlayers();
 }

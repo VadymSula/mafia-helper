@@ -22,9 +22,9 @@ public class StaticServiceImpl implements StaticService {
     }
 
     @Override
-    public void addNewPlayer(String playerName) {
+    public void addNewPlayer(String playerName, String gender) {
         staticDataRepository
-                .addNewPlayer(playerName);
+                .addNewPlayer(playerName, gender);
     }
 
     @Override
