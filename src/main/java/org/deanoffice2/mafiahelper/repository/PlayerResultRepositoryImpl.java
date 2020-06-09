@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
+import java.util.List;
+
 @org.springframework.stereotype.Repository("playerResultRepository")
 
 public class PlayerResultRepositoryImpl implements GameRepository<PlayerResult> {
@@ -57,6 +59,11 @@ public class PlayerResultRepositoryImpl implements GameRepository<PlayerResult> 
         } catch (DataAccessException e) {
             throw new DataNotFoundException();
         }
+    }
+
+    @Override
+    public List<PlayerResult> getGamesList() {
+        return null;
     }
 
     @Override

@@ -10,7 +10,7 @@ public class GameResult implements DomainObject {
     @JsonIgnore
     private Integer idGame;
     private Club club;
-    private boolean gameIsRating;
+    private Boolean gameIsRating;
     private String win;
     private List<PlayerResult> playersResult = new ArrayList<>();
     private List<CheckGame> checksResult = new ArrayList<>();
@@ -23,7 +23,7 @@ public class GameResult implements DomainObject {
     public GameResult(
             Integer idGame,
             Club club,
-            boolean gameIsRating,
+            Boolean gameIsRating,
             String win,
             List<PlayerResult> playersResult,
             List<CheckGame> checksResult,
@@ -95,11 +95,11 @@ public class GameResult implements DomainObject {
         this.gameDate = gameDate;
     }
 
-    public boolean isGameIsRating() {
+    public Boolean isGameIsRating() {
         return gameIsRating;
     }
 
-    public void setGameIsRating(boolean gameIsRating) {
+    public void setGameIsRating(Boolean gameIsRating) {
         this.gameIsRating = gameIsRating;
     }
 }
