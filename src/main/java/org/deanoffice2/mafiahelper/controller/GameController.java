@@ -30,6 +30,14 @@ public class GameController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @GetMapping("/history-games")
+    public ResponseEntity<List<GameResult>> getGamesList() {
+        return new ResponseEntity<>(
+                gameService.getGamesList(),
+                HttpStatus.OK
+        );
+    }
+
     @GetMapping("/game-end/id-game={idGame}")
     public ResponseEntity<GameResult> getGameResult(@PathVariable("idGame") Integer idGame) {
         return new ResponseEntity<>(

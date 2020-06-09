@@ -9,6 +9,8 @@ import java.util.List;
 public interface GameService {
     GameResult getGameResults(Integer idGame);
 
+    List<GameResult> getGamesList();
+
     List<CheckGame> getGameChecks(Integer idGame);
 
     PlayerResult getPlayerResultByIdAndGameId(Integer idGame, Integer idPlayer);

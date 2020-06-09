@@ -40,6 +40,11 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+    public List<GameResult> getGamesList() {
+        return gameRepository.getGamesList();
+    }
+
+    @Override
     public void saveGameResults(GameResult gameResult) {
         Optional.ofNullable(gameResult.getGameDuration()).orElseThrow(
                 () -> new IllegalInputDataException(gameResult.getGameDuration(), "gameDuration"));
