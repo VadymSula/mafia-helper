@@ -3,6 +3,7 @@ package org.deanoffice2.mafiahelper.controller;
 import org.deanoffice2.mafiahelper.entity.GameResult;
 import org.deanoffice2.mafiahelper.entity.PlayerResult;
 import org.deanoffice2.mafiahelper.entity.RatingGame;
+import org.deanoffice2.mafiahelper.entity.Statistics;
 import org.deanoffice2.mafiahelper.service.GameService;
 import org.deanoffice2.mafiahelper.service.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class GameController {
     @PutMapping("/game-end")
     public ResponseEntity<HttpStatus> saveGameResult(@RequestBody GameResult gameResult) {
         gameService.saveGameResults(gameResult);
+        ratingService.updateRatingIndicators(gameResult);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -68,4 +70,11 @@ public class GameController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("/rating")
+    public ResponseEntity<List<Statistics>> getStatistics() {
+        return new ResponseEntity<>(
+                ratingService.getStatisticsPlayers(),
+                HttpStatus.OK
+        );
+    }
 }
