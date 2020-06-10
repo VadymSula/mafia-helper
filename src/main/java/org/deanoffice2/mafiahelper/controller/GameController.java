@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(maxAge = 3600)
+@CrossOrigin(origins = "*")
 @RestController
 public class GameController {
 
