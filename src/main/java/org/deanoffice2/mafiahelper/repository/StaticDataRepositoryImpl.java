@@ -61,7 +61,7 @@ public class StaticDataRepositoryImpl implements StaticDataRepository {
         parameters.addValue("nickname", playerName);
         parameters.addValue("gender", gender);
         namedParameterJdbcTemplate
-                .update(sql, new MapSqlParameterSource("nickname", playerName));
+                .update(sql, parameters);
     }
 
     @Override

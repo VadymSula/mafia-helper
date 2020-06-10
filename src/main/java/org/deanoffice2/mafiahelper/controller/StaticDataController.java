@@ -28,10 +28,8 @@ public class StaticDataController {
     }
 
     @PutMapping("/create-game/")
-    public ResponseEntity<HttpStatus> addNewPlayer(
-            @RequestBody String playerNickName,
-            @RequestBody String gender) {
-        staticService.addNewPlayer(playerNickName, gender);
+    public ResponseEntity<HttpStatus> addNewPlayer(@RequestBody Player player) {
+        staticService.addNewPlayer(player.getNickName(), player.getGender());
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
