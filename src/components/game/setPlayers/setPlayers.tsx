@@ -91,11 +91,11 @@ class SetPlayers extends Component<Props, State> {
 
     componentDidUpdate() {
         let countRoles = {
-                civil: 0,
-                mafia: 0,
-                don: 0,
-                sheriff: 0,
-                lead: 0
+                Civil: 0,
+                Mafia: 0,
+                Don: 0,
+                Sheriff: 0,
+                Lead: 0
             },
             players = [
                 this.props.player.player0,
@@ -117,7 +117,7 @@ class SetPlayers extends Component<Props, State> {
                 countRoles[player.role]++
             return null
         });
-        isGood = countRoles.civil === 6 && countRoles.mafia === 2 && countRoles.sheriff === 1 && countRoles.don === 1 && countRoles.lead === 1;
+        isGood = countRoles.Civil === 6 && countRoles.Mafia === 2 && countRoles.Sheriff === 1 && countRoles.Don === 1 && countRoles.Lead === 1;
 
 
         if (this.state.isHidden && isGood)
@@ -128,7 +128,7 @@ class SetPlayers extends Component<Props, State> {
 
     render() {
         return (
-            <section className="setPlayers">
+            <section className="game">
                 <h1>Набір гравців</h1>
                 <RenderPlayer player={this.props.player.player0} number={0}/>
                 <div className="players">

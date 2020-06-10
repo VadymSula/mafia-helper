@@ -53,16 +53,16 @@ class RenderPlayer extends Component<Props, State> {
                     : this.props.player.number ?
                         <p>
                         <span>
-                        {this.state.role === 'don' ? <i className="fas fa-user-secret"/> :
-                            this.state.role === 'mafia' ? <i className="fas fa-crosshairs"/> :
-                                this.state.role === 'sheriff' ? <i className="fab fa-empire"/> : null}
+                        {this.state.role === 'Don' ? <i className="fas fa-user-secret"/> :
+                            this.state.role === 'Mafia' ? <i className="fas fa-crosshairs"/> :
+                                this.state.role === 'Sheriff' ? <i className="fab fa-empire"/> : null}
                             {this.props.player.name}
                         </span>
                             <select className="ChangeRole" required onChange={this.changeRole} defaultValue="civil">
-                                <option value="civil">Мирний житель</option>
-                                <option value="mafia">Мафія</option>
-                                <option value="don">Дон</option>
-                                <option value="sheriff">Шериф</option>
+                                <option value="Civil">Мирний житель</option>
+                                <option value="Mafia">Мафія</option>
+                                <option value="Don">Дон</option>
+                                <option value="Sheriff">Шериф</option>
                             </select>
                         </p>
                         :
