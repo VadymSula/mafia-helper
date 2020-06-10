@@ -155,15 +155,15 @@ class PlayerDiv extends Component<Props, State> {
     };
 
     render() {
-        let genderText = this.props.player.gender == 'm'? "Г-ин" : "Г-жа";
+        let genderText = this.props.player.gender === 'm'? "Г-ин" : "Г-жа";
         return (
 
             <div className={this.props.player.active ? this.props.player.fouls === 3 ? 'player danger' : 'player'
                 : 'player disabled'}>
                 {this.props.showInfoForLead ?
-                    this.props.player.role === 'don' ? <i className="fas fa-user-secret iRole"/> :
-                        this.props.player.role === 'mafia' ? <i className="fas fa-crosshairs iRole"/> :
-                            this.props.player.role === 'sheriff' ? <i className="fab fa-empire iRole"/> : null
+                    this.props.player.role === 'Don' ? <i className="fas fa-user-secret iRole"/> :
+                        this.props.player.role === 'Mafia' ? <i className="fas fa-crosshairs iRole"/> :
+                            this.props.player.role === 'Sheriff' ? <i className="fab fa-empire iRole"/> : null
                     : null
                 }
 

@@ -3,11 +3,17 @@ import {connect} from "react-redux";
 import PlayerDiv from "./playerDiv";
 import {
     addCheck,
-    changeCircle, changeCountActivePLayers,
+    changeCircle,
+    changeCountActivePLayers,
     changeKickStatus,
     changeKillStatus,
     changeVoting,
-    endGame, setBestMove, setResultGame, setRoles, showInfoForLead
+    endGame,
+    setBestMove,
+    setResultGame,
+    setRoles,
+    setStartPlayerInCircle,
+    showInfoForLead
 } from "../../../store/actions";
 import {API} from "../../../servise/apiServise";
 import Court from "./court";
@@ -36,7 +42,9 @@ interface Props {
     showInfoForLead: any,
     showInfoForLeadBool: boolean,
     setRoles: any,
-    roles: any
+    roles: any,
+    setStartPlayerInCircle: any,
+    startPlayerInCircle: any
 }
 
 interface State {
@@ -86,6 +94,10 @@ class InGame extends Component<Props, State> {
         return count;
     };
 
+    playerIsActive = (number) => {
+        return this.props.player['player'+number].active;
+    };
+
     endCircle = () => {
         if (!this.state.isShowingBestMoveButton) {
             if (!this.props.courtStatus) {
@@ -99,7 +111,14 @@ class InGame extends Component<Props, State> {
                         this.setState({countToDraw: 0})
                     }
                 }
-
+                let number = this.props.startPlayerInCircle + 1;
+                while (!this.playerIsActive(number)){
+                    if(number + 1 > 10)
+                        number = 1;
+                    else
+                    number++;
+                }
+                this.props.setStartPlayerInCircle(number);
 
                 this.props.changeVoting([]);
                 this.props.changeCircle(this.props.circle + 1);
@@ -214,7 +233,6 @@ class InGame extends Component<Props, State> {
                 else
                     _tmp_info = {
                         foulsQuantity: player.fouls,
-                        // firstKillSheriff: false,
                         killed: !player.active,
                         roleInGame: player.role,
                         name: player.name,
@@ -228,8 +246,7 @@ class InGame extends Component<Props, State> {
                     if (this.props.kills[0].playerNumber === player.number)
                         _tmp_info.goldenMove = this.props.bestMove;
 
-                let roleObject = roles.filter(role => role.roleName === _tmp_info.roleInGame)[0];
-                _tmp_info.roleInGame = roleObject.idRole;
+                _tmp_info.roleInGame = roles.filter(role => role.roleName === _tmp_info.roleInGame)[0];
 
                 players.push(_tmp_info);
             }
@@ -388,6 +405,7 @@ class InGame extends Component<Props, State> {
 
                             <span className="time">{this.state.timer !== 0 ? this.state.timer : null}</span>
                             <i className="fas fa-stopwatch"/>
+                            <h3>Це коло розпочинає гравець №{this.props.startPlayerInCircle}</h3>
                         </div>
                         <div>
                             <PlayerDiv player={this.props.player.player7}/>
@@ -483,7 +501,8 @@ const mapStateToProps = function (state) {
         countActivePlayers: state.countActivePlayers,
         isRatingGame: state.isRatingGame,
         showInfoForLeadBool: state.showInfoForLead,
-        roles: state.roles
+        roles: state.roles,
+        startPlayerInCircle: state.startPlayerInCircle
     }
 };
 
@@ -498,7 +517,8 @@ const mapDispatchToProps = {
     setResultGame,
     changeCountActivePLayers,
     showInfoForLead,
-    setRoles
+    setRoles,
+    setStartPlayerInCircle
 };
 export default connect(mapStateToProps, mapDispatchToProps)(InGame)
 
