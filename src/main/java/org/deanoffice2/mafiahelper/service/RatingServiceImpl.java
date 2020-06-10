@@ -1,10 +1,7 @@
 package org.deanoffice2.mafiahelper.service;
 
-import org.deanoffice2.mafiahelper.entity.GameResult;
-import org.deanoffice2.mafiahelper.entity.PlayerResult;
-import org.deanoffice2.mafiahelper.entity.RatingGame;
-import org.deanoffice2.mafiahelper.entity.RoleGame;
-import org.deanoffice2.mafiahelper.repository.RatingRepository;
+import org.deanoffice2.mafiahelper.entity.*;
+import org.deanoffice2.mafiahelper.repository.rating.RatingRepository;
 import org.deanoffice2.mafiahelper.repository.StaticDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,6 +33,33 @@ public class RatingServiceImpl implements RatingService {
     @Override
     public void updateRatingForExtraPoints(List<RatingGame> ratingList) {
         ratingList.forEach(this::updatePlayerRating);
+    }
+
+    @Override
+    public List<Statistics> getStatisticsPlayers() {
+        return ratingRepository.getStatistics();
+    }
+
+    @Override
+    public void updateRatingIndicators(GameResult gameResult) {
+        gameResult.getPlayersResult()
+                .stream()
+                .filter(playerResult -> !playerResult.getRoleInGame().getRoleName().equals("Lead"))
+                .forEach(playerResult -> {
+                    ratingRepository.updateGamesQuantity(
+                            gameResult.getClub().getIdClub(),
+                            playerResult.getIdPlayer(),
+                            addOneGame(playerResult, gameResult)
+                    );
+                });
+        gameResult.getPlayersResult()
+                .forEach(playerResult -> {
+                    addOneGameForRole(
+                            gameResult,
+                            playerResult.getIdPlayer(),
+                            playerResult.getRoleInGame().getRoleName()
+                    );
+                });
     }
 
     private void updateRatingForWin(GameResult gameResult) {
@@ -82,6 +106,60 @@ public class RatingServiceImpl implements RatingService {
                         ratingGame.getRatingValue()
                 )
         );
+    }
+
+    private Integer addOneGame(PlayerResult playerResult, GameResult gameResult) {
+        return 1 + ratingRepository.getPlayerGamesQuantity(
+                gameResult.getClub().getIdClub(),
+                playerResult.getIdPlayer());
+    }
+
+    private void addOneGameForRole(GameResult gameResult, Integer idPlayer, String roleName) {
+        int newGamesQuantity;
+        int newWinsQuantity = 0;
+        int newWinGeneralQuantity = 0;
+        switch (roleName) {
+            case "Civil":
+                newGamesQuantity = 1 + ratingRepository.getForRoleQuantity(idPlayer, "games_civil_quantity");
+                ratingRepository.updateWinsQuantity(idPlayer, newGamesQuantity, "games_civil_quantity");
+                if (gameResult.getWin().equals("city")) {
+                    newWinGeneralQuantity = 1 + ratingRepository.getForRoleQuantity(idPlayer, "wins_quantity");
+                    ratingRepository.updateWinsQuantity(idPlayer, newWinGeneralQuantity, "wins_quantity");
+                    newWinsQuantity = 1 + ratingRepository.getForRoleQuantity(idPlayer, "wins_civil");
+                    ratingRepository.updateWinsQuantity(idPlayer, newWinsQuantity, "wins_civil");
+                }
+                break;
+            case "Mafia":
+                newGamesQuantity = 1 + ratingRepository.getForRoleQuantity(idPlayer, "games_mafia_quantity");
+                ratingRepository.updateWinsQuantity(idPlayer, newGamesQuantity, "games_mafia_quantity");
+                if (!gameResult.getWin().equals("city")) {
+                    newWinGeneralQuantity = 1 + ratingRepository.getForRoleQuantity(idPlayer, "wins_quantity");
+                    ratingRepository.updateWinsQuantity(idPlayer, newWinGeneralQuantity, "wins_quantity");
+                    newWinsQuantity = 1 + ratingRepository.getForRoleQuantity(idPlayer, "wins_mafia");
+                    ratingRepository.updateWinsQuantity(idPlayer, newWinsQuantity, "wins_mafia");
+                }
+                break;
+            case "Don":
+                newGamesQuantity = 1 + ratingRepository.getForRoleQuantity(idPlayer, "games_don_quantity");
+                ratingRepository.updateWinsQuantity(idPlayer, newGamesQuantity, "games_don_quantity");
+                if (!gameResult.getWin().equals("city")) {
+                    newWinGeneralQuantity = 1 + ratingRepository.getForRoleQuantity(idPlayer, "wins_quantity");
+                    ratingRepository.updateWinsQuantity(idPlayer, newWinGeneralQuantity, "wins_quantity");
+                    newWinsQuantity = 1 + ratingRepository.getForRoleQuantity(idPlayer, "wins_don");
+                    ratingRepository.updateWinsQuantity(idPlayer, newWinsQuantity, "wins_don");
+                }
+                break;
+            case "Sheriff":
+                newGamesQuantity = 1 + ratingRepository.getForRoleQuantity(idPlayer, "games_sheriff_quantity");
+                ratingRepository.updateWinsQuantity(idPlayer, newGamesQuantity, "games_sheriff_quantity");
+                if (gameResult.getWin().equals("city")) {
+                    newWinGeneralQuantity = 1 + ratingRepository.getForRoleQuantity(idPlayer, "wins_quantity");
+                    ratingRepository.updateWinsQuantity(idPlayer, newWinGeneralQuantity, "wins_quantity");
+                    newWinsQuantity = 1 + ratingRepository.getForRoleQuantity(idPlayer, "wins_sheriff");
+                    ratingRepository.updateWinsQuantity(idPlayer, newWinsQuantity, "wins_sheriff");
+                }
+                break;
+        }
     }
 //    private void updateRatingOnBestMoveForSheriff(GameResult gameResult) {
 //        gameResult.getPlayersResult()

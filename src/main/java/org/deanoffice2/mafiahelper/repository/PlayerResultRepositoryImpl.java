@@ -70,9 +70,9 @@ public class PlayerResultRepositoryImpl implements GameRepository<PlayerResult> 
     public void addInfoFromGame(PlayerResult infoFromGame) {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         String sql = "INSERT INTO player_result (id_player, id_role, fouls_quantity, golden_move, first_kill_sheriff, id_game, is_killed, player_number)" +
-                "VALUES (:idPlayer, :role, :foulsQuantity, :goldenMove, :firstKillSheriff, (SELECT id_game FROM game ORDER BY id_game DESC LIMIT 1), :isKilled, :player_number)";
+                "VALUES (:idPlayer, :role, :foulsQuantity, :goldenMove, :firstKillSheriff, (SELECT id_game FROM game ORDER BY id_game DESC LIMIT 1), :isKilled, :playerNumber)";
         parameters.addValue("idPlayer", infoFromGame.getIdPlayer());
-        parameters.addValue("role", infoFromGame.getRoleInGame());
+        parameters.addValue("role", infoFromGame.getRoleInGame().getIdRole());
         parameters.addValue("foulsQuantity", infoFromGame.getFoulsQuantity());
         parameters.addValue("goldenMove", infoFromGame.getGoldenMove());
         parameters.addValue("firstKillSheriff", infoFromGame.isFirstKillSheriff());
