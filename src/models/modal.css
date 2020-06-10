@@ -124,6 +124,7 @@
 .radio_buttons{
     max-height: 400px;
     overflow: auto;
+    width: 100%;
 }
 .radio_buttons div{
     min-width: 250px;
@@ -141,6 +142,64 @@
     background:pink !important;
 }
 
+.addNewPlayerForm{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.addNewPlayerForm form{
+    width: 100%;
+}
+.addNewPlayerForm label{
+    display: block;
+    margin: 10px;
+    width: 100%;
+}
+.addNewPlayerForm label.col{
+    display: flex;
+    justify-content: space-between;
+
+}
+.addNewPlayerForm label.col .divGender{
+    display: flex;
+    flex-direction: row;
+
+}
+.addNewPlayerForm label.gender{
+    margin: 0;
+    width: 100px;
+    display: flex;
+    flex-direction: row;
+}
+.addNewPlayerForm label.gender input{
+    margin-top: 15px;
+
+}
+.addNewPlayerForm input{
+    margin: 0 0 0 10px;
+}
+.TabsHead{
+    display: flex;
+}
+.TabsHead h6 {
+    margin: 0 0 0 10px;
+    padding-bottom: 5px;
+    cursor: pointer;
+    transition: .2s;
+    border-bottom: 3px solid white;
+}
+.TabsHead h6.active {
+    border-color: #b71c1c;
+    color: #b71c1c;
+}
+.TabsHead h6.active:hover{
+    border-color: #8a1818;
+    color: #8a1818;
+}
+.TabsHead h6:hover{
+    color: #7d7d7d;
+    border-color: #7d7d7d;
+}
 @media screen and (max-width: 470px){
     .modal-wrapper__setPlayers {
         width: 100%;

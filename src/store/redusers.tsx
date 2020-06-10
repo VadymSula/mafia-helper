@@ -3,7 +3,7 @@ import {
     CHANGE_CIRCLE, CHANGE_COUNT_ACTIVE_PLAYERS, CHANGE_COURT_STATUS,
     CHANGE_KICK_STATUS, CHANGE_KILL_STATUS,
     CHANGE_PLAYER_INFO, CHANGE_SHOW_INFO,
-    CHANGE_VOTING, END_GAME,
+    CHANGE_VOTING, CLEAR_INFO_ABOUT_PLAYERS, END_GAME,
     PLAYER_IS_READY, SET_ALL_GAMES, SET_ARRAY_PLAYERS, SET_BEST_MOVE, SET_RESULT_GAME, SET_ROLES, SHOW_INFO_FOR_LEAD,
     START_GAME
 } from "./actions";
@@ -234,6 +234,21 @@ export const rootReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 allGames: action.payload
+            };
+        case CLEAR_INFO_ABOUT_PLAYERS:
+            return {
+                ...state,
+                player0: {},
+                player1: {},
+                player2: {},
+                player3: {},
+                player4: {},
+                player5: {},
+                player6: {},
+                player7: {},
+                player8: {},
+                player9: {},
+                player10: {}
             };
     }
     return state;

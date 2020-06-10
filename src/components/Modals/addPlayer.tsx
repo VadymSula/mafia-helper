@@ -2,13 +2,17 @@ import React, {Component} from 'react';
 import Modal from "../../models/modal";
 import {connect} from "react-redux";
 import {playersIsReady, setArrayPlayers} from "../../store/actions";
+import {API} from "../../servise/apiServise";
 
 interface State {
     isShowing: boolean,
     player?: any,
     arrayPlayers: any,
     search?: string,
-    searchResult?: any
+    searchResult?: any,
+    addTabIsActive: boolean,
+    newPlayerName: string,
+    gender: string
 }
 
 interface Props {
@@ -26,7 +30,10 @@ class AddPlayerModal extends Component<Props, State> {
             isShowing: false,
             arrayPlayers: [],
             search: "",
-            player: 0
+            player: 0,
+            addTabIsActive: false,
+            newPlayerName: '',
+            gender: '',
         }
     }
 
@@ -91,6 +98,48 @@ class AddPlayerModal extends Component<Props, State> {
         });
     };
 
+    changeActiveTab = (event) => {
+        event.preventDefault();
+        this.setState({addTabIsActive: event.target.id === 'new'})
+    };
+
+    addNewPlayer = (event) => {
+        event.preventDefault();
+        let name = this.state.newPlayerName,
+            gender = this.state.gender;
+        if (name !== ''){
+            if (gender !== ''){
+                if (gender === 'm' || gender === 'f'){
+                    API.addNewPlayer({
+                        playerNickname: name,
+                        gender: gender
+                    }).then(res=>{
+                        console.log(res)
+                    })
+                }
+            } else {
+                alert("Стать не може бути пустим")
+            }
+        } else {
+            alert("Ім'я не може бути пустим")
+        }
+    };
+
+    changeInput = (event) => {
+        let name = event.target.name,
+            value = event.target.value;
+        switch (name) {
+            case 'newPlayerName': {
+                this.setState({newPlayerName: value});
+                break;
+            }
+            case 'gender': {
+                this.setState({gender: value});
+                break;
+            }
+        }
+    };
+
     render() {
         let arr: any = [];
         if (this.state.arrayPlayers !== undefined) {
@@ -113,26 +162,72 @@ class AddPlayerModal extends Component<Props, State> {
                         className="modal"
                         show={this.state.isShowing}
                         close={this.closeModal}>
-                        <div>
-                            <input type="text" onChange={this.changeSearch} placeholder="Введіть для пошуку"/>
-                            <div className="radio_buttons">
-
-                                {arr.map((player) => {
-                                    return (
-                                        <div key={player.id}>
-                                            <label>
-                                                <input onChange={this.changePlayer} name='player'
-                                                       type="radio"
-                                                       value={player.id}/>
-                                                {player.name}
-                                            </label>
-                                        </div>
-                                    )
-                                })}
-                            </div>
+                        <div className="TabsHead">
+                            <h6 onClick={this.changeActiveTab} id="existing"
+                                className={this.state.addTabIsActive ? '' : 'active'}>Обрати існуючого</h6>
+                            <h6 onClick={this.changeActiveTab} id="new"
+                                className={this.state.addTabIsActive ? 'active' : ''}>Додати нового</h6>
                         </div>
-                        {this.state.player !== 0 ? <button onClick={this.sendPlayer}>Add</button> :
-                            <button className='disab'>Add</button>}
+                        {
+                            this.state.addTabIsActive ?
+                                <div className="addNewPlayerForm">
+                                    <form onSubmit={this.addNewPlayer}>
+                                        <label className="col">
+                                            Ім'я:
+                                            <input
+                                                name='newPlayerName'
+                                                type="text"
+                                                value={this.state.newPlayerName}
+                                                onChange={this.changeInput}/>
+                                        </label>
+                                        <label className="col">
+                                            Стать:
+                                            <div className="divGender">
+                                                <label className="gender">
+                                                    <input
+                                                        type="radio"
+                                                        name='gender'
+                                                        value="m"
+                                                        onChange={this.changeInput}/>
+                                                    чол
+                                                </label>
+                                                <label className="gender">
+                                                    <input
+                                                        type="radio"
+                                                        name='gender'
+                                                        value="f"
+                                                        onChange={this.changeInput}/>
+                                                    жін
+                                                </label>
+                                            </div>
+                                        </label>
+                                        <button className='green' onClick={this.addNewPlayer}>Додати гравця</button>
+                                    </form>
+                                </div>
+                                : <div>
+                                    <div>
+                                        <input type="text" onChange={this.changeSearch}
+                                               placeholder="Введіть для пошуку"/>
+                                        <div className="radio_buttons">
+
+                                            {arr.map((player) => {
+                                                return (
+                                                    <div key={player.id}>
+                                                        <label>
+                                                            <input onChange={this.changePlayer} name='player'
+                                                                   type="radio"
+                                                                   value={player.id}/>
+                                                            {player.name}
+                                                        </label>
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                    </div>
+                                    {this.state.player !== 0 ? <button onClick={this.sendPlayer}>Add</button> :
+                                        <button className='disab'>Add</button>}
+                                </div>
+                        }
                     </Modal>
                 </div>
                 : "Упс... В нас закінчились гравці"

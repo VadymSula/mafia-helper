@@ -9,6 +9,14 @@ export class API {
         return await response.json();
     }
 
+    static async addNewPlayer(body) {
+        let response = await fetch(this.defaultPath + "/create-game/", {
+            method: 'PUT',
+            body: body.toString()
+        });
+        return await response.json();
+    }
+
     static async sendGameInformationRating(body) {
         let response = await fetch(this.defaultPath + "/rating-game/game-end/mp", {
             method: 'POST',
