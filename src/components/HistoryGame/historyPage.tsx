@@ -1,31 +1,25 @@
 import React, {Component} from "react";
 import "./historyPage.css";
 import GameBlock from "./gameBlock";
+import {API} from "../../servise/apiServise";
+import {connect} from 'react-redux';
+import {setAllGames} from "../../store/actions";
 
-class HistoryPage extends Component {
+interface Props {
+    setAllGames: any,
+    allGames: any
+}
 
-    games_tmp = [
-        {
-            id: 0,
-            winner: 'mafia',
-            gameDuration: '40:23',
-            date: 'вчора'
-        },
-        {
-            id: 1,
-            winner: 'city',
-            gameDuration: '40:23',
-            date: 'вчора'
-        },
-        {
-            id: 2,
-            winner: 'draw',
-            gameDuration: '40:23',
-            date: 'вчора'
-        }
-    ];
+class HistoryPage extends Component<Props> {
+
+    componentDidMount(): void {
+        API.getAllGames().then(res => {
+            this.props.setAllGames(res)
+        })
+    }
 
     render() {
+
         return (
             <div id='history' className="historyPage">
                 <header>
@@ -34,24 +28,31 @@ class HistoryPage extends Component {
                     </div>
                 </header>
                 <section>
-                    <div className="contanier  line_down">
-                        <div className="lineHeader">
-                            <h3>Дата</h3>
-                        </div>
-                        <div className="lineHeader">
-                            <h3>Переможець</h3>
-                        </div>
-                        <div className="lineHeader">
-                            <h3>Тривалість</h3>
-                        </div>
-                        <div className="button costul"><i className="fas fa-chevron-down"></i></div>
-                    </div>
+
                     {
-                        this.games_tmp.map(game => {
-                            return (
-                                <GameBlock key={game.id} game={game}/>
-                            )
-                        })
+                        this.props.allGames.lenght > 0 ?
+                            <div>
+                                <div className="contanier  line_down">
+                                    <div className="lineHeader">
+                                        <h3>Дата</h3>
+                                    </div>
+                                    <div className="lineHeader">
+                                        <h3>Переможець</h3>
+                                    </div>
+                                    <div className="lineHeader">
+                                        <h3>Тривалість</h3>
+                                    </div>
+                                    <div className="button costul"><i className="fas fa-chevron-down"/></div>
+                                </div>
+                                {
+                                    this.props.allGames.map(game => {
+                                        return (
+                                            <GameBlock game={game}/>
+                                        )
+                                    })
+                                }
+                            </div>:
+                            <h2>Історія ігор пуста</h2>
                     }
                 </section>
             </div>
@@ -59,4 +60,13 @@ class HistoryPage extends Component {
     }
 }
 
-export default HistoryPage;
+const mapStateToProps = function (state) {
+    return {
+        allGames: state.allGames
+    }
+};
+
+const mapDispatchToProps = {
+    setAllGames
+};
+export default connect(mapStateToProps, mapDispatchToProps)(HistoryPage);

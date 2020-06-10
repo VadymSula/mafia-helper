@@ -14,6 +14,8 @@ export const CHANGE_SHOW_INFO = 'CHANGE_SHOW_INFO';
 export const CHANGE_COURT_STATUS = 'CHANGE_COURT_STATUS';
 export const CHANGE_COUNT_ACTIVE_PLAYERS = 'CHANGE_COUNT_ACTIVE_PLAYERS';
 export const SHOW_INFO_FOR_LEAD = 'SHOW_INFO_FOR_LEAD';
+export const SET_ROLES = 'SET_ROLES';
+export const SET_ALL_GAMES = 'SET_ALL_GAMES';
 
 
 export const startGame = value => ({
@@ -77,5 +79,13 @@ export const changeCountActivePLayers = value => ({
 });
 export const showInfoForLead= value => ({
     type: SHOW_INFO_FOR_LEAD,
+    payload: value
+});
+export const setRoles= value => ({
+    type: SET_ROLES,
+    payload: value
+});
+export const setAllGames= value => ({
+    type: SET_ALL_GAMES,
     payload: value
 });

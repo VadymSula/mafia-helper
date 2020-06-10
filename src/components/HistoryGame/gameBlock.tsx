@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import ResultGame from "../ResultGame/resultGame";
 
 interface Props {
     game: {
