@@ -1,13 +1,15 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {setArrayPlayers, startGame} from "../../../store/actions";
+import {playersIsReady, setArrayPlayers, startGame, clearInfoAboutPlayers} from "../../../store/actions";
 import RenderPlayer from "./renderPlayer";
 import {API} from "../../../servise/apiServise";
 
 interface Props {
     startGame: any,
     player: any,
-    setArrayPlayers: any
+    setArrayPlayers: any,
+    playersIsReady: any,
+    clearInfoAboutPlayers: any
 }
 
 interface State {
@@ -27,10 +29,18 @@ class SetPlayers extends Component<Props, State> {
         this.props.startGame(true);
     };
 
-    componentDidMount() {
-        this.props.setArrayPlayers([]);
+    updatePlayers = () => {
+        this.clearInfoForPlayers();
+        this.getAllPlayers();
+    };
+
+    clearInfoForPlayers = () => {
+        this.props.clearInfoAboutPlayers();
+    };
+
+    getAllPlayers = () => {
         API.getAllPlayers().then(response => {
-            let _arr:any = [];
+            let _arr: any = [];
             response.map(pl => {
                 _arr.push({
                     id: pl.idPlayer,
@@ -41,52 +51,11 @@ class SetPlayers extends Component<Props, State> {
         }).catch(error => {
             console.error(error)
         });
-        // this.props.setArrayPlayers([
-        //     {
-        //         name: "amarsik",
-        //         id: 1
-        //     },
-        //     {
-        //         name: "WhoAmI",
-        //         id: 2
-        //     },
-        //     {
-        //         name: "SUBARIST",
-        //         id: 3
-        //     },
-        //     {
-        //         name: "Odin",
-        //         id: 4
-        //     },
-        //     {
-        //         name: "Drews",
-        //         id: 5
-        //     },
-        //     {
-        //         name: "Bananator",
-        //         id: 6
-        //     },
-        //     {
-        //         name: "Vitalik",
-        //         id: 7
-        //     },
-        //     {
-        //         name: "Ostin",
-        //         id: 8
-        //     },
-        //     {
-        //         name: "Seezov",
-        //         id: 9
-        //     },
-        //     {
-        //         name: "Braun",
-        //         id: 10
-        //     },
-        //     {
-        //         name: "Floppy",
-        //         id: 11
-        //     },
-        // ])
+    };
+
+    componentDidMount() {
+        this.props.setArrayPlayers([]);
+        this.getAllPlayers();
     }
 
     componentDidUpdate() {
@@ -114,7 +83,7 @@ class SetPlayers extends Component<Props, State> {
 
         players.map(player => {
             if (player.role)
-                countRoles[player.role]++
+                countRoles[player.role]++;
             return null
         });
         isGood = countRoles.Civil === 6 && countRoles.Mafia === 2 && countRoles.Sheriff === 1 && countRoles.Don === 1 && countRoles.Lead === 1;
@@ -130,6 +99,7 @@ class SetPlayers extends Component<Props, State> {
         return (
             <section className="game">
                 <h1>Набір гравців</h1>
+                <button onClick={this.updatePlayers} className='purple'>Оновити гравців</button>
                 <RenderPlayer player={this.props.player.player0} number={0}/>
                 <div className="players">
                     <RenderPlayer player={this.props.player.player1} number={1}/>
@@ -153,13 +123,21 @@ class SetPlayers extends Component<Props, State> {
     }
 }
 
-const mapStateToProps = function (state) {
-    return {
-        player: state,
-    }
-};
-const mapDispatchToProps = {
-    startGame,
-    setArrayPlayers
-};
-export default connect(mapStateToProps, mapDispatchToProps)(SetPlayers)
+const
+    mapStateToProps = function (state) {
+        return {
+            player: state,
+        }
+    };
+const
+    mapDispatchToProps = {
+        startGame,
+        setArrayPlayers,
+        playersIsReady,
+        clearInfoAboutPlayers
+    };
+export default connect(mapStateToProps, mapDispatchToProps)
+
+(
+    SetPlayers
+)

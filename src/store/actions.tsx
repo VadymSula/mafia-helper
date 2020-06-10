@@ -16,6 +16,7 @@ export const CHANGE_COUNT_ACTIVE_PLAYERS = 'CHANGE_COUNT_ACTIVE_PLAYERS';
 export const SHOW_INFO_FOR_LEAD = 'SHOW_INFO_FOR_LEAD';
 export const SET_ROLES = 'SET_ROLES';
 export const SET_ALL_GAMES = 'SET_ALL_GAMES';
+export const CLEAR_INFO_ABOUT_PLAYERS = 'CLEAR_INFO_ABOUT_PLAYERS';
 
 
 export const startGame = value => ({
@@ -87,5 +88,9 @@ export const setRoles= value => ({
 });
 export const setAllGames= value => ({
     type: SET_ALL_GAMES,
+    payload: value
+});
+export const clearInfoAboutPlayers= value => ({
+    type: CLEAR_INFO_ABOUT_PLAYERS,
     payload: value
 });
