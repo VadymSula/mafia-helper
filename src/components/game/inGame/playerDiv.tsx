@@ -155,6 +155,7 @@ class PlayerDiv extends Component<Props, State> {
     };
 
     render() {
+        let genderText = this.props.player.gender == 'm'? "Г-ин" : "Г-жа";
         return (
 
             <div className={this.props.player.active ? this.props.player.fouls === 3 ? 'player danger' : 'player'
@@ -171,7 +172,7 @@ class PlayerDiv extends Component<Props, State> {
 
                         {this.state.isShowing ? <div onClick={this.closeModal} className="back-drop"/> : null}
                         <p onClick={this.openModal}>
-                            {this.props.player.number + ') ' + this.props.player.name}
+                            {this.props.player.number + ') '+ genderText+' '+this.props.player.name}
                             <span>
                             {
                                 !this.props.player.fouls ? " " :

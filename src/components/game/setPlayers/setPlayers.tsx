@@ -44,7 +44,8 @@ class SetPlayers extends Component<Props, State> {
             response.map(pl => {
                 _arr.push({
                     id: pl.idPlayer,
-                    name: pl.nickName
+                    name: pl.nickName,
+                    gender: pl.gender
                 })
             });
             this.props.setArrayPlayers(_arr);

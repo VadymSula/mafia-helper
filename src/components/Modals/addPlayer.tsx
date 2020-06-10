@@ -69,6 +69,7 @@ class AddPlayerModal extends Component<Props, State> {
                 ready: true,
                 number: this.props.number,
                 fouls: 0,
+                gender: player.gender,
                 active: true,
                 role: "Civil"
             });
