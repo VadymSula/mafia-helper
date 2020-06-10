@@ -17,6 +17,7 @@ export const SHOW_INFO_FOR_LEAD = 'SHOW_INFO_FOR_LEAD';
 export const SET_ROLES = 'SET_ROLES';
 export const SET_ALL_GAMES = 'SET_ALL_GAMES';
 export const CLEAR_INFO_ABOUT_PLAYERS = 'CLEAR_INFO_ABOUT_PLAYERS';
+export const SET_WHO_PLAYER_START_CIRCLE = 'SET_WHO_PLAYER_START_CIRCLE';
 
 
 export const startGame = value => ({
@@ -92,5 +93,9 @@ export const setAllGames= value => ({
 });
 export const clearInfoAboutPlayers= value => ({
     type: CLEAR_INFO_ABOUT_PLAYERS,
+    payload: value
+});
+export const setStartPlayerInCircle= value => ({
+    type: SET_WHO_PLAYER_START_CIRCLE,
     payload: value
 });

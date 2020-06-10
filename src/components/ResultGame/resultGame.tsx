@@ -189,7 +189,6 @@ class ResultGame extends Component<Props, State> {
         }
         arr.map(pl => sum += pl.value);
         sum = parseFloat(sum.toFixed(1));
-        console.log(arr)
         this.setState({pointsSum: sum});
         this.setState({positive: arr});
     };
@@ -233,13 +232,7 @@ class ResultGame extends Component<Props, State> {
         let game: any;
         if (this.props.resultGame)
             game = this.props.resultGame;
-        let {roles} = this.props;
-        if (!game.isParsed)
-            game.playersResult.map(pl => {
-                let roleObject = roles.filter(role => pl.roleInGame === role.idRole)[0];
-                pl.roleInGame = roleObject.roleName;
-            });
-        let arrayPlayers = game.playersResult.filter(pl => pl.roleInGame !== 'Lead');
+        let arrayPlayers = game.playersResult.filter(pl => pl.roleInGame.roleName !== 'Lead');
         // Гравець, який дає "кращий хід"
         let playerBM = game.playersResult.filter(player => player.goldenMove !== undefined)[0], str_: any;
         if (playerBM) {
@@ -251,19 +244,18 @@ class ResultGame extends Component<Props, State> {
         }
         // Перевірка в дона на перше вбивство шерифа
         let don = {firstKillSheriff: false};
-        don = game.playersResult.filter(player => player.roleInGame === 'Don')[0];
+        don = game.playersResult.filter(player => player.roleInGame.roleName === 'Don')[0];
         // Чорні перевірки шерифа
         let blackChecks: any = [];
         game.checksResult.forEach((check) => {
             if (check.sheriffCheck) {
-                if (game.playersResult[check.sheriffCheck - 1].roleInGame === 'Mafia' || game.playersResult[check.sheriffCheck - 1].roleInGame === 'Don') {
+                if (game.playersResult[check.sheriffCheck - 1].roleInGame.roleName === 'Mafia' || game.playersResult[check.sheriffCheck - 1].roleInGame.roleName === 'Don') {
                     blackChecks.push(check.sheriffCheck)
                 }
             }
         });
         let checkArr = blackChecks.join('/');
-        let sheriff = game.playersResult.filter(player => player.roleInGame === 'Sheriff')[0];
-        game.isParsed = true;
+        let sheriff = game.playersResult.filter(player => player.roleInGame.roleName === 'Sheriff')[0];
         return (
             <div className="body ResultGame">
                 <div className="header">
@@ -291,11 +283,11 @@ class ResultGame extends Component<Props, State> {
                                             <span>{num})</span>
                                             {player.name}
                                             {
-                                                player.roleInGame === 'Don' ?
+                                                player.roleInGame.roleName === 'Don' ?
                                                     <i className="fas fa-user-secret iRole"/> :
-                                                    player.roleInGame === 'Mafia' ?
+                                                    player.roleInGame.roleName === 'Mafia' ?
                                                         <i className="fas fa-crosshairs iRole"/> :
-                                                        player.roleInGame === 'Sheriff' ?
+                                                        player.roleInGame.roleName === 'Sheriff' ?
                                                             <i className="fab fa-empire iRole"/> : null
                                             }
                                         </p>

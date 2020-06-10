@@ -1,10 +1,23 @@
 import {
     ADD_CHECK,
-    CHANGE_CIRCLE, CHANGE_COUNT_ACTIVE_PLAYERS, CHANGE_COURT_STATUS,
-    CHANGE_KICK_STATUS, CHANGE_KILL_STATUS,
-    CHANGE_PLAYER_INFO, CHANGE_SHOW_INFO,
-    CHANGE_VOTING, CLEAR_INFO_ABOUT_PLAYERS, END_GAME,
-    PLAYER_IS_READY, SET_ALL_GAMES, SET_ARRAY_PLAYERS, SET_BEST_MOVE, SET_RESULT_GAME, SET_ROLES, SHOW_INFO_FOR_LEAD,
+    CHANGE_CIRCLE,
+    CHANGE_COUNT_ACTIVE_PLAYERS,
+    CHANGE_COURT_STATUS,
+    CHANGE_KICK_STATUS,
+    CHANGE_KILL_STATUS,
+    CHANGE_PLAYER_INFO,
+    CHANGE_SHOW_INFO,
+    CHANGE_VOTING,
+    CLEAR_INFO_ABOUT_PLAYERS,
+    END_GAME,
+    PLAYER_IS_READY,
+    SET_ALL_GAMES,
+    SET_ARRAY_PLAYERS,
+    SET_BEST_MOVE,
+    SET_RESULT_GAME,
+    SET_ROLES,
+    SET_WHO_PLAYER_START_CIRCLE,
+    SHOW_INFO_FOR_LEAD,
     START_GAME
 } from "./actions";
 
@@ -21,6 +34,7 @@ const defaultState = {
     countActivePlayers: 10,
     showInfoForLead: false,
     gameIsEnd: false,
+    startPlayerInCircle: 1,
     player0: {},
     player1: {},
     player2: {},
@@ -33,17 +47,17 @@ const defaultState = {
     player9: {},
     player10: {},
     /*             TEST PLAYERS              */
-    // player0: {name: "Zalypelnik", role: "Lead", ready: true, number: 1, fouls: 0, active: true},
-    // player1: {name: "Zalypelnik", role: "Civil", ready: true, number: 1, fouls: 0, active: true},
-    // player2: {name: "Mr.Od1n", role: "Civil", ready: true, number: 2, fouls: 0, active: true},
-    // player3: {name: "WhoAmI", role: "Civil", ready: true, number: 3, fouls: 0, active: true},
-    // player4: {name: "SUBARIST", role: "Civil", ready: true, number: 4, fouls: 0, active: true},
-    // player5: {name: "Drews", role: "Civil", ready: true, number: 5, fouls: 0, active: true},
-    // player6: {name: "Vitalik", role: "Civil", ready: true, number: 6, fouls: 0, active: true},
-    // player7: {name: "Bananator", role: "Sheriff", ready: true, number: 7, fouls: 0, active: true},
-    // player8: {name: "Микола", role: "Don", ready: true, number: 8, fouls: 0, active: true},
-    // player9: {name: "Михайло", role: "Mafia", ready: true, number: 9, fouls: 0, active: true},
-    // player10: {name: "Дьома", role: "Mafia", ready: true, number: 10, fouls: 0, active: true},
+    // player0: { gender: 'm', name: "loh", role: "Lead", ready: true, number: 0, fouls: 0, active: true},
+    // player1: { gender: 'm', name: "Zalypelnik", role: "Civil", ready: true, number: 1, fouls: 0, active: true},
+    // player2: { gender: 'm', name: "Mr.Od1n", role: "Civil", ready: true, number: 2, fouls: 0, active: true},
+    // player3: { gender: 'm', name: "WhoAmI", role: "Civil", ready: true, number: 3, fouls: 0, active: true},
+    // player4: { gender: 'm', name: "SUBARIST", role: "Civil", ready: true, number: 4, fouls: 0, active: true},
+    // player5: { gender: 'm', name: "Drews", role: "Civil", ready: true, number: 5, fouls: 0, active: true},
+    // player6: { gender: 'm', name: "Vitalik", role: "Civil", ready: true, number: 6, fouls: 0, active: true},
+    // player7: { gender: 'm', name: "Bananator", role: "Sheriff", ready: true, number: 7, fouls: 0, active: true},
+    // player8: { gender: 'm', name: "Микола", role: "Don", ready: true, number: 8, fouls: 0, active: true},
+    // player9: { gender: 'm', name: "Михайло", role: "Mafia", ready: true, number: 9, fouls: 0, active: true},
+    // player10: { gender: 'm', name: "Дьома", role: "Mafia", ready: true, number: 10, fouls: 0, active: true},
     // gameIsEnd: true,
     // gameIsStarted: true,
     // resultGame: {
@@ -234,6 +248,11 @@ export const rootReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 allGames: action.payload
+            };
+        case SET_WHO_PLAYER_START_CIRCLE:
+            return {
+                ...state,
+                startPlayerInCircle: action.payload
             };
         case CLEAR_INFO_ABOUT_PLAYERS:
             return {
