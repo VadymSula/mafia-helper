@@ -46,7 +46,8 @@ class SetPlayers extends Component<Props, State> {
                     id: pl.idPlayer,
                     name: pl.nickName,
                     gender: pl.gender
-                })
+                });
+                return null;
             });
             this.props.setArrayPlayers(_arr);
         }).catch(error => {
@@ -80,7 +81,7 @@ class SetPlayers extends Component<Props, State> {
                 this.props.player.player9,
                 this.props.player.player10,
             ],
-            isGood = false;
+            isGood;
 
         players.map(player => {
             if (player.role)

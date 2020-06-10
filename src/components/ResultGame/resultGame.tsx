@@ -5,7 +5,7 @@ import Mafia from "../../assets/images/mafiaWin.png";
 import City from "../../assets/images/townWin.png";
 import {setResultGame} from "../../store/actions";
 import {Input, InputAdornment} from "@material-ui/core";
-import {API} from "../../servise/apiServise";
+// import {API} from "../../servise/apiServise";
 
 
 interface Props {
@@ -243,8 +243,7 @@ class ResultGame extends Component<Props, State> {
             str_ = str_.join('/');
         }
         // Перевірка в дона на перше вбивство шерифа
-        let don = {firstKillSheriff: false};
-        don = game.playersResult.filter(player => player.roleInGame.roleName === 'Don')[0];
+        let don = game.playersResult.filter(player => player.roleInGame.roleName === 'Don')[0];
         // Чорні перевірки шерифа
         let blackChecks: any = [];
         game.checksResult.forEach((check) => {
