@@ -53,7 +53,7 @@ class AddPlayerModal extends Component<Props, State> {
             this.props.playersIsReady({
                 name: player.name,
                 number: this.props.number,
-                role: "lead",
+                role: "Lead",
                 ready: true
             });
         else
@@ -63,7 +63,7 @@ class AddPlayerModal extends Component<Props, State> {
                 number: this.props.number,
                 fouls: 0,
                 active: true,
-                role: "civil"
+                role: "Civil"
             });
         this.props.setArrayPlayers(this.state.arrayPlayers.filter(player => player.id !== idPlayer));
         this.closeModal();

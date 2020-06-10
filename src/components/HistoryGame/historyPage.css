@@ -1,0 +1,87 @@
+.historyPage nav {
+    margin-top: 20px;
+}
+.historyPage header{
+    background:none;
+}
+.historyPage{
+    font-size: 18px;
+}
+.historyPage section{
+    padding: 0 100px;
+}
+.historyPage header span {
+    padding-left: 25px;
+    font-size: 20px;
+}
+.historyPage a {
+    text-decoration: none;
+}
+.historyPage .winner {
+    font-weight: bold;
+}
+.historyPage .mafia {
+    color: #b71c1c;
+}
+.historyPage .city {
+    color: #2b9a30;
+}
+.historyPage .draw {
+    color: black;
+}
+.historyPage .name_PAGE {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid black;
+    font-size: 30px;
+}
+.historyPage .contanier {
+    display: flex;
+    justify-content: space-around;
+}
+.historyPage h2 {
+    text-align: center;
+}
+.historyPage .table {
+    border: dashed 2px;
+    border-radius: 10px;
+}
+.historyPage .contanier div{
+    min-width: 10%;
+    text-align: center;
+}
+.historyPage .button {
+    color: gray;
+    font-size: 50px;
+}
+.historyPage .costul {
+    color: white;
+    min-width: 50px;
+}
+.historyPage .table {
+    margin-bottom: 10px;
+}
+/*----------------------- all @media--------------------------------------- */
+@media (max-width: 700px) {
+        .historyPage .table {
+        margin-bottom: 10px;
+    }
+    .historyPage .button {
+        font-size: 40px;
+    }
+}
+/* iPhone 5/SE */
+@media (max-width: 376px) {
+    .historyPage p {
+        font-size: 10px;
+    }
+    .historyPage h3 {
+        font-size: 14px;
+    }
+    .historyPage h1 {
+        font-size: 20px;
+    }
+    .historyPage .button {
+        font-size: 30px;
+    }
+}

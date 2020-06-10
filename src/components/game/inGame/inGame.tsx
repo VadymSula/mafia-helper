@@ -7,7 +7,7 @@ import {
     changeKickStatus,
     changeKillStatus,
     changeVoting,
-    endGame, setBestMove, setResultGame, showInfoForLead
+    endGame, setBestMove, setResultGame, setRoles, showInfoForLead
 } from "../../../store/actions";
 import {API} from "../../../servise/apiServise";
 import Court from "./court";
@@ -35,7 +35,8 @@ interface Props {
     isRatingGame: boolean,
     showInfoForLead: any,
     showInfoForLeadBool: boolean,
-
+    setRoles: any,
+    roles: any
 }
 
 interface State {
@@ -176,22 +177,14 @@ class InGame extends Component<Props, State> {
 
     endGame = (winner: string, countPlayers: any) => {
         let date: any = new Date();
-        // let roles;
+        let roles;
         date = [date.getFullYear(), date.getMonth() + 1, date.getDate()];
         if (!this.state.gameIsEnd) {
-            // API.getAllRoles().then(response => {
-            //     roles = response;
-            //     console.log(response)
-            // }).catch(error => {
-            //     console.log(error)
-            // });
-
-            // console.log(roles)
             let players: any = [], sheriffIsKilled = false, typeWin, firstKill;
 
             if (this.props.kills.length > 0) {
                 firstKill = this.props.kills[0].playerNumber;
-                if (this.props.player['player' + firstKill].role === 'sheriff')
+                if (this.props.player['player' + firstKill].role === 'Sheriff')
                     sheriffIsKilled = true;
             }
 
@@ -207,6 +200,7 @@ class InGame extends Component<Props, State> {
                     break;
             }
 
+            roles = this.props.roles;
             for (let i = 0; i <= 10; i++) {
                 let player = this.props.player['player' + i], _tmp_info;
                 if (i === 0)
@@ -226,7 +220,7 @@ class InGame extends Component<Props, State> {
                         name: player.name,
                         number: player.number.toString()
                     };
-                if (player.role === 'mafia' || player.role === 'don')
+                if (player.role === 'Mafia' || player.role === 'Don')
                     if (sheriffIsKilled) {
                         _tmp_info.firstKillSheriff = true;
                     }
@@ -234,30 +228,13 @@ class InGame extends Component<Props, State> {
                     if (this.props.kills[0].playerNumber === player.number)
                         _tmp_info.goldenMove = this.props.bestMove;
 
-                // switch (_tmp_info.roleInGame) {
-                //     case "civil":
-                //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
-                //         break;
-                //     case "mafia":
-                //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
-                //         break;
-                //     case "don":
-                //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
-                //         break;
-                //     case "sheriff":
-                //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
-                //         break;
-                //     case "lead":
-                //         _tmp_info.roleInGame = roles[_tmp_info.roleInGame];
-                //         break;
-                // }
-                // console.log(_tmp_info)
+                let roleObject = roles.filter(role => role.roleName === _tmp_info.roleInGame)[0];
+                _tmp_info.roleInGame = roleObject.idRole;
+
                 players.push(_tmp_info);
             }
-            this.endTimerDurationGame();
-            this.setState({gameIsEnd: true});
-            this.props.endGame(true);
 
+            this.endTimerDurationGame();
             let resultGame = {
                 checksResult: this.props.checks,
                 gameDuration: this.state.currentCount,
@@ -268,20 +245,32 @@ class InGame extends Component<Props, State> {
                 gameDate: date.join('-'),
                 isEnd: true
             };
+
             this.props.setResultGame(resultGame);
             delete resultGame.isEnd;
-            // API.sendGameInformation(resultGame).then(response => {
-            //     console.log(response)
-            // });
+            API.sendGameInformation(resultGame).then(response => {
+                console.log(response)
+            }).catch(err => {
+                console.error(err)
+            });
             // if (this.props.isRatingGame)
             //     API.sendGameInformationRating(resultGame).then(responce => {
             //         console.log(responce)
-            //     })
+            //     });
+            this.setState({gameIsEnd: true});
+            this.props.endGame(true);
         }
+    };
+
+    setRolesFromDB = () => {
+        API.getAllRoles().then(res => {
+            this.props.setRoles(res)
+        }).catch(err => console.error(err))
     };
 
     componentDidMount() {
         this.startTimerDurationGame();
+        this.setRolesFromDB();
     }
 
     howMuchColorPlayers = () => {
@@ -291,7 +280,7 @@ class InGame extends Component<Props, State> {
         };
         for (let i = 1; i <= 10; i++) {
             if (this.props.player['player' + i].active === true)
-                if (this.props.player['player' + i].role === 'civil' || this.props.player['player' + i].role === 'sheriff')
+                if (this.props.player['player' + i].role === 'Civil' || this.props.player['player' + i].role === 'Sheriff')
                     countPlayers.red++;
                 else
                     countPlayers.black++;
@@ -355,7 +344,7 @@ class InGame extends Component<Props, State> {
 
     render() {
         return (
-            <section>
+            <section className='game'>
                 <h1>{this.state.timeOutDurGame}</h1>
                 <h2 className="leadName">Ведучий: <span>{this.props.player.player0.name}</span></h2>
                 {
@@ -493,7 +482,8 @@ const mapStateToProps = function (state) {
         courtStatus: state.courtStatus,
         countActivePlayers: state.countActivePlayers,
         isRatingGame: state.isRatingGame,
-        showInfoForLeadBool: state.showInfoForLead
+        showInfoForLeadBool: state.showInfoForLead,
+        roles: state.roles
     }
 };
 
@@ -507,7 +497,8 @@ const mapDispatchToProps = {
     setBestMove,
     setResultGame,
     changeCountActivePLayers,
-    showInfoForLead
+    showInfoForLead,
+    setRoles
 };
 export default connect(mapStateToProps, mapDispatchToProps)(InGame)
 
