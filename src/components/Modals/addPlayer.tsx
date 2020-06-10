@@ -114,7 +114,9 @@ class AddPlayerModal extends Component<Props, State> {
                         playerNickname: name,
                         gender: gender
                     }).then(res=>{
-                        console.log(res)
+                        console.log(res);
+                        this.closeModal();
+                        alert("Онови список гравців")
                     })
                 }
             } else {
