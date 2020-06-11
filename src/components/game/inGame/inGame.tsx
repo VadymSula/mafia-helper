@@ -176,6 +176,18 @@ class InGame extends Component<Props, State> {
         })
     };
 
+    calculateTime = (time) => {
+        let d = Number(time);
+        let h = Math.floor(d / 3600);
+        let m = Math.floor(d % 3600 / 60);
+        let s = Math.floor(d % 3600 % 60);
+
+        let hDisplay = h;
+        let mDisplay = m < 10 ? '0' + m : m;
+        let sDisplay = s < 10 ? '0' + m : s;
+        return hDisplay + ':' + mDisplay + ':' + sDisplay;
+    };
+
     startTimerDurationGame = () => {
         this.setState({
             intervalId: setInterval(() => {
@@ -228,7 +240,10 @@ class InGame extends Component<Props, State> {
                         killed: false,
                         roleInGame: player.role,
                         name: player.name,
-                        number: player.number.toString(),
+                        playerNumberInGame: player.number,
+                        checks: [
+                            0
+                        ],
                     };
                 else
                     _tmp_info = {
@@ -236,7 +251,10 @@ class InGame extends Component<Props, State> {
                         killed: !player.active,
                         roleInGame: player.role,
                         name: player.name,
-                        number: player.number.toString()
+                        playerNumberInGame: player.number,
+                        checks: [
+                            0
+                        ],
                     };
                 if (player.role === 'Mafia' || player.role === 'Don')
                     if (sheriffIsKilled) {
@@ -254,13 +272,18 @@ class InGame extends Component<Props, State> {
             this.endTimerDurationGame();
             let resultGame = {
                 checksResult: this.props.checks,
-                gameDuration: this.state.currentCount,
+                gameDuration: this.calculateTime(this.state.currentCount),
                 win: winner,
                 typeWin: typeWin,
                 playersResult: players,
                 kills: this.props.kills,
                 gameDate: date.join('-'),
-                isEnd: true
+                isEnd: true,
+                club: {
+                    clubName: "FMC",
+                    idClub: 1
+                },
+                "gameIsRating": true,
             };
 
             this.props.setResultGame(resultGame);
@@ -270,6 +293,7 @@ class InGame extends Component<Props, State> {
             }).catch(err => {
                 console.error(err)
             });
+
             // if (this.props.isRatingGame)
             //     API.sendGameInformationRating(resultGame).then(responce => {
             //         console.log(responce)

@@ -209,25 +209,6 @@ class ResultGame extends Component<Props, State> {
         this.setState({negative: arr})
     };
 
-    calculateTime = (time) => {
-        let d = Number(time);
-        let h = Math.floor(d / 3600);
-        let m = Math.floor(d % 3600 / 60);
-        let s = Math.floor(d % 3600 % 60);
-
-        let hDisplay = h;
-        let mDisplay = m < 10 ? '0' + m : m;
-        let sDisplay = s < 10 ? '0' + m : s;
-        return hDisplay + ':' + mDisplay + ':' + sDisplay;
-    };
-
-    componentDidMount(): void {
-        if (this.props.resultGame) {
-            let game = this.props.resultGame;
-            this.setState({gameDuration: this.calculateTime(game.gameDuration)})
-        }
-    }
-
     render() {
         let game: any;
         if (this.props.resultGame)
@@ -274,7 +255,7 @@ class ResultGame extends Component<Props, State> {
                     <div className="column_one">
                         <ul className="player">
                             {arrayPlayers.map(player => {
-                                let num = player.number.toString();
+                                let num = player.playerNumberInGame.toString();
                                 return (
                                     <li key={player.number} className={!player.killed ? "" : "disabledPlayer"}>
                                         <p>
@@ -332,7 +313,7 @@ class ResultGame extends Component<Props, State> {
                         <div className="timer">
                             <h3>
                                 <span>Тривалість гри:</span>
-                                <span>{this.state.gameDuration}</span>
+                                <span>{game.gameDuration}</span>
                             </h3>
                         </div>
                         <div className="divTable checkTable">
@@ -345,13 +326,13 @@ class ResultGame extends Component<Props, State> {
                             <div className="divTableBody">
                                 {game.checksResult.map(check => {
                                     let don, sheriff;
-                                    if (check.sheriffCheck)
-                                        sheriff = check.sheriffCheck;
+                                    if (check.SheriffCheck)
+                                        sheriff = check.SheriffCheck;
                                     else
                                         sheriff = "-";
 
-                                    if (check.donCheck)
-                                        don = check.donCheck;
+                                    if (check.DonCheck)
+                                        don = check.DonCheck;
                                     else
                                         don = "-";
                                     return (

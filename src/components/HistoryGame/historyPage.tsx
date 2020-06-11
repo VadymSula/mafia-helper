@@ -17,9 +17,12 @@ class HistoryPage extends Component<Props> {
             this.props.setAllGames(res)
         })
     }
+    componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<{}>, snapshot?: any) {
+        console.log(this.props.allGames);
+
+    }
 
     render() {
-
         return (
             <div id='history' className="historyPage">
                 <header>
@@ -30,12 +33,12 @@ class HistoryPage extends Component<Props> {
                 <section>
 
                     {
-                        this.props.allGames.lenght > 0 ?
+                        this.props.allGames  ?
                             <div>
                                 <div className="contanier  line_down">
-                                    <div className="lineHeader">
-                                        <h3>Дата</h3>
-                                    </div>
+                                    {/*<div className="lineHeader">*/}
+                                    {/*    <h3>Дата</h3>*/}
+                                    {/*</div>*/}
                                     <div className="lineHeader">
                                         <h3>Переможець</h3>
                                     </div>

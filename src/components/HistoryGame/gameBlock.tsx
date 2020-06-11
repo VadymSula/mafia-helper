@@ -1,23 +1,19 @@
 import React, {Component} from "react";
 
 interface Props {
-    game: {
-        winner: string,
-        gameDuration: string,
-        date: string
-    }
+    game: any
 }
 
 class GameBlock extends Component<Props> {
-
     render() {
+        let date = Date.parse(this.props.game.date);
         return (
             <div className="contanier table">
-                <div className="line">
-                    <p>{this.props.game.date}</p>
-                </div>
+                {/*<div className="line">*/}
+                {/*    <p>{date}</p>*/}
+                {/*</div>*/}
                 <div className="winner">
-                    <p className={this.props.game.winner}>{this.props.game.winner}</p>
+                    <p className={this.props.game.win}>{this.props.game.win}</p>
                 </div>
                 <div className="line">
                     <p>{this.props.game.gameDuration}</p>
