@@ -197,7 +197,7 @@ class InGame extends Component<Props, State> {
     endGame = (winner: string, countPlayers: any) => {
         let date: any = new Date();
         let roles;
-        date = [date.getFullYear(), date.getMonth() + 1, date.getDate()];
+        date = [date.getFullYear(), date.getMonth() + 1 < 10 ?  '0' + (date.getMonth() + 1) : date.getMonth() + 1, date.getDate()];
         if (!this.state.gameIsEnd) {
             let players: any = [], sheriffIsKilled = false, typeWin, firstKill;
 
@@ -244,7 +244,7 @@ class InGame extends Component<Props, State> {
                     }
                 if (this.props.kills.length > 0)
                     if (this.props.kills[0].playerNumber === player.number)
-                        _tmp_info.goldenMove = this.props.bestMove;
+                        _tmp_info.goldenMove = this.props.bestMove.join('/');
 
                 _tmp_info.roleInGame = roles.filter(role => role.roleName === _tmp_info.roleInGame)[0];
 
@@ -432,8 +432,8 @@ class InGame extends Component<Props, State> {
                                         return (
                                             <div key={circle.numberOfTheCircle}>
                                                 <p>{circle.numberOfTheCircle} день</p>
-                                                <p>{circle.sheriffCheck ? circle.sheriffCheck : ' '}</p>
-                                                <p>{circle.donCheck ? circle.donCheck : ' '}</p>
+                                                <p>{circle.SheriffCheck ? circle.SheriffCheck : ' '}</p>
+                                                <p>{circle.DonCheck ? circle.DonCheck : ' '}</p>
                                             </div>
                                         )
                                     })

@@ -4,7 +4,10 @@ export class API {
     static async sendGameInformation(body) {
         let response = await fetch(this.defaultPath + "/game-end", {
             method: 'PUT',
-            body: body.toString()
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
         });
         return await response.json();
     }
@@ -12,7 +15,11 @@ export class API {
     static async addNewPlayer(body) {
         let response = await fetch(this.defaultPath + "/create-game/", {
             method: 'PUT',
-            body: body.toString()
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+
         });
         return await response.json();
     }
@@ -23,7 +30,7 @@ export class API {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: body.toString()
+            body: JSON.stringify(body)
         });
         return await response.json();
     }
@@ -55,7 +62,7 @@ export class API {
             headers: {
                 'Accept': "*/*"
             },
-            body: body.toString()
+            body: JSON.stringify(body)
         });
         return await response.json();
     }
