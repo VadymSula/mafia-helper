@@ -18,7 +18,7 @@ public class WebCorsConfig implements Filter,WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**");
+        registry.addMapping("*/**");
     }
 
     @Override
