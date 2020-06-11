@@ -155,7 +155,7 @@ class PlayerDiv extends Component<Props, State> {
     };
 
     render() {
-        let genderText = this.props.player.gender === 'm'? "Г-ин" : "Г-жа";
+        let genderText = this.props.player.gender === 'm'? "Г-н" : "Г-жа";
         return (
 
             <div className={this.props.player.active ? this.props.player.fouls === 3 ? 'player danger' : 'player'
@@ -199,7 +199,7 @@ class PlayerDiv extends Component<Props, State> {
                                         </button> : null}
                                 </div>
                                 {
-                                    this.props.player.role === 'don' && !this.state.checked && this.props.circle !== 0 ?
+                                    this.props.player.role === 'Don' && !this.state.checked && this.props.circle !== 0 ?
                                         <form onSubmit={this.checkedPlayer}>
                                             <input max={10} placeholder="№" type="number"
                                                    onChange={this.updCheck}/>
@@ -207,7 +207,7 @@ class PlayerDiv extends Component<Props, State> {
                                         </form> : null
                                 }
                                 {
-                                    this.props.player.role === 'sheriff' && !this.state.checked && this.props.circle !== 0 ?
+                                    this.props.player.role === 'Sheriff' && !this.state.checked && this.props.circle !== 0 ?
                                         <form onSubmit={this.checkedPlayer}>
                                             <input max={10} placeholder="№" type="number"
                                                    onChange={this.updCheck}/>

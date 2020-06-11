@@ -240,7 +240,6 @@ class ResultGame extends Component<Props, State> {
                 str_ = playerBM.goldenMove;
             else
                 str_ = [0];
-            str_ = str_.join('/');
         }
         // Перевірка в дона на перше вбивство шерифа
         let don = game.playersResult.filter(player => player.roleInGame.roleName === 'Don')[0];

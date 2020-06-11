@@ -112,12 +112,28 @@ class AddPlayerModal extends Component<Props, State> {
             if (gender !== ''){
                 if (gender === 'm' || gender === 'f'){
                     API.addNewPlayer({
-                        playerNickname: name,
-                        gender: gender
+                        gender: gender,
+                        idPlayer: 0,
+                        nickName: name
                     }).then(res=>{
-                        console.log(res);
-                        this.closeModal();
-                        alert("Онови список гравців")
+                        switch (res.status) {
+                            case 200:{
+                                this.closeModal();
+                                alert("Онови список гравців");
+                                break;
+                            }
+                            case 400:{
+                                console.error(res.message);
+                                break;
+                            }
+                            case 415:{
+                                console.error("ПІЗДА БЛЯЯЯЯЯЯТЬ, ВСЕ ПРОПАЛО НАХУЙ");
+                                break;
+                            }
+                        }
+
+                    }).catch(err=> {
+                        console.error(err);
                     })
                 }
             } else {
