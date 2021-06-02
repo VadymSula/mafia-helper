@@ -33,7 +33,7 @@ const PlayerListItem = ({ row, index }) => {
       );
     }
     return null;
-  }, [index]);
+  }, [index, classes]);
 
   return (
     <>
