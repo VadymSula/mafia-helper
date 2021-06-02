@@ -6,12 +6,8 @@ interface Props {
 
 class GameBlock extends Component<Props> {
     render() {
-        let date = Date.parse(this.props.game.date);
         return (
             <div className="contanier table">
-                {/*<div className="line">*/}
-                {/*    <p>{date}</p>*/}
-                {/*</div>*/}
                 <div className="winner">
                     <p className={this.props.game.win}>{this.props.game.win}</p>
                 </div>
